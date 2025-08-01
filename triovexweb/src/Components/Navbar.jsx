@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Link, NavLink, useLocation } from "react-router-dom";
+import logo from "../assets/logo2.png";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -29,7 +30,7 @@ const Navbar = () => {
             {/* Logo */}
             <NavLink to="/" onClick={handleNavigate}>
               <img
-                src="src/assets/logo2.png"
+                src={logo}
                 alt="logo"
                 className="w-[118px] h-[46px]"
               />

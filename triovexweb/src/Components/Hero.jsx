@@ -120,7 +120,8 @@ const Hero = () => {
 
           <button
             onClick={() => (window.location.href = "/contact")}
-            className="bg-[#313719] text-white  px-4 sm:px-6 md:px-8 py-2.5 sm:py-3.5 md:py-4 rounded-full text-xs sm:text-sm md:text-base font-semibold transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl border border-green-500/30 select-none"
+            className="bg-[#313719] text-white hover:bg-white hover:text-[#313719]
+ px-4 sm:px-6 md:px-8 py-2.5 sm:py-3.5 md:py-4 rounded-full text-xs sm:text-sm md:text-base font-semibold transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl border border-green-500/30 select-none"
           >
             Get in Touch
           </button>

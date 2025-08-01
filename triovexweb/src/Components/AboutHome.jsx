@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { motion } from "framer-motion";
 import MagnifyCursor from "../Components/AnimationComponents/MagnifyCursor";
+import hbg from "../assets/hbg.png";
 
 const AboutHero = () => {
   const heroRef = useRef(null);
@@ -13,7 +14,7 @@ const AboutHero = () => {
     "strategy",
     "for",
     "business",
-    "success."
+    "success.",
   ];
 
   return (
@@ -29,7 +30,7 @@ const AboutHero = () => {
           repeatType: "reverse",
         }}
         className="absolute w-full h-full object-cover object-center"
-        src="src/assets/hbg.png"
+        src={hbg}
         alt="Background"
       />
 
@@ -65,7 +66,8 @@ const AboutHero = () => {
           </h2>
 
           <p className="mt-4 text-[11px] sm:text-sm md:text-base lg:text-lg text-gray-600 max-w-2xl mx-auto cursor-zoom leading-relaxed">
-            We blend creativity and strategy to build powerful brand experiences that drive real business growth.
+            We blend creativity and strategy to build powerful brand experiences
+            that drive real business growth.
           </p>
         </div>
       </div>

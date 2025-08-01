@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { motion as m } from "framer-motion";
-
+import triovexBuilding from "../assets/triovexbuilding.png";
 const WeAre = () => {
   const [showCards, setShowCards] = useState(false);
 
@@ -95,7 +95,7 @@ const WeAre = () => {
               variants={fadeIn}
             >
               <img
-                src="src/assets/triovexbuilding.png"
+                src={triovexBuilding}
                 alt="Triovex Building"
                 className="w-full h-full object-cover rounded-lg"
               />

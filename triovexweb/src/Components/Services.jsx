@@ -1,6 +1,14 @@
 import React from "react";
 import { LazyMotion, domAnimation, m } from "framer-motion";
 import { NavLink } from "react-router-dom";
+import cart1 from "../assets/service-cart1.png";
+import cart2 from "../assets/service-cart2.png";
+import cart3 from "../assets/service-cart3.png";
+import cart4 from "../assets/service-cart4.png";
+import cart5 from "../assets/service-cart5.png";
+import cart6 from "../assets/service-cart6.png";
+import cart7 from "../assets/service-cart7.png";
+import cart8 from "../assets/service-cart8.png";
 
 // 3D card components
 export function CardContainer({ children }) {
@@ -97,55 +105,56 @@ export default function Services() {
   );
 
   const services = [
-    {
-      title: "AI & Machine Learning",
-      description:
-        "Build smarter systems with AI that automate, predict, and optimize business processes effortlessly.",
-      imageSrc: "src/assets/service-cart1.png",
-    },
-    {
-      title: "Custom Software Development",
-      description:
-        "Tailored software built for your exact business needs — scalable, secure, and efficient.",
-      imageSrc: "src/assets/service-cart2.png",
-    },
-    {
-      title: "Website Design & Development",
-      description:
-        "Modern, responsive websites crafted to impress, engage, and convert your audience.",
-      imageSrc: "src/assets/service-cart3.png",
-    },
-    {
-      title: "Mobile & Web Apps",
-      description:
-        "Launch intuitive mobile and web apps that your users love and your business benefits from.",
-      imageSrc: "src/assets/service-cart4.png",
-    },
-    {
-      title: "Search Engine Optimization (SEO)",
-      description:
-        "Boost your visibility with search-first strategies that drive traffic and improve rankings.",
-      imageSrc: "src/assets/service-cart5.png",
-    },
-    {
-      title: "Digital Marketing",
-      description:
-        "From content to conversion — we create digital campaigns that bring measurable growth.",
-      imageSrc: "src/assets/service-cart6.png",
-    },
-    {
-      title: "Social Media Management",
-      description:
-        "Engage your audience with creative content, timely posts, and smart strategies that grow your brand.",
-      imageSrc: "src/assets/service-cart7.png",
-    },
-    {
-      title: "Paid Ads & Email Marketing",
-      description:
-        "Target the right audience with PPC and stay top-of-mind with personalized email campaigns.",
-      imageSrc: "src/assets/service-cart8.png",
-    },
-  ];
+  {
+    title: "AI & Machine Learning",
+    description:
+      "Build smarter systems with AI that automate, predict, and optimize business processes effortlessly.",
+    imageSrc: cart1,
+  },
+  {
+    title: "Custom Software Development",
+    description:
+      "Tailored software built for your exact business needs — scalable, secure, and efficient.",
+    imageSrc: cart2,
+  },
+  {
+    title: "Website Design & Development",
+    description:
+      "Modern, responsive websites crafted to impress, engage, and convert your audience.",
+    imageSrc: cart3,
+  },
+  {
+    title: "Mobile & Web Apps",
+    description:
+      "Launch intuitive mobile and web apps that your users love and your business benefits from.",
+    imageSrc: cart4,
+  },
+  {
+    title: "Search Engine Optimization (SEO)",
+    description:
+      "Boost your visibility with search-first strategies that drive traffic and improve rankings.",
+    imageSrc: cart5,
+  },
+  {
+    title: "Digital Marketing",
+    description:
+      "From content to conversion — we create digital campaigns that bring measurable growth.",
+    imageSrc: cart6,
+  },
+  {
+    title: "Social Media Management",
+    description:
+      "Engage your audience with creative content, timely posts, and smart strategies that grow your brand.",
+    imageSrc: cart7,
+  },
+  {
+    title: "Paid Ads & Email Marketing",
+    description:
+      "Target the right audience with PPC and stay top-of-mind with personalized email campaigns.",
+    imageSrc: cart8,
+  },
+];
+
 
   const chunkedServices = [];
   for (let i = 0; i < services.length; i += 3) {

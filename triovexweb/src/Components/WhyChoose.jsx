@@ -1,6 +1,9 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import why1 from "../assets/whychoose1.png";
+import why2 from "../assets/whychoose2.png";
+import why3 from "../assets/whychoose3.png";
 
 // Animation variant factory
 const fadeInVariant = (delay = 0) => ({
@@ -64,7 +67,11 @@ const WhyChoose = () => {
               delivery—with no surprise <br /> charges.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
-              {["Clear Communication", "Transparent Billing", "No Third-Party Costs"].map((item) => (
+              {[
+                "Clear Communication",
+                "Transparent Billing",
+                "No Third-Party Costs",
+              ].map((item) => (
                 <span
                   key={item}
                   className="whitespace-nowrap rounded-full bg-[#1B2604] px-4 py-2 text-sm font-medium text-white"
@@ -78,7 +85,7 @@ const WhyChoose = () => {
           <div className="relative mt-10 justify-center hidden lg:flex">
             <div className="absolute h-[240px] w-[240px] -z-10"></div>
             <img
-              src="src/assets/whychoose1.png"
+              src={why1}
               alt="Consultation"
               className="max-w-[400px] z-10 translate-x-[-30%] translate-y-[-93.7%] absolute top-1/2 left-1/2"
             />
@@ -109,7 +116,7 @@ const WhyChoose = () => {
             </div>
             <div className="relative mt-10 flex justify-center hidden lg:flex">
               <img
-                src="src/assets/whychoose2.png"
+                 src={why2}
                 alt="Projects Delivered"
                 className="max-w-[300px] translate-x-[-25%] translate-y-[-86.7%] absolute top-1/2 left-1/2"
               />
@@ -135,7 +142,11 @@ const WhyChoose = () => {
                 we cover everything to boost your business.
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
-                {["Start in Minutes", "Expert Team Support", "Results-Driven Solutions"].map((item) => (
+                {[
+                  "Start in Minutes",
+                  "Expert Team Support",
+                  "Results-Driven Solutions",
+                ].map((item) => (
                   <span
                     key={item}
                     className="whitespace-nowrap rounded-full bg-[#1B2604] px-4 py-2 text-sm font-medium text-white"
@@ -146,7 +157,7 @@ const WhyChoose = () => {
               </div>
             </div>
             <img
-              src="src/assets/whychoose3.png"
+              src={why3}
               alt="Services & Features"
               className="w-[80%] sm:w-[70%] md:w-[65%] lg:w-[75%] z-10 translate-x-[-15%] translate-y-[-7.8%] absolute left-1/2 transform scale-x-[-1] hidden lg:block"
             />

@@ -1,14 +1,15 @@
 "use client";
 import React, { useState } from "react";
 import { ArrowRight, X } from "lucide-react";
-
+import cart2 from "../assets/service-cart2.png";
+import cart3 from "../assets/service-cart3.png";
 const worksData = [
   {
     id: 1,
     title: "We deliver future-ready digital solutions",
     description:
       "From websites and apps to marketing and SEO — every project is built for long-term success, with performance at the core.",
-    image: "src/assets/service-cart2.png",
+    image: "src/assets/service-cart2.png", // ❌ hardcoded path
   },
   {
     id: 2,
@@ -18,6 +19,7 @@ const worksData = [
     image: "src/assets/service-cart3.png",
   },
 ];
+
 
 export default function WorksSection() {
   const [openModal, setOpenModal] = useState(false);

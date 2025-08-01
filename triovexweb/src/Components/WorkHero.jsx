@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { motion } from "framer-motion";
 import MagnifyCursor from "../Components/AnimationComponents/MagnifyCursor";
+import hbg from "../assets/hbg.png";
 
 const WorksHero = () => {
   const heroRef = useRef(null);
@@ -29,7 +30,7 @@ const WorksHero = () => {
           repeatType: "reverse",
         }}
         className="absolute w-full h-full object-cover object-center"
-        src="src/assets/hbg.png"
+        src={hbg}
         alt="Works Background"
       />
 

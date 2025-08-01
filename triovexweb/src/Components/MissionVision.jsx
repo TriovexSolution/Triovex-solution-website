@@ -1,6 +1,8 @@
 "use client";
 
 import { motion as m } from "framer-motion";
+import triovexBuilding from "../assets/triovexbuilding.png";
+import logo from "../assets/logo.png";
 
 const MissionVision = () => {
   return (
@@ -70,17 +72,17 @@ const MissionVision = () => {
               </p>
               <div className="flex justify-end items-end absolute bottom-6 left-1/2 transform -translate-x-1/2">
                 <img
-                  src="src/assets/triovexbuilding.png"
+                  src={triovexBuilding}
                   alt="Vision"
                   className="w-30 object-cover rounded shadow-md transform rotate-12 transition-transform duration-300 ease-in-out hover:rotate-0"
                 />
                 <img
-                  src="src/assets/triovexbuilding.png"
+                 src={triovexBuilding}
                   alt="Vision"
                   className="w-30 object-cover rounded shadow-md -ml-4 transform -rotate-6 transition-transform duration-300 ease-in-out hover:rotate-0"
                 />
                 <img
-                  src="src/assets/triovexbuilding.png"
+                  src={triovexBuilding}
                   alt="Vision"
                   className="w-30 object-cover rounded shadow-md -ml-4 transform rotate-3 transition-transform duration-300 ease-in-out hover:rotate-0"
                 />
@@ -96,17 +98,17 @@ const MissionVision = () => {
               </p>
               <div className="flex justify-start items-end absolute bottom-6 left-1/2 transform -translate-x-1/2">
                 <img
-                  src="src/assets/triovexbuilding.png"
+                  src={triovexBuilding}
                   alt="Mission"
                   className="w-30 object-cover rounded shadow-md transform rotate-12 transition-transform duration-300 ease-in-out hover:rotate-0"
                 />
                 <img
-                  src="src/assets/triovexbuilding.png"
+                 src={triovexBuilding}
                   alt="Mission"
                   className="w-30 object-cover rounded shadow-md -ml-4 transform -rotate-6 transition-transform duration-300 ease-in-out hover:rotate-0"
                 />
                 <img
-                  src="src/assets/triovexbuilding.png"
+                  src={triovexBuilding}
                   alt="Mission"
                   className="w-30 object-cover rounded shadow-md -ml-4 transform rotate-3 transition-transform duration-300 ease-in-out hover:rotate-0"
                 />
@@ -116,7 +118,7 @@ const MissionVision = () => {
             {/* Center Logo */}
             <div className="absolute left-1/2 bottom-0 transform -translate-x-1/2 translate-y-1/2 bg-white text-green-900 rounded-full w-[200px] h-[200px] z-10 flex items-center justify-center">
               <img
-                src="src/assets/logo.png"
+                src={logo}
                 alt="Triovex Logo"
                 className="w-[200px] h-[66px] object-contain"
               />
@@ -133,17 +135,17 @@ const MissionVision = () => {
               </p>
               <div className="flex justify-center items-end absolute bottom-4 left-1/2 transform -translate-x-1/2">
                 <img
-                  src="src/assets/triovexbuilding.png"
+                  src={triovexBuilding}
                   alt="Vision"
                   className="w-16 object-cover rounded shadow-md transform rotate-12 transition-transform duration-300 ease-in-out hover:rotate-0"
                 />
                 <img
-                  src="src/assets/triovexbuilding.png"
+                  src={triovexBuilding}
                   alt="Vision"
                   className="w-16 object-cover rounded shadow-md -ml-3 transform -rotate-6 transition-transform duration-300 ease-in-out hover:rotate-0"
                 />
                 <img
-                  src="src/assets/triovexbuilding.png"
+                  src={triovexBuilding}
                   alt="Vision"
                   className="w-16 object-cover rounded shadow-md -ml-3 transform rotate-3 transition-transform duration-300 ease-in-out hover:rotate-0"
                 />
