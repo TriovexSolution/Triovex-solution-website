@@ -9,14 +9,14 @@ const worksData = [
     title: "We deliver future-ready digital solutions",
     description:
       "From websites and apps to marketing and SEO — every project is built for long-term success, with performance at the core.",
-    image: "src/assets/service-cart2.png", // ❌ hardcoded path
+    image: cart2, // ❌ hardcoded path
   },
   {
     id: 2,
     title: "We deliver future-ready digital solutions",
     description:
       "From websites and apps to marketing and SEO — every project is built for long-term success, with performance at the core.",
-    image: "src/assets/service-cart3.png",
+    image: cart3,
   },
 ];
 
