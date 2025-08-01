@@ -118,14 +118,19 @@ const Hero = () => {
             Transforming brands with innovative and captivating web solutions.
           </p>
 
-          <button
+          {/* <button
             onClick={() => (window.location.href = "/contact")}
             className="bg-[#313719] text-white hover:bg-white hover:text-[#313719]
  px-4 sm:px-6 md:px-8 py-2.5 sm:py-3.5 md:py-4 rounded-full text-xs sm:text-sm md:text-base font-semibold transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl border border-green-500/30 select-none"
           >
             Get in Touch
-          </button>
-          {/* <NavLink to={"/contact"}>Get in Touch</NavLink> */}
+          </button> */}
+          <NavLink
+            to="/contact"
+            className="inline-block px-8 py-4 bg-[#313719] text-white rounded-full hover:bg-white hover:text-[#313719] transition-colors"
+          >
+            Get in Touch
+          </NavLink>
 
           <div className="flex items-center justify-center space-x-2 text-black mt-10">
             <Circle className="w-3 h-3 fill-green-500 text-green-500 animate-pulse" />
