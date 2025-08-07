@@ -21,13 +21,6 @@ export default function AboutUs() {
     }),
   };
 
-  const bgImages = [
-    "image copy.png",
-    "image.png",
-    "image copy 2.png",
-    "image copy 3.png",
-    "image copy 4.png",
-  ];
   const bottomImages = [
     "image copy.png",
     "image.png",
@@ -39,7 +32,7 @@ export default function AboutUs() {
   return (
     <section
       id="about"
-      className="w-full px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-24 4xl:px-32 py-12 sm:py-16 md:py-20 max-w-screen-4xl mx-auto relative overflow-x-hidden"
+      className="w-full px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-24 py-12 sm:py-16 md:py-20 max-w-screen-4xl mx-auto relative overflow-x-hidden"
     >
       {/* Background Blobs */}
       <span
@@ -60,62 +53,55 @@ export default function AboutUs() {
         <span className="inline-block mb-3 sm:mb-4 px-3 sm:px-4 py-1 rounded-full text-xs sm:text-sm font-medium bg-emerald-100 text-emerald-700">
           About us
         </span>
-        <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold leading-tight tracking-tight mb-3 sm:mb-4 text-gray-900">
-          Empowering Digital Growth Through Design, Code & Strategy
+        <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold leading-tight tracking-tight text-gray-900 mb-3 sm:mb-4">
+          Fueling Digital Growth with Intelligence, Creativity & Code
         </h2>
-        <p className="mx-auto max-w-md sm:max-w-lg md:max-w-2xl lg:max-w-3xl text-sm sm:text-base md:text-lg text-gray-600 mb-8 sm:mb-10 md:mb-12">
-          At Triovex Solution, we blend creativity, technology, and strategy to
-          build digital experiences that drive real growth.
+        <p className="mx-auto max-w-md sm:max-w-lg md:max-w-2xl lg:max-w-3xl text-sm sm:text-base md:text-lg text-gray-600">
+          At Triovex Solution, we merge AI-driven tech with design and strategy to craft smart digital experiences that scale and succeed.
         </p>
       </div>
 
       {/* Cards Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-11 grid-rows-auto sm:grid-rows-9 gap-4 sm:gap-5 md:gap-6 lg:gap-6 auto-rows-auto">
+      <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-5">
+
         {/* Card 1 */}
         <motion.div
           variants={fadeFrom.left()}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: false, amount: 0.3 }}
-          className="aspect-square col-span-1 sm:col-span-4 md:col-span-4 lg:col-span-3 row-span-3 relative bg-white/80 backdrop-blur-lg border border-white/30 rounded-2xl shadow-md hover:scale-[1.02] transition duration-300 ease-out hover:shadow-[0_8px_30px_rgba(0,0,0,0.15)] overflow-hidden"
+          className="col-span-1 md:col-span-2 lg:col-span-2 relative overflow-hidden bg-white rounded-2xl border border-gray-200 shadow-md p-4 h-64 flex items-center justify-center"
         >
+          {/* Decorative images (same as before) */}
           <img
             src={bottomImages[0]}
+            className="hidden sm:block absolute top-2 left-2 w-10 sm:w-12 md:w-14"
             alt="icon"
-            className="hidden sm:block absolute top-2 w-10 sm:w-12 md:w-14 h-auto opacity-100"
           />
           <img
             src={bottomImages[0]}
+            className="hidden sm:block absolute top-4 right-3 w-10 sm:w-12 md:w-14"
             alt="icon"
-            className="hidden sm:block absolute top-10 right-3 w-10 sm:w-12 md:w-14 h-auto opacity-100"
           />
-          <div className="absolute bottom-0 left-4 flex items-start gap-1 opacity-70">
+          <div className="absolute bottom-4 left-4 flex items-start gap-1 opacity-70">
             <div className="flex flex-col gap-1">
-              <img
-                src={bottomImages[0]}
-                alt="icon"
-                className="w-6 sm:w-8 md:w-9 h-auto opacity-100"
-              />
-              <img
-                src={bottomImages[0]}
-                alt="icon"
-                className="w-6 sm:w-8 md:w-9 h-auto opacity-100"
-              />
+              <img src={bottomImages[0]} className="w-6 sm:w-8 md:w-9" alt="icon" />
+              <img src={bottomImages[0]} className="w-6 sm:w-8 md:w-9" alt="icon" />
             </div>
             <img
               src={bottomImages[0]}
+              className="w-6 sm:w-8 md:w-9 my-auto"
               alt="icon"
-              className="w-6 sm:w-8 md:w-9 my-auto opacity-100"
             />
           </div>
           <img
             src={bottomImages[0]}
+            className="hidden sm:block absolute bottom-0 right-0 w-20 sm:w-24"
             alt="icon"
-            className="hidden sm:block absolute bottom-[-25px] right-[-19px] w-20 sm:w-24 h-auto opacity-100"
           />
-          <div className="relative z-10 flex flex-col items-center justify-center h-full text-center">
-            <h3 className="font-bold text-3xl text-gray-900">10+</h3>
-            <p className="text-base text-gray-800 mt-2">Industries Served</p>
+          <div className="z-10 flex flex-col items-center justify-center h-full text-center relative">
+            <h3 className="font-bold text-3xl sm:text-4xl lg:text-5xl text-gray-900">10+</h3>
+            <p className="text-base sm:text-lg text-gray-800 mt-2">Industries Served</p>
           </div>
         </motion.div>
 
@@ -125,16 +111,15 @@ export default function AboutUs() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: false, amount: 0.3 }}
-          className="col-span-1 sm:col-span-6 md:col-span-8 lg:col-span-8 row-span-3 sm:col-start-1 md:col-start-1 lg:col-start-4"
+          className="col-span-1 md:col-span-3 lg:col-span-3 bg-white rounded-2xl border border-gray-200 shadow-md p-6 sm:p-8 flex flex-col justify-center"
         >
-          <div className="bg-gradient-to-r from-white via-lime-50 to-white rounded-2xl border border-gray-200 shadow-lg hover:scale-[1.02] transition duration-300 ease-out hover:shadow-[0_8px_30px_rgba(0,0,0,0.12)] p-6 sm:p-8 lg:p-12 flex flex-col md:flex-row items-center justify-between">
+          <div className="flex flex-col md:flex-row items-center justify-between h-full">
             <div className="max-w-xl text-center md:text-left">
               <h3 className="text-xl sm:text-2xl md:text-3xl font-semibold text-green-900 mb-4">
-                We deliver future-ready digital solutions
+                Smart, Scalable & Future-Ready Digital Solutions
               </h3>
               <p className="text-sm sm:text-base md:text-lg text-gray-700 leading-relaxed">
-                From websites and apps to marketing and SEO — every project is
-                built for long-term success, with performance at the core.
+                From intelligent websites and AI-integrated apps to SEO and marketing, we build solutions to scale with speed, strategy, and long-term impact.
               </p>
             </div>
             <motion.img
@@ -153,87 +138,61 @@ export default function AboutUs() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: false, amount: 0.3 }}
-          className="col-span-1 sm:col-span-6 md:col-span-8 lg:col-span-8 row-span-6 sm:row-start-4 relative group bg-white rounded-2xl shadow-md overflow-hidden hover:scale-[1.02] transition duration-300 ease-out"
+          className="col-span-1 md:col-span-1 lg:col-span-2 bg-white rounded-2xl border border-gray-200 shadow-md p-6 sm:p-8 flex flex-col justify-between"
         >
-          <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-96 h-96 bg-gradient-to-br from-lime-300 via-green-500 to-lime-600 opacity-9 rounded-full blur-3xl z-0"></div>
-          <div className="relative z-10 h-full flex flex-col p-8 text-center">
-            <div>
-              <h3 className="font-semibold text-lg sm:text-xl md:text-2xl text-gray-800">
-                Creativity meets technology
-              </h3>
-              <p className="text-sm sm:text-base text-gray-600 max-w-xl text-center mx-auto leading-relaxed mt-2">
-                From websites and apps to marketing and SEO — every project is
-                built for long-term success, with performance at the core.
-              </p>
-            </div>
-            <div className="flex-grow flex items-center justify-center relative mt-4">
-              {/* Optional: glow effect beneath the image */}
-              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-32 h-10 bg-lime-400/20 rounded-full blur-2xl z-0"></div>
+          <div className="relative z-10 h-full flex flex-col text-center justify-between">
+            <h3 className="font-semibold text-lg sm:text-xl text-gray-800">
+              Where Creative Vision Meets AI Precision
 
-              {/* 3D horizontal rotating image */}
-              <motion.div
-                animate={{
-                  scale: [1, 1.15, 1],
-                  filter: ["brightness(1)", "brightness(1.1)", "brightness(1)"], // Zoom in and out
-                }}
-                transition={{
-                  duration: 3, // Faster zoom
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-                className="will-change-transform"
-              >
-                <img
-                  src={bottomImages[2]} // or directly: '/path/to/your/image.png'
-                  alt="Tech Icon"
-                  className="w-48 sm:w-56 md:w-64 h-auto object-contain"
-                />
-              </motion.div>
-            </div>
+            </h3>
+            <p className="text-sm text-gray-600 mt-2 leading-relaxed">
+             We merge bold design with smart technology from AI-powered websites to automated marketing and intelligent SEO every project is built to perform, adapt, and scale.
+            </p>
+            <motion.div
+              className="mt-4"
+              animate={{ scale: [1, 1.15, 1] }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <img
+                src={bottomImages[2]}
+                alt="Tech Icon"
+                className="w-full max-w-[120px] mx-auto object-contain"
+              />
+            </motion.div>
           </div>
         </motion.div>
 
         {/* Card 4 */}
-
         <motion.div
           variants={fadeFrom.right()}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: false, amount: 0.3 }}
-          className="aspect-square col-span-1 sm:col-span-4 md:col-span-4 lg:col-span-3 row-span-3 sm:col-start-3 md:col-start-5 lg:col-start-9 sm:row-start-4 group bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl shadow-lg overflow-hidden hover:scale-[1.02] transition duration-300 ease-out hover:shadow-[0_8px_30px_rgba(0,0,0,0.12)] relative"
+          className="col-span-1 md:col-span-1 lg:col-span-1 bg-white rounded-2xl border border-gray-200 shadow-md p-6 sm:p-8 flex flex-col items-center justify-between"
         >
-          <div className="relative flex flex-col items-center justify-between h-full px-4 py-5 text-center rounded-lg">
-            {/* Text */}
-            <div className="z-10">
-              <h3 className="font-semibold text-base sm:text-lg md:text-xl text-black mb-2">
-                Built on <br /> partnerships
-              </h3>
-              <p className="text-xs sm:text-sm md:text-base text-gray-800 leading-relaxed">
-                We align your goals with our expertise to create lasting digital
-                experiences — not just one-time solutions.
-              </p>
-            </div>
-
-            {/* Aesthetic 3D-Like Floating Animation */}
+          <div className="h-full flex flex-col items-center justify-between text-center">
+            <h3 className="font-semibold text-lg sm:text-xl text-black mb-2">
+            Collaborative & Enduring
+            </h3>
+            <p className="text-sm text-gray-800 mb-4">
+             We create evolving, AI-powered digital partnerships.
+            </p>
             <motion.img
-              src={bottomImages[3]} // replace with your actual image path
+              src={bottomImages[3]}
               alt="3D Cubes"
-              className="w-24 sm:w-28 md:w-32 h-auto mt-4 z-10"
+              className="w-20 sm:w-24 md:w-28 h-auto max-w-[70%] mt-4 z-10"
               animate={{
-                rotateX: [0, 10, 0, -10, 0, 10, 0],
-                rotateY: [0, -10, 10, 0, -10, 0, 0],
-                scale: [1.5, 1.05, 1.5],
+                rotateX: [0, 0, 0, 0, 0],
+                rotateY: [0, 0, 0, 0, 0],
+                scale: [1.25, 1, 1.25],
+                
                 filter: [
                   "blur(0px) brightness(1)",
                   "blur(1.5px) brightness(1.15)",
                   "blur(0px) brightness(1)",
                 ],
               }}
-              transition={{
-                duration: 5,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
+              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
               style={{
                 transformStyle: "preserve-3d",
                 perspective: 800,
@@ -248,27 +207,23 @@ export default function AboutUs() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: false, amount: 0.3 }}
-          className="aspect-square col-span-1 sm:col-span-4 md:col-span-4 lg:col-span-3 row-span-3 sm:col-start-3 md:col-start-5 lg:col-start-9 sm:row-start-7 group bg-white rounded-2xl shadow-lg overflow-hidden relative border border-gray-200"
+          className="col-span-1 md:col-span-2 lg:col-span-2 bg-white rounded-2xl border border-gray-200 shadow-md p-6 sm:p-8 flex flex-col justify-between"
         >
-          <div
-            className="absolute inset-0 bg-center bg-contain bg-no-repeat opacity-10 blur-xl"
-            style={{ backgroundImage: `url('/path-to-your-openai-logo.png')` }}
-          ></div>
-          <div className="relative z-10 flex flex-col justify-between h-full p-6 text-left">
+          <div className="h-full flex flex-col justify-between">
             <div>
-              <h3 className="text-xl font-bold text-gray-800 leading-snug">
-                Focused on <br /> measurable results
+              <h3 className="text-xl font-bold text-gray-800 text-center mb-2">
+                Data-Driven. Impact-Obsessed.
+
               </h3>
-              <p className="mt-4 text-base text-gray-700">
-                At , everything is tied to growth. From user experience to
-                backend performance — we ensure real impact.
+              <p className="text-base text-gray-700 text-center">
+                At Triovex, every pixel, click, and line of code is engineered for measurable growth from intuitive UX to high-performance backend systems, we turn strategy into scalable success.
               </p>
             </div>
-            <div className="w-full flex justify-end">
+            <div className="flex justify-center mt-4">
               <motion.img
                 src={bottomImages[4]}
                 alt="Top Cover"
-                className="w-16 sm:w-24 md:w-28 h-auto"
+                className="w-20 sm:w-24 md:w-28"
                 animate={{ rotate: 360 }}
                 transition={{ repeat: Infinity, duration: 6, ease: "linear" }}
               />

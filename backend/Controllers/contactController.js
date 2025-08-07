@@ -30,7 +30,11 @@ exports.submitContactForm = async (req, res) => {
       }
     );
 
-    res.send("Your message has been sent successfully.");
+    res.status(200).json({
+  success: true,
+  message: "Your message has been sent successfully.",
+});
+
   } catch (err) {
     console.error("Error submitting contact form:", err.message);
     res.status(500).send("Server error");

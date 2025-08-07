@@ -3,6 +3,8 @@
 import { motion as m } from "framer-motion";
 import triovexBuilding from "../assets/triovexbuilding.png";
 import logo from "../assets/logo.png";
+import mission from "../assets/mission2.jpg";
+import vision from "../assets/vision2.jpg";
 
 const MissionVision = () => {
   return (
@@ -64,63 +66,46 @@ const MissionVision = () => {
             className="hidden md:flex justify-center items-center gap-8 relative"
           >
             {/* Vision */}
-            <div className="bg-[#313719] text-white p-8 rounded-lg shadow-lg w-full sm:w-[300px] md:w-[580px] lg:w-[500px] h-auto md:h-[340px] lg:h-[300px] relative">
+            <div className="bg-[#313719] text-white p-8 rounded-lg shadow-lg w-full max-w-md lg:max-w-[500px] h-auto min-h-[300px] relative">
               <h3 className="text-2xl font-bold mb-4">Vision</h3>
               <p className="text-sm leading-relaxed mb-6">
-                To become a leading force in digital innovation, empowering
-                businesses to thrive in the connected world.
+                Shaping a future where technology is ethical, personal, and
+                planet-friendly. At Triovex Solution, we’re building a legacy of
+                innovation that empowers businesses and uplifts communities
+                worldwide.
               </p>
               <div className="flex justify-end items-end absolute bottom-6 left-1/2 transform -translate-x-1/2">
                 <img
-                  src={triovexBuilding}
+                  src={vision}
                   alt="Vision"
-                  className="w-30 object-cover rounded shadow-md transform rotate-12 transition-transform duration-300 ease-in-out hover:rotate-0"
-                />
-                <img
-                 src={triovexBuilding}
-                  alt="Vision"
-                  className="w-30 object-cover rounded shadow-md -ml-4 transform -rotate-6 transition-transform duration-300 ease-in-out hover:rotate-0"
-                />
-                <img
-                  src={triovexBuilding}
-                  alt="Vision"
-                  className="w-30 object-cover rounded shadow-md -ml-4 transform rotate-3 transition-transform duration-300 ease-in-out hover:rotate-0"
+                  className="w-44 md:w-36 lg:w-44 object-cover rounded shadow-md transition-transform duration-300 ease-in-out"
                 />
               </div>
             </div>
 
             {/* Mission */}
-            <div className="bg-[#313719] text-white p-8 rounded-lg shadow-lg w-full sm:w-[300px] md:w-[380px] lg:w-[500px] h-auto md:h-[340px] lg:h-[300px] relative">
+            <div className="bg-[#313719] text-white p-8 rounded-lg shadow-lg w-full max-w-md lg:max-w-[500px] h-auto min-h-[300px] relative">
               <h3 className="text-2xl font-bold mb-4">Mission</h3>
               <p className="text-sm leading-relaxed mb-6">
-                We aim to deliver impactful digital solutions that drive growth
-                through technology, creativity, and strategy.
+                Empowering innovation with smart, sustainable tech — built with
+                heart, code, and purpose. At Triovex Solution, we turn bold
+                ideas into impactful digital realities.
               </p>
               <div className="flex justify-start items-end absolute bottom-6 left-1/2 transform -translate-x-1/2">
                 <img
-                  src={triovexBuilding}
+                  src={mission}
                   alt="Mission"
-                  className="w-30 object-cover rounded shadow-md transform rotate-12 transition-transform duration-300 ease-in-out hover:rotate-0"
-                />
-                <img
-                 src={triovexBuilding}
-                  alt="Mission"
-                  className="w-30 object-cover rounded shadow-md -ml-4 transform -rotate-6 transition-transform duration-300 ease-in-out hover:rotate-0"
-                />
-                <img
-                  src={triovexBuilding}
-                  alt="Mission"
-                  className="w-30 object-cover rounded shadow-md -ml-4 transform rotate-3 transition-transform duration-300 ease-in-out hover:rotate-0"
+                  className="w-44 md:w-36 lg:w-44 object-cover rounded shadow-md transition-transform duration-300 ease-in-out"
                 />
               </div>
             </div>
 
             {/* Center Logo */}
-            <div className="absolute left-1/2 bottom-0 transform -translate-x-1/2 translate-y-1/2 bg-white text-green-900 rounded-full w-[200px] h-[200px] z-10 flex items-center justify-center">
+            <div className="absolute left-1/2 bottom-0 transform -translate-x-1/2 translate-y-1/2 bg-white text-green-900 rounded-full w-[25vw] max-w-[200px] h-[25vw] max-h-[200px] z-10 flex items-center justify-center">
               <img
                 src={logo}
-                alt="Triovex Logo"
-                className="w-[200px] h-[66px] object-contain"
+                alt="Triovex"
+                className="w-36 sm:w-40 md:w-44 lg:w-48 xl:w-52 mx-auto"
               />
             </div>
           </m.div>
@@ -130,24 +115,16 @@ const MissionVision = () => {
             <div className="bg-[#313719] text-white p-6 rounded-lg shadow-lg mx-auto w-full max-w-xs h-auto min-h-[280px] relative">
               <h3 className="text-xl font-bold mb-3">Vision</h3>
               <p className="text-sm leading-relaxed mb-4">
-                To become a leading force in digital innovation, empowering
-                businesses to thrive in the connected world.
+                Shaping a future where technology is ethical, personal, and
+                planet-friendly. At Triovex Solution, we’re building a legacy of
+                innovation that empowers businesses and uplifts communities
+                worldwide.
               </p>
               <div className="flex justify-center items-end absolute bottom-4 left-1/2 transform -translate-x-1/2">
                 <img
-                  src={triovexBuilding}
+                  src={vision}
                   alt="Vision"
-                  className="w-16 object-cover rounded shadow-md transform rotate-12 transition-transform duration-300 ease-in-out hover:rotate-0"
-                />
-                <img
-                  src={triovexBuilding}
-                  alt="Vision"
-                  className="w-16 object-cover rounded shadow-md -ml-3 transform -rotate-6 transition-transform duration-300 ease-in-out hover:rotate-0"
-                />
-                <img
-                  src={triovexBuilding}
-                  alt="Vision"
-                  className="w-16 object-cover rounded shadow-md -ml-3 transform rotate-3 transition-transform duration-300 ease-in-out hover:rotate-0"
+                  className="w-28 sm:w-32 object-cover rounded shadow-md transition-transform duration-300 ease-in-out"
                 />
               </div>
             </div>
@@ -155,24 +132,15 @@ const MissionVision = () => {
             <div className="bg-[#313719] text-white p-6 rounded-lg shadow-lg mx-auto w-full max-w-xs h-auto min-h-[280px] relative">
               <h3 className="text-xl font-bold mb-3">Mission</h3>
               <p className="text-sm leading-relaxed mb-4">
-                We aim to deliver impactful digital solutions that drive growth
-                through technology, creativity, and strategy.
+                Empowering innovation with smart, sustainable tech — built with
+                heart, code, and purpose. At Triovex Solution, we turn bold
+                ideas into impactful digital realities.
               </p>
               <div className="flex justify-center items-end absolute bottom-4 left-1/2 transform -translate-x-1/2">
                 <img
-                  src="src/assets/triovexbuilding.png"
+                  src={mission}
                   alt="Mission"
-                  className="w-16 object-cover rounded shadow-md transform rotate-12 transition-transform duration-300 ease-in-out hover:rotate-0"
-                />
-                <img
-                  src="src/assets/triovexbuilding.png"
-                  alt="Mission"
-                  className="w-16 object-cover rounded shadow-md -ml-3 transform -rotate-6 transition-transform duration-300 ease-in-out hover:rotate-0"
-                />
-                <img
-                  src="src/assets/triovexbuilding.png"
-                  alt="Mission"
-                  className="w-16 object-cover rounded shadow-md -ml-3 transform rotate-3 transition-transform duration-300 ease-in-out hover:rotate-0"
+                  className="w-28 sm:w-32 object-cover rounded shadow-md transition-transform duration-300 ease-in-out"
                 />
               </div>
             </div>
@@ -180,9 +148,9 @@ const MissionVision = () => {
             <div className="bg-white text-green-900 px-6 py-4 rounded-full shadow-lg mx-auto w-fit">
               <div className="text-center">
                 <img
-                  src="src/assets/logo.png"
+                  src={logo}
                   alt="Triovex"
-                  className="w-[120px] mx-auto"
+                  className="w-36 sm:w-40 md:w-44 lg:w-48 xl:w-52 mx-auto"
                 />
               </div>
             </div>

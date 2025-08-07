@@ -238,9 +238,9 @@ export default function CareersForm() {
           {[
             {
               name: "firstName",
-              label: "First Name",
+              label: "Full Name",
               type: "text",
-              placeholder: "Enter your first name",
+              placeholder: "Enter your full name",
             },
             {
               name: "email",

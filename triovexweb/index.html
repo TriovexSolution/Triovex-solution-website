@@ -2,9 +2,18 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Triovex</title>
+    <title>Triovex Solution</title>
+
+    <!-- Default light mode favicon -->
+   <link id="favicon" rel="icon" type="image/png" href="/logo2.png" />
+<script>
+  const darkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const favicon = document.getElementById("favicon");
+  favicon.href = darkMode ? "/white.png" : "/logo3.png";
+</script>
+
+
     <link href="/src/index.css" rel="stylesheet" />
   </head>
   <body>

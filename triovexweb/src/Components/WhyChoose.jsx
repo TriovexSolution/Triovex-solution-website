@@ -35,14 +35,12 @@ const WhyChoose = () => {
         </span>
 
         <h2 className="mt-6 text-3xl font-bold text-gray-900 sm:text-4xl leading-tight">
-          Empowering You Through Custom
-          <br className="hidden sm:block" />
-          Software Solutions
+          Smart Software. Real Results.
+
         </h2>
 
         <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
-          Custom‑built software designed to solve real problems, crafted with
-          precision to drive your business forward.
+          At Triovex Solution, we don’t just build software we engineer intelligent solutions that solve real problems, fuel innovation, and accelerate business growth with precision and performance.
         </p>
       </motion.div>
 
@@ -57,20 +55,20 @@ const WhyChoose = () => {
         >
           <div>
             <h3 className="text-2xl font-bold text-gray-900">
-              ₹0 Consultation Fee
+              ₹0 Consultation 100% Transparency, Always
+
             </h3>
             <p className="mt-2 text-base font-medium text-gray-700">
               No Hidden Costs
             </p>
             <p className="mt-2 text-gray-600">
-              We offer transparent digital solutions—from <br /> strategy to
-              delivery—with no surprise <br /> charges.
+              At Triovex Solution, we believe great partnerships start with honesty. That’s why we offer zero consultation fees, clear communication, and upfront pricing no hidden charges, no third-party surprises.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               {[
-                "Clear Communication",
                 "Transparent Billing",
-                "No Third-Party Costs",
+                "Clear Communication",
+                "No Hidden or Extra Costs",
               ].map((item) => (
                 <span
                   key={item}
@@ -87,7 +85,7 @@ const WhyChoose = () => {
             <img
               src={why1}
               alt="Consultation"
-              className="max-w-[400px] z-10 translate-x-[-30%] translate-y-[-93.7%] absolute top-1/2 left-1/2"
+              className="max-w-[400px] z-10 translate-x-[-23%] translate-y-[-93.7%] absolute top-1/2 left-1/2"
             />
           </div>
         </motion.div>
@@ -103,22 +101,21 @@ const WhyChoose = () => {
           >
             <div className="relative z-10 text-white">
               <h3 className="text-2xl font-bold text-gray-900">
-                500+ Projects Delivered
+                500+ Success Stories Globally Trusted, Locally Rooted
+
               </h3>
               <p className="mt-2 text-base font-medium text-gray-700">
                 Trusted by Brands Worldwide
               </p>
               <p className="mt-2 text-gray-600">
-                Startups to global enterprises rely on us for <br /> scalable
-                websites, apps, automation, and AI- <br />
-                powered growth.
+                From fast-growing startups to global <br />enterprises, businesses trust Triovex for <br />scalable web platforms, high-performing <br />apps, smart automation, and AI-powered <br />digital  transformation.
               </p>
             </div>
             <div className="relative mt-10 flex justify-center hidden lg:flex">
               <img
                  src={why2}
                 alt="Projects Delivered"
-                className="max-w-[300px] translate-x-[-25%] translate-y-[-86.7%] absolute top-1/2 left-1/2"
+                className="max-w-[300px] translate-x-[-2%] translate-y-[-86.7%] absolute top-1/2 left-1/2"
               />
             </div>
           </motion.div>
@@ -132,20 +129,21 @@ const WhyChoose = () => {
           >
             <div className="relative z-20">
               <h3 className="text-2xl font-bold text-gray-900">
-                1,000+ Services & Features
+                1,000+ Solutions to Launch, <br />Grow & Scale Smarter
+
               </h3>
               <p className="mt-2 text-base font-medium text-gray-700">
                 From Development to Digital Growth
               </p>
               <p className="mt-2 text-gray-600">
-                From custom software to smart marketing— <br />
-                we cover everything to boost your business.
+               From AI-driven software to performance marketing <br /> Triovex covers everything you<br /> need to start  fast, scale<br /> confidently, and stay ahead in the <br />digital game.
+
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
                 {[
                   "Start in Minutes",
-                  "Expert Team Support",
-                  "Results-Driven Solutions",
+                  "Backed by Expert Teams",
+                  "Built for Real Results",
                 ].map((item) => (
                   <span
                     key={item}

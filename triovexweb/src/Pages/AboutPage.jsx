@@ -5,6 +5,7 @@ import Team from "../Components/Team";
 import WeAre from "../Components/WeAre";
 import RatingMarquee from "../Components/RatingMarquee";
 import WhyChoose from "../Components/WhyChoose";
+import AboutWhyChoose from "../Components/Aboutwhychoose";
 
 const AboutPage = () => {
   return (
@@ -12,8 +13,7 @@ const AboutPage = () => {
       <AboutHome />
       <WeAre />
       <MissionVision />
-      <WhyChoose />
-      
+      <AboutWhyChoose />
       <RatingMarquee />
     </>
   );

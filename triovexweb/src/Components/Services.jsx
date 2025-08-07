@@ -1,13 +1,13 @@
 import React from "react";
 import { LazyMotion, domAnimation, m } from "framer-motion";
 import { NavLink } from "react-router-dom";
-import cart1 from "../assets/service-cart1.png";
+import cart1 from "../assets/hp10.png";
 import cart2 from "../assets/service-cart2.png";
 import cart3 from "../assets/service-cart3.png";
-import cart4 from "../assets/service-cart4.png";
-import cart5 from "../assets/service-cart5.png";
-import cart6 from "../assets/service-cart6.png";
-import cart7 from "../assets/service-cart7.png";
+import cart4 from "../assets/hp11.png";
+import cart5 from "../assets/seo.png";
+import cart6 from "../assets/digitalmarketing.png";
+import cart7 from "../assets/hp14.png";
 import cart8 from "../assets/service-cart8.png";
 
 // 3D card components
@@ -106,51 +106,51 @@ export default function Services() {
 
   const services = [
   {
-    title: "AI & Machine Learning",
+    title: "AI & Machine Learning Solutions That Think Ahead",
     description:
-      "Build smarter systems with AI that automate, predict, and optimize business processes effortlessly.",
+      "Transform your business with intelligent systems that automate workflows, predict outcomes, and unlock real-time insights all powered by next-gen AI and machine learning.",
     imageSrc: cart1,
   },
   {
-    title: "Custom Software Development",
+    title: "Custom Software That Fits, Scales & Performs",
     description:
-      "Tailored software built for your exact business needs — scalable, secure, and efficient.",
+      "We build powerful, secure, and scalable software tailored to your business from smart dashboards to complex systems, designed for performance and growth.",
     imageSrc: cart2,
   },
   {
-    title: "Website Design & Development",
+    title: "Websites That Convert Design Meets Performance",
     description:
-      "Modern, responsive websites crafted to impress, engage, and convert your audience.",
+      "We craft fast,modern,responsive, SEO-ready websites that not only look stunning but drive engagement, boost conversions, and scale with your business.",
     imageSrc: cart3,
   },
   {
-    title: "Mobile & Web Apps",
+    title: "Mobile Apps Built to Engage, Scale & Win",
     description:
-      "Launch intuitive mobile and web apps that your users love and your business benefits from.",
+      "From sleek fintech to on-demand services we design powerful, user-friendly mobile apps that boost retention, drive revenue, and elevate your brand on every device.",
     imageSrc: cart4,
   },
   {
-    title: "Search Engine Optimization (SEO)",
+    title: "Rank Higher, Grow Faster, Win Organically",
     description:
-      "Boost your visibility with search-first strategies that drive traffic and improve rankings.",
+      "We craft data-driven SEO strategies that boost visibility, skyrocket traffic, and keep your brand ahead on Google because great businesses deserve to be seen.",
     imageSrc: cart5,
   },
   {
-    title: "Digital Marketing",
+    title: "Digital Campaigns That Convert, Scale & Win",
     description:
-      "From content to conversion — we create digital campaigns that bring measurable growth.",
+      "From strategy to storytelling, we craft performance-driven digital marketing campaigns that boost brand visibility, increase ROI, and turn clicks into loyal customers.",
     imageSrc: cart6,
   },
   {
-    title: "Social Media Management",
+    title: "Turn Scrolls into Sales with Strategic Social Media",
     description:
-      "Engage your audience with creative content, timely posts, and smart strategies that grow your brand.",
+      "We manage your brand across platforms with eye-catching content, timely posting, and data-driven strategies that boost engagement, followers, and real business growth.",
     imageSrc: cart7,
   },
   {
-    title: "Paid Ads & Email Marketing",
+    title: "Clicks That Convert Emails That Engage",
     description:
-      "Target the right audience with PPC and stay top-of-mind with personalized email campaigns.",
+      "Drive instant traffic with high-performing PPC ads and keep your audience hooked with smart, personalized email campaigns designed to boost ROI and brand recall.",
     imageSrc: cart8,
   },
 ];
@@ -174,11 +174,12 @@ export default function Services() {
               Our Services
             </span>
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight tracking-tight mb-4 text-gray-900">
-              Smart Digital Services That Drive Business Forward
+              AI-Powered Digital Services That Accelerate Growth
+
             </h2>
             <p className="text-base sm:text-lg text-gray-600 max-w-2xl leading-relaxed">
-              Our services are designed to help you grow faster, smarter, and
-              stronger in the digital space.
+              
+From intelligent automation to custom web apps and digital marketing our services are built to scale your business faster, smarter, and stronger in today’s tech-driven world.
             </p>
           </div>
           <div className="mt-8 lg:mt-0 lg:ml-8">
@@ -192,7 +193,7 @@ export default function Services() {
         </div>
 
         {/* Services Grid */}
-        <div className="space-y-12">
+        <div className="space-y-1">
           {chunkedServices.map((row, rowIndex) => (
             <m.div
               key={rowIndex}

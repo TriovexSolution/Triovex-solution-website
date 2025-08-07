@@ -4,9 +4,18 @@ import { X } from "lucide-react";
 
 export default function AppDevModal({ onClose }) {
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-sm">
+    <div className="fixed inset-0 z-50 bg-black/90 backdrop-sm overflow-x-hidden">
+      {/* ✅ Fixed Close Button */}
+      <button
+        onClick={onClose}
+        className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 bg-black/85 hover:bg-black/90 text-white p-5 rounded-full backdrop-blur-md transition"
+      >
+        <X size={24} />
+      </button>
+
+      {/* Scrollable Content */}
       <div
-        className="relative max-w-6xl w-full bg-transparent text-white px-6 py-16"
+        className="relative max-w-6xl mx-auto w-full text-white px-6 py-16"
         style={{
           height: "90vh",
           overflowY: "scroll",
@@ -14,23 +23,15 @@ export default function AppDevModal({ onClose }) {
           scrollbarWidth: "none",
         }}
       >
-        {/* Hide scrollbar */}
+        {/* Hide Scrollbar */}
         <style jsx>{`
           div::-webkit-scrollbar {
             display: none;
           }
         `}</style>
 
-        {/* Close Button */}
-        <button
-          onClick={onClose}
-          className="absolute top-6 left-1/2 transform -translate-x-1/2 bg-black/85 hover:bg-black/90 text-white p-5 rounded-full backdrop-blur-md transition mb-4"
-        >
-          <X size={24} />
-        </button>
-
         {/* Heading */}
-        <h2 className="text-2xl font-semibold mt-10 text-center">
+        <h2 className="text-2xl font-semibold mt-16 text-center">
           Application Development Solution
         </h2>
         <p className="text-center text-gray-300 mb-12">

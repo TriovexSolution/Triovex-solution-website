@@ -3,6 +3,7 @@ import { motion as m } from "framer-motion";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Link } from "react-router-dom";
 
 const baseURL = import.meta.env.VITE_BASE_URL;
 
@@ -40,54 +41,53 @@ const ContactForm = () => {
   };
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
-  if (!isFormValid) return;
+    e.preventDefault();
+    if (!isFormValid) return;
 
-  // Show loading toast
-  const toastId = toast.loading(" Sending your message...");
+    // Show loading toast
+    const toastId = toast.loading(" Sending your message...");
 
-  try {
-    const response = await axios.post(`${baseURL}/api/contact/submit`, {
-      firstName: formData.firstName,
-      lastName: formData.lastName,
-      email: formData.email,
-      message: formData.message,
-      privacy: formData.agreed,
-    });
+    try {
+      const response = await axios.post(`${baseURL}/api/contact/submit`, {
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        message: formData.message,
+        privacy: formData.agreed,
+      });
 
-    // Update toast on success
-    toast.update(toastId, {
-      render: " Message sent successfully!",
-      type: "success",
-      isLoading: false,
-      autoClose: 3000,
-      closeOnClick: true,
-    });
+      // Update toast on success
+      toast.update(toastId, {
+        render: " Message sent successfully!",
+        type: "success",
+        isLoading: false,
+        autoClose: 3000,
+        closeOnClick: true,
+      });
 
-    console.log("Server response:", response.data);
+      console.log("Server response:", response.data);
 
-    // Reset the form
-    setFormData({
-      firstName: "",
-      lastName: "",
-      email: "",
-      message: "",
-      agreed: false,
-    });
-  } catch (error) {
-    console.error("❌ Error submitting form:", error);
+      // Reset the form
+      setFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        message: "",
+        agreed: false,
+      });
+    } catch (error) {
+      console.error("❌ Error submitting form:", error);
 
-    // Update toast on error
-    toast.update(toastId, {
-      render: "❌ Something went wrong. Please try again later.",
-      type: "error",
-      isLoading: false,
-      autoClose: 3000,
-      closeOnClick: true,
-    });
-  }
-};
-
+      // Update toast on error
+      toast.update(toastId, {
+        render: "❌ Something went wrong. Please try again later.",
+        type: "error",
+        isLoading: false,
+        autoClose: 3000,
+        closeOnClick: true,
+      });
+    }
+  };
 
   return (
     <m.div
@@ -178,7 +178,8 @@ const ContactForm = () => {
             />
             <p>
               By reaching out to us, you agree to our{" "}
-              <span className="font-semibold text-gray-800">Privacy Policy</span>.
+              
+              <Link to="/privacypolicy" className="font-semibold text-gray-800">Privacy Policy.</Link>
             </p>
           </div>
 

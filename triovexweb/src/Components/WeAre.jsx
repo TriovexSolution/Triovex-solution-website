@@ -69,8 +69,9 @@ const WeAre = () => {
                 Digital Innovation Experts
               </h3>
               <p className="text-sm my-4">
-                We create cutting-edge web and mobile solutions tailored to modern
-                business needs.
+                Triovex Solution is at the cutting edge of digital innovation. We specialize in generative AI, ML, data visualization, and AI driven product design turning ideas into intelligent systems that create real business advantage.
+Our team does not just build technology; we design intelligent platforms that adapt, learn, and drive measurable growth.
+
               </p>
             </m.div>
 
@@ -84,8 +85,9 @@ const WeAre = () => {
                 Trusted by Global Brands
               </h3>
               <p className="text-sm my-4">
-                Startups to enterprises trust us for reliable, scalable, and
-                high-performance digital solutions.
+                Our clients span geographies and industries from startups to established enterprises. We partner with organizations seeking digital excellence, whether it’s AI integration, scalable cloud solutions, or performance driven marketing campaigns.
+Our ability to deliver smart, data informed digital ecosystems has earned the trust of global brands looking for reliable, scalable, and impactful technology partners.
+
               </p>
             </m.div>
 
@@ -111,8 +113,9 @@ const WeAre = () => {
                 Creative-Driven Team
               </h3>
               <p className="text-sm my-4">
-                Our designers and strategists turn ideas into user-focused digital
-                experiences.
+                At Triovex Solution, our international team blends creative mindset with technical expertise to deliver digital products that inspire engagement and drive business outcomes. From AI powered platforms to custom mobile applications and performance marketing campaigns, we fuse design thinking with data science to unlock real ROI for global clients. Our creative technologists solve real world problems, building solutions that are as thoughtful as they are impactful.
+This globally distributed workforce allows us to serve clients across time zones with consistency and quality.
+
               </p>
             </m.div>
 
@@ -123,11 +126,10 @@ const WeAre = () => {
               variants={fadeIn}
             >
               <h3 className="text-lg md:text-xl lg:text-2xl font-semibold mb-2">
-                Trusted by Global Brands
+                Customer-Centric Approach
               </h3>
               <p className="text-sm my-4">
-                Everything we build is designed to grow your business and deliver
-                measurable success.
+                At Triovex Solution, we prioritize understanding our clients' unique needs to deliver tailored digital experiences. By integrating user feedback and market insights, we create intuitive designs and seamless functionality that drive customer satisfaction and business growth. Our commitment to innovation ensures that every solution is crafted with precision and adaptability.
               </p>
             </m.div>
 
@@ -141,8 +143,9 @@ const WeAre = () => {
                 End-to-End Services
               </h3>
               <p className="text-sm my-4">
-                From development to digital marketing, we handle it all—under one
-                roof.
+                We provide comprehensive digital transformation services, guiding you from initial ideation all the way through development, deployment, and optimization. Our offerings span AI, Machine Learning, predictive analytics, custom software, cloud native architecture, mobile apps, web platforms, API integration, SEO, SEM, and performance marketing.
+Whether you're overhauling legacy systems or launching new digital ventures, our goal is the same: a seamless, full stack solution tailored to your business and growth objectives.
+
               </p>
             </m.div>
           </m.div>

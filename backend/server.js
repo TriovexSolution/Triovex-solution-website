@@ -13,8 +13,17 @@ mongoose.connect(process.env.MONGO_URL)
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.error("MongoDB connection error:", err));
 
+// ✅ Use only ONE properly configured CORS
+app.use(cors({
+  origin: [
+    "https://triovex.onrender.com", // live frontend
+    "http://localhost:5173"         // local frontend
+  ],
+  methods: ["GET", "POST"],
+  credentials: true
+}));
+
 // Middleware
-app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -24,20 +33,15 @@ if (!fs.existsSync(uploadPath)) {
   fs.mkdirSync(uploadPath);
 }
 app.use("/uploads", express.static(uploadPath));
-app.use(cors({ origin: "http://localhost:5173", credentials: true }));
-// EJS setup
+
+// EJS setup (optional)
 app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "views")); // Optional if views in root
+app.set("views", path.join(__dirname, "views"));
 
 // Routes
-const careerRoutes = require("./Routers/careersRouter");
-app.use("/api/career", careerRoutes);
-
-const contactRoutes = require("./Routers/contactRouter");
-app.use("/api/contact", contactRoutes);
-
-const vacancyRoutes =  require("./Routers/vacancyRouter");
-app.use("/api/vacancy",vacancyRoutes);
+app.use("/api/career", require("./Routers/careersRouter"));
+app.use("/api/contact", require("./Routers/contactRouter"));
+app.use("/api/vacancy", require("./Routers/vacancyRouter"));
 
 // Start server
 const PORT = process.env.PORT || 5000;

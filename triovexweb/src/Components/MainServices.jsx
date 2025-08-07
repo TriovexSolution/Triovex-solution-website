@@ -30,13 +30,13 @@ import PaidAdsEmailModal from "./PaidAdsEmailMarketing";
 
 const MainServices = () => {
   const [showModal, setShowModal] = useState(false);
-    const [show1Modal, setShow1Modal] = useState(false);
-    const [show2Modal, setShow2Modal] = useState(false);
-    const [show3Modal, setShow3Modal] = useState(false);
-    const [show4Modal, setShow4Modal] = useState(false);
-    const [show5Modal, setShow5Modal] = useState(false);
-    const [show6Modal, setShow6Modal] = useState(false);
-    const [show7Modal, setShow7Modal] = useState(false);
+  const [show1Modal, setShow1Modal] = useState(false);
+  const [show2Modal, setShow2Modal] = useState(false);
+  const [show3Modal, setShow3Modal] = useState(false);
+  const [show4Modal, setShow4Modal] = useState(false);
+  const [show5Modal, setShow5Modal] = useState(false);
+  const [show6Modal, setShow6Modal] = useState(false);
+  const [show7Modal, setShow7Modal] = useState(false);
   const [visibleCards, setVisibleCards] = useState([]);
   const [lineProgress, setLineProgress] = useState(0);
   const [scrollY, setScrollY] = useState(0);
@@ -142,17 +142,16 @@ const MainServices = () => {
       pin: pin2,
     },
   ];
-const modalMap = {
-  1: () => setShowModal(true),
-  2: () => setShow1Modal(true),
-  3: () => setShow2Modal(true),
-  4: () => setShow3Modal(true),
-  5: () => setShow4Modal(true),
-  6: () =>setShow5Modal(true)
-  ,
-  7: () => setShow6Modal(true),
-  8: () => setShow7Modal(true),
-};
+  const modalMap = {
+    1: () => setShowModal(true),
+    2: () => setShow1Modal(true),
+    3: () => setShow2Modal(true),
+    4: () => setShow3Modal(true),
+    5: () => setShow4Modal(true),
+    6: () => setShow5Modal(true),
+    7: () => setShow6Modal(true),
+    8: () => setShow7Modal(true),
+  };
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
@@ -214,62 +213,6 @@ const modalMap = {
 
   return (
     <div className="">
-      <div className="min-h-screen bg-white relative overflow-hidden">
-        <motion.img
-          initial={{ scale: 1.1 }}
-          animate={{ scale: 1 }}
-          transition={{
-            duration: 10,
-            ease: "easeInOut",
-            repeat: Infinity,
-            repeatType: "reverse",
-          }}
-          className="absolute w-full h-full object-cover object-center"
-          src={hbg}
-          alt="Background"
-        />
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: scrollY > 50 ? 0.4 : 0 }}
-          transition={{ duration: 0.5 }}
-          className="absolute inset-0 pointer-events-none z-0"
-        />
-
-        <div className="h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 relative z-10">
-          <MagnifyCursor containerRef={heroRef} />
-
-          <div className="text-center">
-            <a
-              href="#about"
-              className="inline-block bg-gray-200 text-gray-700 px-3 sm:px-4 md:px-5 py-1.5 sm:py-2 md:py-2.5 rounded-full text-xs sm:text-sm md:text-base font-medium"
-            >
-              Services
-            </a>
-
-            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mt-6">
-              {headingWords.map((word, i) => (
-                <motion.span
-                  key={i}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.15, duration: 0.5 }}
-                  className="inline-block mr-1"
-                >
-                  {word}
-                </motion.span>
-              ))}
-            </h2>
-
-            <p className="mt-4 text-[11px] sm:text-sm md:text-base lg:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
-              We offer website development, app creation, SEO, digital
-              marketing, social media management, paid ads, and email marketing
-              to help your business thrive online.
-            </p>
-          </div>
-        </div>
-      </div>
-
       {/* Services Section */}
       <section
         ref={containerRef}
@@ -412,15 +355,15 @@ const modalMap = {
       </section>
 
       {showModal && <AIModal onClose={() => setShowModal(false)} />}
-      {show1Modal && <CustomSoftwareModal onClose={() => setShow1Modal(false)} />}
+      {show1Modal && (
+        <CustomSoftwareModal onClose={() => setShow1Modal(false)} />
+      )}
       {show2Modal && <WebDevModal onClose={() => setShow2Modal(false)} />}
       {show3Modal && <AppDevModal onClose={() => setShow3Modal(false)} />}
       {show4Modal && <SEOModal onClose={() => setShow4Modal(false)} />}
       {show5Modal && <DigitalMarketing onClose={() => setShow5Modal(false)} />}
       {show6Modal && <SocialMediaModal onClose={() => setShow6Modal(false)} />}
       {show7Modal && <PaidAdsEmailModal onClose={() => setShow7Modal(false)} />}
-      
-
     </div>
   );
 };

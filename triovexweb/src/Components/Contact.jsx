@@ -22,66 +22,9 @@ function Contact() {
     return () => clearTimeout(timer);
   }, []);
 
-  const headingWords = ["We're", "Here", "to", "Help", "–", "Contact", "Us"];
-
   return (
     <div>
       {/* 🔹 Hero Section */}
-      <div className="min-h-screen bg-white relative overflow-hidden cursor-none">
-        <m.img
-          initial={{ scale: 1.1 }}
-          animate={{ scale: 1 }}
-          transition={{
-            duration: 10,
-            ease: "easeInOut",
-            repeat: Infinity,
-            repeatType: "reverse",
-          }}
-          className="absolute w-full h-full object-cover object-center"
-          src={hbg}
-          alt="Background"
-        />
-
-        <div
-          ref={heroRef}
-          className="h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 relative z-10"
-        >
-          <MagnifyCursor containerRef={heroRef} />
-
-          <div className="text-center">
-            <a
-              href="#contact"
-              className="inline-block bg-gray-200 text-gray-700 px-4 py-2 rounded-full text-sm font-medium"
-            >
-              Contact
-            </a>
-
-            <h2 className="text-2xl font-bold text-gray-900 mt-6 sm:text-3xl cursor-zoom">
-              {headingWords.map((word, i) => (
-                <m.span
-                  key={i}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.15, duration: 0.5 }}
-                  className="inline-block mr-1"
-                >
-                  {word}
-                </m.span>
-              ))}
-            </h2>
-
-            <m.p
-              className="mt-4 text-sm sm:text-base text-gray-600 max-w-2xl mx-auto cursor-zoom"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1.2, duration: 0.6 }}
-            >
-              Have questions or need help? Our friendly team is just a message
-              away and ready to support you anytime.
-            </m.p>
-          </div>
-        </div>
-      </div>
 
       {/* 🔹 Who We Are Section */}
       <m.div
@@ -132,10 +75,10 @@ function Contact() {
             >
               <h3 className="font-bold text-lg">Office Address</h3>
               <a
-                href="https://maps.google.com"
+                href="https://www.google.com/maps?q=Shivalik+Shilp,+Iskcon+Cross+Road,+SG+Highway,+Ahmedabad"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block hover:underline my-2"
+                className="block hover:underline my-2 "
               >
                 <p>
                   1306, Shivalik shilp, Iskcon Cross Road, SG Highway, Ahmedabad
@@ -153,13 +96,19 @@ function Contact() {
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
           >
-            <iframe
-              title="Google Map"
-              src="https://maps.google.com/maps?q=Ahmedabad,Gujarat,India&z=14&output=embed"
-              className="w-full h-full border-none rounded-xl shadow-md"
-              allowFullScreen
-              loading="lazy"
-            />
+            <div className="space-y-2">
+              <h2 className="text-lg font-semibold">
+                📍 Location: Shivalik Ship
+              </h2>{" "}
+              {/* Your custom label */}
+              <iframe
+                title="Google Map - Shivalik Shilp"
+                src="https://maps.google.com/maps?q=Shivalik+Shilp,+Iskcon+Cross+Road,+SG+Highway,+Ahmedabad&z=17&output=embed"
+                className="w-full h-[450px] border-none rounded-xl shadow-md"
+                allowFullScreen
+                loading="lazy"
+              />
+            </div>
           </m.div>
 
           {/* 🔸 Right Column */}
