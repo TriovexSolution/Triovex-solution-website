@@ -5,6 +5,7 @@ import AboutUs from "../Components/AboutUs";
 import Services from "../Components/Services";
 import Work from "../Components/Work";
 import WhyChoose from "../Components/WhyChoose";
+import ConsultationForm from "../Components/ConsultationForm";
 
 const HomePage = () => {
   return (
@@ -15,6 +16,7 @@ const HomePage = () => {
       <Work />
       <Services />
       <WhyChoose />
+      <ConsultationForm />
     </>
   );
 };

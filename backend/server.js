@@ -42,6 +42,7 @@ app.set("views", path.join(__dirname, "views"));
 app.use("/api/career", require("./Routers/careersRouter"));
 app.use("/api/contact", require("./Routers/contactRouter"));
 app.use("/api/vacancy", require("./Routers/vacancyRouter"));
+app.use("/api/consultant", require("./Routers/consultantRouter"));
 
 // Start server
 const PORT = process.env.PORT || 5000;

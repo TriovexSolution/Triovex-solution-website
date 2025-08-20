@@ -3,6 +3,7 @@
 import { motion as m } from "framer-motion";
 import triovexBuilding from "../assets/triovexbuilding.png";
 import logo from "../assets/logo.png";
+import darklogo from "../assets/darkmodelogo.png";
 import mission from "../assets/mission2.jpg";
 import vision from "../assets/vision2.jpg";
 
@@ -54,7 +55,7 @@ const MissionVision = () => {
         }
       `}</style>
 
-      <div className="py-16 px-4 sm:px-6 lg:px-8">
+      <div className="py-16 px-4 sm:px-6 lg:px-8 bg-white dark:bg-black transition-colors duration-500">
         <div className="max-w-7xl mx-auto">
           {/* Desktop View */}
           <m.div
@@ -101,11 +102,16 @@ const MissionVision = () => {
             </div>
 
             {/* Center Logo */}
-            <div className="absolute left-1/2 bottom-0 transform -translate-x-1/2 translate-y-1/2 bg-white text-green-900 rounded-full w-[25vw] max-w-[200px] h-[25vw] max-h-[200px] z-10 flex items-center justify-center">
+            <div className="absolute left-1/2 bottom-0 transform -translate-x-1/2 translate-y-1/2 rounded-full w-[25vw] max-w-[200px] h-[25vw] max-h-[200px] z-10 flex items-center justify-center bg-white dark:bg-black transition-colors duration-500">
               <img
                 src={logo}
                 alt="Triovex"
-                className="w-36 sm:w-40 md:w-44 lg:w-48 xl:w-52 mx-auto"
+                className="w-36 sm:w-40 md:w-44 lg:w-48 xl:w-52 mx-auto dark:hidden"
+              />
+              <img
+                src={darklogo}
+                alt="Triovex"
+                className="w-36 sm:w-40 md:w-44 lg:w-48 xl:w-52 mx-auto hidden dark:block"
               />
             </div>
           </m.div>
@@ -145,12 +151,17 @@ const MissionVision = () => {
               </div>
             </div>
 
-            <div className="bg-white text-green-900 px-6 py-4 rounded-full shadow-lg mx-auto w-fit">
+            <div className="px-6 py-4 rounded-full shadow-lg mx-auto w-fit bg-white dark:bg-black transition-colors duration-500">
               <div className="text-center">
                 <img
                   src={logo}
                   alt="Triovex"
-                  className="w-36 sm:w-40 md:w-44 lg:w-48 xl:w-52 mx-auto"
+                  className="w-36 sm:w-40 md:w-44 lg:w-48 xl:w-52 mx-auto dark:hidden"
+                />
+                <img
+                  src={darklogo}
+                  alt="Triovex"
+                  className="w-36 sm:w-40 md:w-44 lg:w-48 xl:w-52 mx-auto hidden dark:block"
                 />
               </div>
             </div>

@@ -44,7 +44,7 @@ export default function Work() {
         <div className="max-w-7xl mx-auto text-center relative z-10 px-4 py-12">
           <a
             href="#work"
-            className="inline-block mb-4 px-4 py-2 text-sm font-medium bg-white/10 rounded-full transition-colors"
+            className="inline-block mb-4 px-4 py-2 text-sm font-medium bg-white/10  dark:bg-emerald-900/40 dark:text-emerald-300 rounded-full transition-colors"
           >
             Our Work
           </a>
@@ -73,7 +73,7 @@ export default function Work() {
             onClick={handleScrollClick}
             className="absolute bottom-10 right-4 z-20 text-white text-sm px-4 py-2 rounded-full shadow-lg flex items-center gap-2 transition-all duration-300
               bg-gradient-to-r from-[#313719] via-[#5a6133] to-[#8c9445]
-              hover:from-[#8c9445] hover:to-[#313719]"
+              hover:from-[#8c9445] hover:to-[#313719] cursor-pointer"
           >
             {scrollDirection === "down" ? (
               <ChevronDown className="w-8 h-8" />

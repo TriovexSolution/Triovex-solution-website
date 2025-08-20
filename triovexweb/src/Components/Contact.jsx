@@ -23,7 +23,7 @@ function Contact() {
   }, []);
 
   return (
-    <div>
+    <div className="bg-white dark:bg-black transition-colors duration-500">
       {/* 🔹 Hero Section */}
 
       {/* 🔹 Who We Are Section */}
@@ -34,22 +34,22 @@ function Contact() {
         viewport={{ once: true, amount: 0.2 }}
         variants={fadeCard(0.1)}
       >
-        <span className="inline-block bg-gray-200 text-gray-700 px-4 py-1 rounded-full text-sm font-medium mb-3">
+        <span className="inline-block bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 px-4 py-1 rounded-full text-sm font-medium mb-3">
           Who We Are
         </span>
-        <p className="text-base sm:text-sm md:text-base lg:text-lg text-gray-600">
+        <p className="text-base sm:text-sm md:text-base lg:text-lg text-gray-600 dark:text-gray-300">
           Triovex Solution empowers businesses to grow digitally through
           innovative web, app, and marketing solutions.
         </p>
       </m.div>
 
       {/* 🔹 Info Cards + Map */}
-      <div className="w-full px-4 sm:px-6 lg:px-8 py-12 bg-white">
+      <div className="w-full px-4 sm:px-6 lg:px-8 py-12 bg-white dark:bg-black transition-colors duration-500">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-5 gap-6 items-center">
           {/* 🔸 Left Column */}
-          <div className="flex flex-col gap-6 col-span-1">
+          <div className="flex flex-col gap-6 col-span-1 ">
             <m.div
-              className="bg-[#2F3712] text-white rounded-xl p-6 h-52 sm:h-60 md:h-64 lg:h-[196px]"
+              className="bg-[#2F3712] dark:bg-[#1f2a0f] text-white rounded-xl p-6 h-52 sm:h-60 md:h-64 lg:h-[196px] flex flex-col items-center justify-center"
               variants={fadeCard(0.2)}
               initial="hidden"
               whileInView="visible"
@@ -67,7 +67,7 @@ function Contact() {
             </m.div>
 
             <m.div
-              className="bg-[#2F3712] text-white rounded-xl p-6 h-52 sm:h-60 md:h-64 lg:h-[196px]"
+              className="bg-[#2F3712] dark:bg-[#1f2a0f] text-white rounded-xl p-6 h-52 sm:h-60 md:h-64 lg:h-[196px] flex flex-col items-center justify-center"
               variants={fadeCard(0.3)}
               initial="hidden"
               whileInView="visible"
@@ -80,7 +80,7 @@ function Contact() {
                 rel="noopener noreferrer"
                 className="block hover:underline my-2 "
               >
-                <p>
+                <p className="text-white">
                   1306, Shivalik shilp, Iskcon Cross Road, SG Highway, Ahmedabad
                   – 380054.
                 </p>
@@ -97,10 +97,6 @@ function Contact() {
             viewport={{ once: true, amount: 0.2 }}
           >
             <div className="space-y-2">
-              <h2 className="text-lg font-semibold">
-                📍 Location: Shivalik Ship
-              </h2>{" "}
-              {/* Your custom label */}
               <iframe
                 title="Google Map - Shivalik Shilp"
                 src="https://maps.google.com/maps?q=Shivalik+Shilp,+Iskcon+Cross+Road,+SG+Highway,+Ahmedabad&z=17&output=embed"
@@ -114,7 +110,7 @@ function Contact() {
           {/* 🔸 Right Column */}
           <div className="flex flex-col gap-6 col-span-1">
             <m.div
-              className="bg-[#2F3712] text-white rounded-xl p-6 h-52 sm:h-60 md:h-64 lg:h-[196px] w-full overflow-x-auto"
+              className="bg-[#2F3712] dark:bg-[#1f2a0f] text-white rounded-xl p-6 h-52 sm:h-60 md:h-64 lg:h-[196px] w-full overflow-x-auto flex flex-col items-center justify-center overflow-x-hidden"
               variants={fadeCard(0.5)}
               initial="hidden"
               whileInView="visible"
@@ -132,7 +128,7 @@ function Contact() {
             </m.div>
 
             <m.div
-              className="bg-[#2F3712] text-white rounded-xl p-6 h-52 sm:h-60 md:h-64 lg:h-[196px]"
+              className="bg-[#2F3712] dark:bg-[#1f2a0f] text-white rounded-xl p-6 h-52 sm:h-60 md:h-64 lg:h-[196px] flex flex-col items-center justify-center"
               variants={fadeCard(0.6)}
               initial="hidden"
               whileInView="visible"

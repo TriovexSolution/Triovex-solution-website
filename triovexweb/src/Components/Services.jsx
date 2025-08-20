@@ -9,6 +9,7 @@ import cart5 from "../assets/seo.png";
 import cart6 from "../assets/digitalmarketing.png";
 import cart7 from "../assets/hp14.png";
 import cart8 from "../assets/service-cart8.png";
+import cart9 from "../assets/clude.png";
 
 // 3D card components
 export function CardContainer({ children }) {
@@ -59,102 +60,114 @@ export default function Services() {
     },
   };
 
-  const textVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5, ease: "easeOut", delay: 0.3 },
-    },
-  };
+const textVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.3, ease: "easeOut", delay: 0.1 },
+  },
+};
 
-  const imageVariants = {
-    hidden: { opacity: 0, y: 40 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.8, ease: "easeOut", delay: 1.0 },
-    },
-  };
+const imageVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.4, ease: "easeOut", delay: 0.2 },
+  },
+};
 
-  const AnimatedCard = ({ title, description, imageSrc }) => (
-    <CardContainer>
-      <CardBody className="bg-white dark:bg-black border border-gray-100 dark:border-white/[0.2] rounded-2xl p-6 group/card w-full h-auto">
-        <CardItem translateZ={60}>
-          <m.div variants={textVariants}>
-            <h3 className="font-semibold text-xl text-gray-900 dark:text-white mb-3">
-              {title}
-            </h3>
-            <p className="text-sm text-gray-600 dark:text-neutral-300 leading-relaxed mb-6">
-              {description}
-            </p>
-          </m.div>
-        </CardItem>
+const AnimatedCard = ({ title, description, imageSrc }) => (
+  <CardContainer>
+    <CardBody className="bg-white dark:bg-black border border-gray-100 dark:border-white/[0.2] rounded-2xl p-6 group/card w-full h-auto flex flex-col">
+      {/* Fixed height text container */}
+      <CardItem translateZ={60}>
+        <m.div 
+  variants={textVariants} 
+  className="h-[180px] overflow-hidden flex flex-col justify-start"
+>
+  <h3 className="font-semibold text-xl text-gray-900 dark:text-white">
+    {title}
+  </h3>
+  <p className="text-sm text-gray-600 dark:text-neutral-300 leading-relaxed mt-1">
+    {description}
+  </p>
+</m.div>
 
-        <CardItem translateZ={120} className="w-full">
-          <m.div variants={imageVariants}>
-            <img
-              src={imageSrc}
-              alt={title}
-              className="w-full h-48 object-cover rounded-t-lg group-hover/card:scale-105 group-hover/card:shadow-2xl group-hover/card:shadow-black/30 transition-all duration-300"
-            />
-          </m.div>
-        </CardItem>
-      </CardBody>
-    </CardContainer>
-  );
+      </CardItem>
+
+      {/* Image container stays same */}
+      <CardItem translateZ={120} className="w-full">
+        <m.div variants={imageVariants}>
+          <img
+            src={imageSrc}
+            alt={title}
+            className="w-full h-48 object-cover rounded-t-lg group-hover/card:scale-105 group-hover/card:shadow-2xl group-hover/card:shadow-black/30 transition-all duration-300"
+          />
+        </m.div>
+      </CardItem>
+    </CardBody>
+  </CardContainer>
+);
 
   const services = [
-  {
-    title: "AI & Machine Learning Solutions That Think Ahead",
-    description:
-      "Transform your business with intelligent systems that automate workflows, predict outcomes, and unlock real-time insights all powered by next-gen AI and machine learning.",
-    imageSrc: cart1,
-  },
-  {
-    title: "Custom Software That Fits, Scales & Performs",
-    description:
-      "We build powerful, secure, and scalable software tailored to your business from smart dashboards to complex systems, designed for performance and growth.",
-    imageSrc: cart2,
-  },
-  {
-    title: "Websites That Convert Design Meets Performance",
-    description:
-      "We craft fast,modern,responsive, SEO-ready websites that not only look stunning but drive engagement, boost conversions, and scale with your business.",
-    imageSrc: cart3,
-  },
-  {
-    title: "Mobile Apps Built to Engage, Scale & Win",
-    description:
-      "From sleek fintech to on-demand services we design powerful, user-friendly mobile apps that boost retention, drive revenue, and elevate your brand on every device.",
-    imageSrc: cart4,
-  },
-  {
-    title: "Rank Higher, Grow Faster, Win Organically",
-    description:
-      "We craft data-driven SEO strategies that boost visibility, skyrocket traffic, and keep your brand ahead on Google because great businesses deserve to be seen.",
-    imageSrc: cart5,
-  },
-  {
-    title: "Digital Campaigns That Convert, Scale & Win",
-    description:
-      "From strategy to storytelling, we craft performance-driven digital marketing campaigns that boost brand visibility, increase ROI, and turn clicks into loyal customers.",
-    imageSrc: cart6,
-  },
-  {
-    title: "Turn Scrolls into Sales with Strategic Social Media",
-    description:
-      "We manage your brand across platforms with eye-catching content, timely posting, and data-driven strategies that boost engagement, followers, and real business growth.",
-    imageSrc: cart7,
-  },
-  {
-    title: "Clicks That Convert Emails That Engage",
-    description:
-      "Drive instant traffic with high-performing PPC ads and keep your audience hooked with smart, personalized email campaigns designed to boost ROI and brand recall.",
-    imageSrc: cart8,
-  },
-];
+    {
+      title: "AI & Machine Learning Solutions That Think Ahead",
+      description:
+        "Transform your business with intelligent systems that automate workflows, predict outcomes, and unlock real-time insights all powered by next-gen AI and machine learning.",
+      imageSrc: cart1,
+    },
+    {
+      title: "Custom Software That Fits, Scales & Performs",
+      description:
+        "We build powerful, secure, and scalable software tailored to your business from smart dashboards to complex systems, designed for performance and growth.",
+      imageSrc: cart2,
+    },
+    {
+      title: "Websites That Convert Design Meets Performance",
+      description:
+        "We craft fast,modern,responsive, SEO-ready websites that not only look stunning but drive engagement, boost conversions, and scale with your business.",
+      imageSrc: cart3,
+    },
+    {
+      title: "Mobile Apps Built to Engage, Scale & Win",
+      description:
+        "From sleek fintech to on-demand services we design powerful, user-friendly mobile apps that boost retention, drive revenue, and elevate your brand on every device.",
+      imageSrc: cart4,
+    },
+    {
+      title: "Rank Higher, Grow Faster, Win Organically",
+      description:
+        "We craft data-driven SEO strategies that boost visibility, skyrocket traffic, and keep your brand ahead on Google because great businesses deserve to be seen.",
+      imageSrc: cart5,
+    },
+    {
+      title: "Digital Campaigns That Convert, Scale & Win",
+      description:
+        "From strategy to storytelling, we craft performance-driven digital marketing campaigns that boost brand visibility, increase ROI, and turn clicks into loyal customers.",
+      imageSrc: cart6,
+    },
+    {
+      title: "Turn Scrolls into Sales with Strategic Social Media",
+      description:
+        "We manage your brand across platforms with eye-catching content, timely posting, and data-driven strategies that boost engagement, followers, and real business growth.",
+      imageSrc: cart7,
+    },
+    {
+      title: "Clicks That Convert Emails That Engage",
+      description:
+        "Drive instant traffic with high-performing PPC ads and keep your audience hooked with smart, personalized email campaigns designed to boost ROI and brand recall.",
+      imageSrc: cart8,
+    },
+    {
+  title: "Power Your Growth with Next-Gen Cloud Solutions",
+  description:
+    "We design secure, scalable, high-performance cloud systems that reduce costs, enhance agility, and boost collaboration, and from seamless migration to optimization, our expertise drives innovation and business efficiency.",
+  imageSrc: cart9,
+}
 
+  ];
 
   const chunkedServices = [];
   for (let i = 0; i < services.length; i += 3) {
@@ -165,21 +178,21 @@ export default function Services() {
     <LazyMotion features={domAnimation}>
       <section
         id="services"
-        className="w-full px-4 lg:px-8 xl:px-16 2xl:px-24 py-20 max-w-screen-4xl mx-auto relative overflow-x-hidden"
+        className="w-full bg-white dark:bg-black px-4 lg:px-8 xl:px-16 2xl:px-24 py-20 max-w-screen-4xl mx-auto relative overflow-x-hidden"
       >
         {/* Header */}
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-16">
           <div className="lg:flex-1">
-            <span className="inline-block mb-4 px-4 py-2 rounded-full text-xs font-medium bg-[#313719]/10 text-black">
+            <span className="inline-block mb-4 px-4 py-2 rounded-full text-xs font-medium bg-[#313719]/10 dark:bg-emerald-900/40 dark:text-emerald-300 text-black">
               Our Services
             </span>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight tracking-tight mb-4 text-gray-900">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight tracking-tight mb-4 text-gray-900 dark:text-white">
               AI-Powered Digital Services That Accelerate Growth
-
             </h2>
-            <p className="text-base sm:text-lg text-gray-600 max-w-2xl leading-relaxed">
-              
-From intelligent automation to custom web apps and digital marketing our services are built to scale your business faster, smarter, and stronger in today’s tech-driven world.
+            <p className="text-base sm:text-lg text-gray-600 max-w-2xl leading-relaxed mb-8 dark:text-neutral-300">
+              From intelligent automation to custom web apps and digital
+              marketing our services are built to scale your business faster,
+              smarter, and stronger in today’s tech-driven world.
             </p>
           </div>
           <div className="mt-8 lg:mt-0 lg:ml-8">

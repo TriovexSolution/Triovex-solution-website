@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import DotGrid from "../Components/AnimationComponents/dotgrid";
 
@@ -16,6 +16,26 @@ import hp9 from "../assets/hp9.jpg";
 const Hero = () => {
   const heroRef = useRef(null);
   const carouselRef = useRef(null);
+
+  // state to hold theme-based dot color
+  const [dotColor, setDotColor] = useState("#E5E5E5");
+
+  useEffect(() => {
+    // initial load
+    const isDark =
+      window.matchMedia &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches;
+    setDotColor(isDark ? "#2a2a2a" : "#E5E5E5");
+
+    // listener for system/browser theme changes
+    const mq = window.matchMedia("(prefers-color-scheme: dark)");
+    const handler = (e) => {
+      setDotColor(e.matches ? "#2a2a2a" : "#E5E5E5");
+    };
+    mq.addEventListener("change", handler);
+
+    return () => mq.removeEventListener("change", handler);
+  }, []);
 
   const headingWords = [
     "Where",
@@ -39,24 +59,41 @@ const Hero = () => {
     const singleSetWidth = carousel.scrollWidth / 3;
     let scrollPosition = 0;
 
+    const referenceWidth = 1440;
+    const screenWidth = window.innerWidth;
+    const baseSpeed = 1.2;
+
+    let speed = (screenWidth / referenceWidth) * baseSpeed;
+
     const animate = () => {
-      scrollPosition += 0.8;
+      scrollPosition += speed;
       if (scrollPosition >= singleSetWidth) scrollPosition = 0;
       carousel.scrollLeft = scrollPosition;
       requestAnimationFrame(animate);
     };
 
     requestAnimationFrame(animate);
+
+    const handleResize = () => {
+      const newScreenWidth = window.innerWidth;
+      speed = (newScreenWidth / referenceWidth) * baseSpeed;
+    };
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   return (
-    <div className="relative w-full min-h-[150vh] overflow-hidden">
+    <div
+      className="relative w-full min-h-[90vh] sm:min-h-[150vh] overflow-hidden 
+                 bg-white dark:bg-black transition-colors duration-500"
+    >
       {/* DotGrid Background */}
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0 w-full top-0 left-0 m-0 p-0">
         <DotGrid
-          dotSize={3.5}
-          gap={13}
-          baseColor="#D3D3D3"
+          dotSize={3.0}
+          gap={9}
+          baseColor={dotColor} // dynamic based on browser/system theme
           activeColor="#22c55e"
           proximity={120}
           shockRadius={250}
@@ -69,31 +106,36 @@ const Hero = () => {
       {/* Hero Content */}
       <div
         ref={heroRef}
-        className="relative min-h-screen w-full flex items-center justify-center px-4 sm:px-6 lg:px-8 overflow-hidden"
+        className="relative min-h-[80vh] sm:min-h-screen 
+               w-full flex flex-col items-center justify-center 
+               px-4 sm:px-6 lg:px-8 text-center"
       >
         <motion.div
-          className="max-w-4xl w-full text-center text-black"
+          className="max-w-2xl sm:max-w-4xl w-full text-black dark:text-white"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2 }}
         >
           {/* Badge */}
-          <div className="mb-4 sm:mb-6 mt-10">
-            <span className="inline-block bg-[#313719]/10 px-4 sm:px-6 py-2 sm:py-3 rounded-full text-[10px] sm:text-xs md:text-sm lg:text-base font-medium backdrop-blur-sm shadow-lg">
+          <div className="mb-3 sm:mb-6 mt-6 sm:mt-10">
+            <span
+              className="inline-block bg-[#313719]/10 px-3 sm:px-6 py-1.5 sm:py-3 
+                         rounded-full text-[10px] sm:text-xs md:text-sm font-medium 
+                         backdrop-blur-sm shadow-md text-black dark:text-white"
+            >
               Beyond code Towards intelligence
             </span>
           </div>
 
           {/* Animated Heading */}
           <motion.h2
-            className="mt-6 text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-gray-900 cursor-zoom my-4"
+            className="mt-4 text-base sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl 
+                   font-bold text-gray-900 dark:text-gray-100"
             initial="hidden"
             animate="visible"
             variants={{
               hidden: {},
-              visible: {
-                transition: { staggerChildren: 0.07 },
-              },
+              visible: { transition: { staggerChildren: 0.07 } },
             }}
           >
             {headingWords.map((word, index) => (
@@ -110,7 +152,11 @@ const Hero = () => {
           </motion.h2>
 
           {/* Subheading */}
-          <p className="mt-4 text-[9px] sm:text-[11px] md:text-xs lg:text-sm xl:text-base text-gray-600 max-w-2xl mx-auto px-2 leading-relaxed mt-5 my-8">
+          <p
+            className="mt-3 text-[11px] sm:text-xs md:text-sm lg:text-base 
+                   text-gray-600 dark:text-gray-300 
+                   max-w-md sm:max-w-2xl mx-auto leading-relaxed"
+          >
             We craft intelligent digital solutions that blend creative design,
             strategic thinking, and cutting-edge AI/ML technology to drive
             scalable, automated, and future-ready business growth.
@@ -118,34 +164,44 @@ const Hero = () => {
 
           {/* CTA Button */}
           <button
-            onClick={() => (window.location.href = "/contact")}
-            className="bg-[#313719] text-white hover:bg-white hover:text-[#313719] px-6 sm:px-8 py-3 sm:py-3.5 md:py-4 rounded-full text-sm sm:text-base md:text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl border border-green-500/30 select-none"
+            onClick={() => {
+              const element = document.getElementById("Consultation");
+              if (element) element.scrollIntoView({ behavior: "smooth" });
+            }}
+            className="mt-6 bg-[#313719] text-white hover:bg-white hover:text-[#313719] 
+                   px-5 sm:px-8 py-2.5 sm:py-3 rounded-full 
+                   text-sm sm:text-base font-semibold transition-all duration-300 
+                   transform hover:scale-105 shadow-md hover:shadow-lg border 
+                   border-green-500/30"
           >
-            Get in Touch
+            Talk to an Expert
           </button>
 
-          {/* Support Text */}
-          <div className="flex items-center justify-center space-x-2 text-black mt-10">
-            <span className="w-3 h-3 bg-green-500 rounded-full animate-pulse" />
-            <span className="text-[10px] sm:text-xs md:text-sm font-medium">
-              24 * 7 Support
-            </span>
+          {/* Support */}
+          <div className="flex flex-col items-center justify-center mt-6 sm:mt-10 text-black dark:text-white">
+            <div className="flex items-center space-x-2">
+              <span className="w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse" />
+              <span className="text-[10px] sm:text-xs font-medium">
+                24 * 7 Support
+              </span>
+            </div>
           </div>
         </motion.div>
       </div>
 
       {/* Carousel */}
-      <div className="absolute bottom-0 w-full z-10 pb-12 sm:pb-16">
+      <div className="absolute bottom-0 w-full z-10 pb-8 sm:pb-16">
         <div
           ref={carouselRef}
-          className="flex space-x-4 sm:space-x-6 overflow-hidden px-4 sm:px-6"
+          className="flex space-x-3 sm:space-x-6 overflow-hidden px-4 sm:px-6 items-start"
           style={{ scrollBehavior: "auto" }}
         >
           {duplicatedImages.map((src, index) => (
             <div
               key={index}
-              className="flex-shrink-0 rounded-xl overflow-hidden"
-              style={{ minWidth: "280px", height: "180px" }}
+              className="flex-shrink-0 rounded-lg overflow-hidden
+                     w-36 sm:w-60 md:w-72 lg:w-80 
+                     h-24 sm:h-36 md:h-44 lg:h-48"
             >
               <img
                 src={src}

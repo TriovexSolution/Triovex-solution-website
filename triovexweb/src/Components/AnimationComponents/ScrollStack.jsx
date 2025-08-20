@@ -1,6 +1,5 @@
 import { useLayoutEffect, useRef, useCallback } from "react";
-import Lenis from "@studio-freight/lenis";
-
+import Lenis from "lenis";
 
 export const ScrollStackItem = ({ children, itemClassName = "" }) => (
   <div

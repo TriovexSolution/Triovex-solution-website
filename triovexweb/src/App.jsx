@@ -31,75 +31,77 @@ function ScrollToTop() {
 }
 
 function App() {
- useEffect(() => {
-  // 🔒 Disable right-click
-  const handleContextMenu = (e) => e.preventDefault();
-  document.addEventListener("contextmenu", handleContextMenu);
-
-  // 🔒 Disable F12, Ctrl+Shift+I/J, Ctrl+U
-  const handleKeyDown = (e) => {
-    if (
-      e.key === "F12" ||
-      (e.ctrlKey && e.shiftKey && (e.key === "I" || e.key === "J")) ||
-      (e.ctrlKey && e.key === "U")
-    ) {
-      e.preventDefault();
-    }
-  };
-  document.addEventListener("keydown", handleKeyDown);
-
-  // 🔒 Disable copy
-  const handleCopy = (e) => e.preventDefault();
-  document.addEventListener("copy", handleCopy);
-
-  // 🔒 Disable text selection
-  const handleSelectStart = (e) => e.preventDefault();
-  document.addEventListener("selectstart", handleSelectStart);
-
-  // 🔒 Disable drag on all images
-  const handleDragStart = (e) => {
-    if (e.target.tagName === "IMG") {
-      e.preventDefault();
-    }
-  };
-  document.addEventListener("dragstart", handleDragStart);
-
-  // 🧹 Cleanup
-  return () => {
-    document.removeEventListener("contextmenu", handleContextMenu);
-    document.removeEventListener("keydown", handleKeyDown);
-    document.removeEventListener("copy", handleCopy);
-    document.removeEventListener("selectstart", handleSelectStart);
-    document.removeEventListener("dragstart", handleDragStart);
-  };
-}, []);
-
+  // Your security code (commented out) remains unchanged
+  // useEffect(() => {
+  //   // 🔒 Disable right-click
+  //   const handleContextMenu = (e) => e.preventDefault();
+  //   document.addEventListener("contextmenu", handleContextMenu);
+  
+  //   // 🔒 Disable F12, Ctrl+Shift+I/J, Ctrl+U
+  //   const handleKeyDown = (e) => {
+  //     if (
+  //       e.key === "F12" ||
+  //       (e.ctrlKey && e.shiftKey && (e.key === "I" || e.key === "J")) ||
+  //       (e.ctrlKey && e.key === "U")
+  //     ) {
+  //       e.preventDefault();
+  //     }
+  //   };
+  //   document.addEventListener("keydown", handleKeyDown);
+  
+  //   // 🔒 Disable copy
+  //   const handleCopy = (e) => e.preventDefault();
+  //   document.addEventListener("copy", handleCopy);
+  
+  //   // 🔒 Disable text selection
+  //   const handleSelectStart = (e) => e.preventDefault();
+  //   document.addEventListener("selectstart", handleSelectStart);
+  
+  //   // 🔒 Disable drag on all images
+  //   const handleDragStart = (e) => {
+  //     if (e.target.tagName === "IMG") {
+  //       e.preventDefault();
+  //     }
+  //   };
+  //   document.addEventListener("dragstart", handleDragStart);
+  
+  //   // 🧹 Cleanup
+  //   return () => {
+  //     document.removeEventListener("contextmenu", handleContextMenu);
+  //     document.removeEventListener("keydown", handleKeyDown);
+  //     document.removeEventListener("copy", handleCopy);
+  //     document.removeEventListener("selectstart", handleSelectStart);
+  //     document.removeEventListener("dragstart", handleDragStart);
+  //   };
+  // }, []);
 
   return (
     <BrowserRouter>
-      <ScrollToTop />
-      <Navbar />
-      
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/services" element={<ServicePage />} />
-        <Route path="/contact" element={<ContactPage />} />
-        <Route path="/AIModal" element={<AIModal />} />
-        <Route path="/careers" element={<Careers />} />
-        <Route path="/works" element={<WorkPage />} />
-        <Route path="/privacypolicy" element={<PrivacyPolicy />} />
-        <Route path="/termsandconditions" element={<TermsAndConditions />} />
-        <Route path="/customsoftwaremodel" element={<CustomSoftwareModal />} />
-        <Route path="/webdevmodel" element={<WebDevModal />} />
-        <Route path="/appdevmodal" element={<AppDevModal />} />
-        <Route path="/seomodel" element={<SEOModal />} />
-        <Route path="/digitalmarketingmodel" element={<DigitalMarketing />} />
-        <Route path="/socialmediamodel" element={<SocialMediaHandling />} />
-        <Route path="/paidads" element={<PaidAdsEmailModal />} />
-      </Routes>
+      <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
+        <ScrollToTop />
+        <Navbar />
+        
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/services" element={<ServicePage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/AIModal" element={<AIModal />} />
+          <Route path="/careers" element={<Careers />} />
+          <Route path="/works" element={<WorkPage />} />
+          <Route path="/privacypolicy" element={<PrivacyPolicy />} />
+          <Route path="/termsandconditions" element={<TermsAndConditions />} />
+          <Route path="/customsoftwaremodel" element={<CustomSoftwareModal />} />
+          <Route path="/webdevmodel" element={<WebDevModal />} />
+          <Route path="/appdevmodal" element={<AppDevModal />} />
+          <Route path="/seomodel" element={<SEOModal />} />
+          <Route path="/digitalmarketingmodel" element={<DigitalMarketing />} />
+          <Route path="/socialmediamodel" element={<SocialMediaHandling />} />
+          <Route path="/paidads" element={<PaidAdsEmailModal />} />
+        </Routes>
 
-      <Footer />
+        <Footer />
+      </div>
     </BrowserRouter>
   );
 }

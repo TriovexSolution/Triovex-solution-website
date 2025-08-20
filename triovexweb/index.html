@@ -1,23 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Triovex Solution</title>
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Triovex Solution</title>
 
-    <!-- Default light mode favicon -->
-   <link id="favicon" rel="icon" type="image/png" href="/logo2.png" />
-<script>
-  const darkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  const favicon = document.getElementById("favicon");
-  favicon.href = darkMode ? "/white.png" : "/logo3.png";
-</script>
+      <!-- Default favicon (will be replaced dynamically) -->
+      <link id="favicon" rel="icon" type="image/png" href="/logo3.png" />
 
+      <script>
+        // Function to set favicon based on system theme
+        function setFaviconBySystemTheme() {
+          const favicon = document.getElementById("favicon");
+          const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+          favicon.href = isDark ? "/white.png" : "/logo3.png";
+        }
 
-    <link href="/src/index.css" rel="stylesheet" />
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
-</html>
+        // Set favicon on page load
+        setFaviconBySystemTheme();
+
+        // Listen for system theme changes and update favicon automatically
+        window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", setFaviconBySystemTheme);
+      </script>
+
+      <link href="/src/index.css" rel="stylesheet" />
+    </head>
+    <body>
+      <div id="root"></div>
+      <script type="module" src="/src/main.jsx"></script>
+    </body>
+  </html>

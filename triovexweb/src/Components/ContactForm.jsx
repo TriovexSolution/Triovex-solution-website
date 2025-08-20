@@ -44,8 +44,13 @@ const ContactForm = () => {
     e.preventDefault();
     if (!isFormValid) return;
 
-    // Show loading toast
-    const toastId = toast.loading(" Sending your message...");
+    const browserDarkMode =
+      window.matchMedia &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+    const toastId = toast.loading("Sending your message...", {
+      theme: browserDarkMode ? "dark" : "light",
+    });
 
     try {
       const response = await axios.post(`${baseURL}/api/contact/submit`, {
@@ -56,18 +61,15 @@ const ContactForm = () => {
         privacy: formData.agreed,
       });
 
-      // Update toast on success
       toast.update(toastId, {
-        render: " Message sent successfully!",
+        render: "Message sent successfully!",
         type: "success",
         isLoading: false,
         autoClose: 3000,
         closeOnClick: true,
+        theme: browserDarkMode ? "dark" : "light",
       });
 
-      console.log("Server response:", response.data);
-
-      // Reset the form
       setFormData({
         firstName: "",
         lastName: "",
@@ -76,41 +78,40 @@ const ContactForm = () => {
         agreed: false,
       });
     } catch (error) {
-      console.error("❌ Error submitting form:", error);
-
-      // Update toast on error
+      console.error(error);
       toast.update(toastId, {
         render: "❌ Something went wrong. Please try again later.",
         type: "error",
         isLoading: false,
         autoClose: 3000,
         closeOnClick: true,
+        theme: browserDarkMode ? "dark" : "light",
       });
     }
   };
 
   return (
     <m.div
-      className="min-h-screen bg-white px-4 py-12 flex flex-col items-center mt-5"
+      className="min-h-screen bg-white dark:bg-black transition-colors duration-500 px-4 py-12 flex flex-col items-center pt-5"
       variants={fadeIn}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.4 }}
     >
-      <button className="bg-gray-200 px-4 py-1 rounded-full text-sm mb-3">
+      <button className="bg-gray-200 dark:bg-gray-700 px-4 py-1 rounded-full text-sm mb-3 text-gray-800 dark:text-gray-200">
         Get in Touch
       </button>
-      <p className="text-center text-xs text-gray-700 mb-8 max-w-md my-2">
+      <p className="text-center text-xs text-gray-700 dark:text-gray-300 mb-8 max-w-md my-2">
         Have questions, feedback, or need assistance? Our team is here to help
         you.
       </p>
 
-      <div className="bg-[#FAFAFA] rounded-2xl p-6 w-full max-w-2xl shadow-sm">
+      <div className="bg-[#FAFAFA] dark:bg-gray-800 rounded-2xl p-6 w-full max-w-2xl shadow-sm transition-colors duration-500">
         <form className="space-y-5" onSubmit={handleSubmit}>
           {/* Name Fields */}
           <div className="flex flex-col sm:flex-row gap-4">
             <div className="flex-1">
-              <label className="block text-sm font-medium text-gray-800 mb-1">
+              <label className="block text-sm font-medium text-gray-800 dark:text-gray-200 mb-1">
                 First Name
               </label>
               <input
@@ -119,11 +120,11 @@ const ContactForm = () => {
                 value={formData.firstName}
                 onChange={handleChange}
                 placeholder="First Name"
-                className="w-full bg-[#EAEEDC] text-sm px-4 py-3 rounded-full focus:outline-none"
+                className="w-full bg-[#EAEEDC] dark:bg-gray-700 text-black dark:text-white text-sm px-4 py-3 rounded-full focus:outline-none focus:ring-2 focus:ring-[#2B2F18] dark:focus:ring-[#BB86FC] transition-colors duration-300"
               />
             </div>
             <div className="flex-1">
-              <label className="block text-sm font-medium text-gray-800 mb-1">
+              <label className="block text-sm font-medium text-gray-800 dark:text-gray-200 mb-1">
                 Last Name
               </label>
               <input
@@ -132,14 +133,14 @@ const ContactForm = () => {
                 value={formData.lastName}
                 onChange={handleChange}
                 placeholder="Last Name"
-                className="w-full bg-[#EAEEDC] text-sm px-4 py-3 rounded-full focus:outline-none"
+                className="w-full bg-[#EAEEDC] dark:bg-gray-700 text-black dark:text-white text-sm px-4 py-3 rounded-full focus:outline-none focus:ring-2 focus:ring-[#2B2F18] dark:focus:ring-[#BB86FC] transition-colors duration-300"
               />
             </div>
           </div>
 
           {/* Email */}
           <div>
-            <label className="block text-sm font-medium text-gray-800 mb-1">
+            <label className="block text-sm font-medium text-gray-800 dark:text-gray-200 mb-1">
               Email
             </label>
             <input
@@ -148,13 +149,13 @@ const ContactForm = () => {
               value={formData.email}
               onChange={handleChange}
               placeholder="Enter Email"
-              className="w-full bg-[#EAEEDC] text-sm px-4 py-3 rounded-full focus:outline-none"
+              className="w-full bg-[#EAEEDC] dark:bg-gray-700 text-black dark:text-white text-sm px-4 py-3 rounded-full focus:outline-none focus:ring-2 focus:ring-[#2B2F18] dark:focus:ring-[#BB86FC] transition-colors duration-300"
             />
           </div>
 
           {/* Message */}
           <div>
-            <label className="block text-sm font-medium text-gray-800 mb-1">
+            <label className="block text-sm font-medium text-gray-800 dark:text-gray-200 mb-1">
               Message
             </label>
             <textarea
@@ -163,12 +164,12 @@ const ContactForm = () => {
               onChange={handleChange}
               placeholder="Type your Message"
               rows="5"
-              className="w-full bg-[#EAEEDC] text-sm px-4 py-3 rounded-lg resize-none focus:outline-none"
+              className="w-full bg-[#EAEEDC] dark:bg-gray-700 text-black dark:text-white text-sm px-4 py-3 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-[#2B2F18] dark:focus:ring-[#BB86FC] transition-colors duration-300"
             ></textarea>
           </div>
 
           {/* Privacy Checkbox */}
-          <div className="flex items-start gap-2 text-sm text-gray-400">
+          <div className="flex items-start gap-2 text-sm text-gray-400 dark:text-gray-300">
             <input
               type="checkbox"
               name="agreed"
@@ -176,10 +177,12 @@ const ContactForm = () => {
               onChange={handleChange}
               className="mt-1"
             />
-            <p>
+            <p className="text-gray-800 dark:text-gray-200">
               By reaching out to us, you agree to our{" "}
-              
-              <Link to="/privacypolicy" className="font-semibold text-gray-800">Privacy Policy.</Link>
+              <Link to="/privacypolicy" className="font-semibold underline">
+                Privacy Policy
+              </Link>
+              .
             </p>
           </div>
 
@@ -189,11 +192,11 @@ const ContactForm = () => {
             disabled={!isFormValid}
             className={`w-full text-sm py-3 rounded-full transition-all duration-300 ${
               isFormValid
-                ? "bg-[#2B2F18] text-white cursor-pointer"
-                : "bg-[#2B2F18] text-white opacity-50 cursor-not-allowed"
+                ? "bg-[#2B2F18] dark:bg-[#BB86FC] text-white cursor-pointer hover:bg-[#3a3f1c] dark:hover:bg-[#9a5de1]"
+                : "bg-[#2B2F18] dark:bg-[#BB86FC] text-white opacity-50 cursor-not-allowed"
             }`}
           >
-            Send Messages
+            Send Message
           </button>
         </form>
       </div>

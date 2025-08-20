@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import career1 from "./../assets/career1.png";
 import career2 from "./../assets/career2.png";
@@ -6,6 +6,16 @@ import career3 from "./../assets/career3.png";
 import career4 from "./../assets/career4.png";
 
 export default function CareersSection() {
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  useEffect(() => {
+    setIsDarkMode(window.matchMedia("(prefers-color-scheme: dark)").matches);
+    const listener = (e) => setIsDarkMode(e.matches);
+    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", listener);
+    return () =>
+      window.matchMedia("(prefers-color-scheme: dark)").removeEventListener("change", listener);
+  }, []);
+
   const cards = [
     {
       image: career1,
@@ -30,9 +40,13 @@ export default function CareersSection() {
   ];
 
   return (
-    <section className="py-16 px-4 bg-white text-center">
-      <h2 className="text-xl font-semibold text-gray-800">Careers</h2>
-      <p className="text-sm text-gray-600 mb-12">
+    <section
+      className={`py-16 px-4 text-center ${
+        isDarkMode ? "bg-black text-white" : "bg-white text-gray-800"
+      }`}
+    >
+      <h2 className="text-xl font-semibold">Careers</h2>
+      <p className={`${isDarkMode ? "text-gray-300" : "text-gray-600"} mb-12 text-sm`}>
         Join a team that values innovation, excellence, and professional growth
       </p>
 

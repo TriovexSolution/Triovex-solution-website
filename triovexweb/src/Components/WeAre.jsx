@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { motion as m } from "framer-motion";
 import triovexBuilding from "../assets/triovexbuilding.png";
+
 const WeAre = () => {
   const [showCards, setShowCards] = useState(false);
 
@@ -30,126 +31,154 @@ const WeAre = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-6">
-      <div className="text-center mb-6"></div>
+    <div className="flex justify-center dark:bg-black px-4 py-6">
+      <div className="w-full max-w-7xl">
+        <div className="text-center mb-6"></div>
 
-      <div className="grid grid-cols-1 md:grid-cols-8 md:grid-rows-9 gap-4">
-        {/* WHO WE ARE SECTION */}
-        <m.div
-          className="flex flex-col justify-center text-center space-y-3 md:col-span-2 md:row-span-2 md:col-start-4 md:row-start-1 w-full"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          variants={fadeIn}
-        >
-          <span className="mx-auto inline-block bg-gray-200 text-gray-700 px-4 py-1 rounded-full text-sm font-medium">
-            Who We Are
-          </span>
-          <p className="text-base md:text-sm lg:text-base text-gray-600 px-4">
-            Triovex Solution empowers businesses to grow digitally through
-            innovative web, app, and marketing solutions.
-          </p>
-        </m.div>
-
-        {/* CONTAINER FOR STAGGERED CARDS */}
-        {showCards && (
+        <div className="grid grid-cols-1 md:grid-cols-8 md:grid-rows-9 gap-4">
+          {/* WHO WE ARE SECTION */}
           <m.div
-            className="contents"
+            className="flex flex-col justify-center text-center space-y-3 md:col-span-2 md:row-span-2 md:col-start-4 md:row-start-1 w-full"
             initial="hidden"
-            animate="visible"
-            variants={containerVariants}
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={fadeIn}
           >
-            {/* Card 1 */}
-            <m.div
-              className="md:col-span-2 md:row-span-5 text-white p-4 rounded-lg flex flex-col text-left items-start"
-              style={{ backgroundColor: "#313719" }}
-              variants={fadeIn}
-            >
-              <h3 className="text-lg md:text-xl lg:text-2xl font-semibold mb-2">
-                Digital Innovation Experts
-              </h3>
-              <p className="text-sm my-4">
-                Triovex Solution is at the cutting edge of digital innovation. We specialize in generative AI, ML, data visualization, and AI driven product design turning ideas into intelligent systems that create real business advantage.
-Our team does not just build technology; we design intelligent platforms that adapt, learn, and drive measurable growth.
-
-              </p>
-            </m.div>
-
-            {/* Card 2 */}
-            <m.div
-              className="md:col-span-2 md:row-span-5 text-white p-4 rounded-lg flex flex-col text-left items-start"
-              style={{ backgroundColor: "#313719" }}
-              variants={fadeIn}
-            >
-              <h3 className="text-lg md:text-xl lg:text-2xl font-semibold mb-2">
-                Trusted by Global Brands
-              </h3>
-              <p className="text-sm my-4">
-                Our clients span geographies and industries from startups to established enterprises. We partner with organizations seeking digital excellence, whether it’s AI integration, scalable cloud solutions, or performance driven marketing campaigns.
-Our ability to deliver smart, data informed digital ecosystems has earned the trust of global brands looking for reliable, scalable, and impactful technology partners.
-
-              </p>
-            </m.div>
-
-            {/* Center Image */}
-            <m.div
-              className="md:col-span-4 md:row-span-5 md:col-start-3 md:row-start-3"
-              variants={fadeIn}
-            >
-              <img
-                src={triovexBuilding}
-                alt="Triovex Building"
-                className="w-full h-full object-cover rounded-lg"
-              />
-            </m.div>
-
-            {/* Card 3 */}
-            <m.div
-              className="md:col-span-4 md:row-span-2 md:col-start-3 md:row-start-8 bg-green-800 text-white px-4 py-4 rounded-lg flex flex-col items-start text-left"
-              style={{ backgroundColor: "#313719" }}
-              variants={fadeIn}
-            >
-              <h3 className="text-lg md:text-xl lg:text-2xl font-semibold mb-2">
-                Creative-Driven Team
-              </h3>
-              <p className="text-sm my-4">
-                At Triovex Solution, our international team blends creative mindset with technical expertise to deliver digital products that inspire engagement and drive business outcomes. From AI powered platforms to custom mobile applications and performance marketing campaigns, we fuse design thinking with data science to unlock real ROI for global clients. Our creative technologists solve real world problems, building solutions that are as thoughtful as they are impactful.
-This globally distributed workforce allows us to serve clients across time zones with consistency and quality.
-
-              </p>
-            </m.div>
-
-            {/* Card 4 */}
-            <m.div
-              className="md:col-span-2 md:row-span-5 text-white p-4 rounded-lg flex flex-col text-left items-start"
-              style={{ backgroundColor: "#313719" }}
-              variants={fadeIn}
-            >
-              <h3 className="text-lg md:text-xl lg:text-2xl font-semibold mb-2">
-                Customer-Centric Approach
-              </h3>
-              <p className="text-sm my-4">
-                At Triovex Solution, we prioritize understanding our clients' unique needs to deliver tailored digital experiences. By integrating user feedback and market insights, we create intuitive designs and seamless functionality that drive customer satisfaction and business growth. Our commitment to innovation ensures that every solution is crafted with precision and adaptability.
-              </p>
-            </m.div>
-
-            {/* Card 5 */}
-            <m.div
-              className="md:col-span-2 md:row-span-5 text-white p-4 rounded-lg flex flex-col text-left items-start"
-              style={{ backgroundColor: "#313719" }}
-              variants={fadeIn}
-            >
-              <h3 className="text-lg md:text-xl lg:text-2xl font-semibold mb-2">
-                End-to-End Services
-              </h3>
-              <p className="text-sm my-4">
-                We provide comprehensive digital transformation services, guiding you from initial ideation all the way through development, deployment, and optimization. Our offerings span AI, Machine Learning, predictive analytics, custom software, cloud native architecture, mobile apps, web platforms, API integration, SEO, SEM, and performance marketing.
-Whether you're overhauling legacy systems or launching new digital ventures, our goal is the same: a seamless, full stack solution tailored to your business and growth objectives.
-
-              </p>
-            </m.div>
+            <span className="mx-auto inline-block bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 px-4 py-1 rounded-full text-sm font-medium">
+              Who We Are
+            </span>
+            <p className="text-base md:text-sm lg:text-base text-gray-600 dark:text-gray-300 px-4">
+              Triovex Solution empowers businesses to grow digitally through
+              innovative web, app, and marketing solutions.
+            </p>
           </m.div>
-        )}
+
+          {/* CARDS */}
+          {showCards && (
+            <m.div
+              className="contents"
+              initial="hidden"
+              animate="visible"
+              variants={containerVariants}
+            >
+              {/* Card 1 */}
+              <m.div
+                className="md:col-span-2 md:row-span-5 text-white p-4 rounded-lg flex flex-col text-left items-start"
+                style={{ backgroundColor: "#313719" }}
+                variants={fadeIn}
+              >
+                <h3 className="text-lg md:text-xl lg:text-2xl font-semibold mb-2">
+                  Digital Innovation Experts
+                </h3>
+                <p className="text-sm my-4 text-white">
+                  Triovex Solution is at the cutting edge of digital innovation.
+                  We specialize in generative AI, ML, data visualization, and AI
+                  driven product design turning ideas into intelligent systems
+                  that create real business advantage. Our team does not just
+                  build technology; we design intelligent platforms that adapt,
+                  learn, and drive measurable growth.
+                </p>
+              </m.div>
+
+              {/* Card 2 */}
+              <m.div
+                className="md:col-span-2 md:row-span-5 text-white p-4 rounded-lg flex flex-col text-left items-start"
+                style={{ backgroundColor: "#313719" }}
+                variants={fadeIn}
+              >
+                <h3 className="text-lg md:text-xl lg:text-2xl font-semibold mb-2">
+                  Trusted by Global Brands
+                </h3>
+                <p className="text-sm my-4 text-white">
+                  Our clients span geographies and industries from startups to
+                  established enterprises. We partner with organizations seeking
+                  digital excellence, whether it’s AI integration, scalable
+                  cloud solutions, or performance driven marketing campaigns.
+                  Our ability to deliver smart, data informed digital ecosystems
+                  has earned the trust of global brands looking for reliable,
+                  scalable, and impactful technology partners.
+                </p>
+              </m.div>
+
+              {/* Center Image */}
+              <m.div
+                className="md:col-span-4 md:row-span-5 md:col-start-3 md:row-start-3"
+                variants={fadeIn}
+              >
+                <img
+                  src={triovexBuilding}
+                  alt="Triovex Building"
+                  className="w-full h-full object-cover rounded-lg"
+                />
+              </m.div>
+
+              {/* Card 3 */}
+              <m.div
+                className="md:col-span-4 md:row-span-2 md:col-start-3 md:row-start-8 text-white px-4 py-4 rounded-lg flex flex-col items-start text-left"
+                style={{ backgroundColor: "#313719" }}
+                variants={fadeIn}
+              >
+                <h3 className="text-lg md:text-xl lg:text-2xl font-semibold mb-2">
+                  Creative-Driven Team
+                </h3>
+                <p className="text-sm my-4 text-white">
+                  At Triovex Solution, our international team blends creative
+                  mindset with technical expertise to deliver digital products
+                  that inspire engagement and drive business outcomes. From Al
+                  powered platforms to custom mobile applications and
+                  performance marketing campaigns, we fuse design thinking with
+                  data science to unlock real ROI for global clients. Our
+                  creative technologists solve real world problems, building
+                  solutions that are as thoughtful as they are impactful. This
+                  globally distributed workforce allows us to serve clients
+                  across time zones with consistency and quality.
+                </p>
+              </m.div>
+
+              {/* Card 4 */}
+              <m.div
+                className="md:col-span-2 md:row-span-5 text-white p-4 rounded-lg flex flex-col text-left items-start"
+                style={{ backgroundColor: "#313719" }}
+                variants={fadeIn}
+              >
+                <h3 className="text-lg md:text-xl lg:text-2xl font-semibold mb-2">
+                  Customer-Centric Approach
+                </h3>
+                <p className="text-sm my-4 text-white">
+                  At Triovex Solution, we prioritize understanding our clients'
+                  unique needs to deliver tailored digital experiences. By
+                  integrating user feedback and market insights, we create
+                  intuitive designs and seamless functionality that drive
+                  customer satisfaction and business growth. Our commitment to
+                  innovation ensures that every solution is crafted with
+                  precision and adaptability.
+                </p>
+              </m.div>
+
+              {/* Card 5 */}
+              <m.div
+                className="md:col-span-2 md:row-span-5 text-white p-4 rounded-lg flex flex-col text-left items-start"
+                style={{ backgroundColor: "#313719" }}
+                variants={fadeIn}
+              >
+                <h3 className="text-lg md:text-xl lg:text-2xl font-semibold mb-2">
+                  End-to-End Services
+                </h3>
+                <p className="text-sm my-4 text-white">
+                  We provide comprehensive digital transformation services,
+                  guiding you from initial ideation all the way through
+                  development, deployment, and optimization. Our offerings span
+                  Al, Machine Learning, predictive analytics, custom software,
+                  cloud native architecture, mobile apps, web platforms, API
+                  integration, SEO, SEM, and performance marketing. Whether
+                  you're overhauling legacy systems or launching new digital
+                  ventures, our goal is the same: a seamless, full stack
+                  solution tailored to your business and growth objectives.
+                </p>
+              </m.div>
+            </m.div>
+          )}
+        </div>
       </div>
     </div>
   );

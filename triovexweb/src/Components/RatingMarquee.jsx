@@ -29,7 +29,6 @@ const RatingMarquee = () => {
     { name: "Spectrum", image: l6 },
   ];
 
-  // Repeat logos for infinite effect
   const marqueeItems = [...brands, ...brands, ...brands, ...brands];
 
   useEffect(() => {
@@ -38,7 +37,7 @@ const RatingMarquee = () => {
 
     let scrollLeft = 0;
     const speed = 0.5;
-    const singleLoopWidth = slider.scrollWidth / 4; // Adjust based on duplication
+    const singleLoopWidth = slider.scrollWidth / 4;
 
     const animate = () => {
       scrollLeft += speed;
@@ -52,20 +51,30 @@ const RatingMarquee = () => {
   }, []);
 
   return (
-    <section className="py-10 sm:py-12 bg-white">
+    <section className="py-10 sm:py-12 bg-white dark:bg-black transition-colors duration-300">
       {/* Stars */}
       <Stars />
 
       {/* Rating Text */}
-      <p className="mt-3 text-center text-sm sm:text-base font-medium text-gray-700">
+      <p className="mt-3 text-center text-sm sm:text-base font-medium text-gray-700 dark:text-gray-300">
         4.9/5 From 3,602 Customers
       </p>
 
       {/* Marquee */}
       <div className="mt-6 sm:mt-8 relative overflow-hidden">
         {/* Left and Right Fade */}
-        <div className="pointer-events-none absolute inset-y-0 left-0 w-10 sm:w-20 bg-gradient-to-r from-white via-white/80 to-transparent z-10" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 w-10 sm:w-20 bg-gradient-to-l from-white via-white/80 to-transparent z-10" />
+        <div
+          className="pointer-events-none absolute inset-y-0 left-0 w-10 sm:w-20 
+          bg-gradient-to-r from-white via-white/80 to-transparent 
+          dark:from-black dark:via-black/80 dark:to-transparent 
+          z-10"
+        />
+        <div
+          className="pointer-events-none absolute inset-y-0 right-0 w-10 sm:w-20 
+          bg-gradient-to-l from-white via-white/80 to-transparent 
+          dark:from-black dark:via-black/80 dark:to-transparent 
+          z-10"
+        />
 
         {/* Scroll Track */}
         <div
@@ -84,9 +93,9 @@ const RatingMarquee = () => {
             >
               <img
                 src={image}
-                
                 alt={`${name} Logo`}
-                className="h-6 sm:h-8 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity duration-300 grayscale hover:grayscale-0"
+                className="h-6 sm:h-8 w-auto object-contain opacity-70 hover:opacity-100 transition duration-300 grayscale hover:grayscale-0 
+             dark:brightness-0 dark:invert"
               />
             </div>
           ))}
