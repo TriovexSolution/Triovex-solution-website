@@ -292,7 +292,8 @@ Impact Delivered:
     link: "https://www.etickets.ca/",
   },
 ];
-function CarouselCard({ work, onClick, isActive, index }) {
+
+function CarouselCard({ work, onClick, index }) {
   const cardColors = [
     "#E6EBF5",
     "#F0F0EB",
@@ -310,8 +311,8 @@ function CarouselCard({ work, onClick, isActive, index }) {
   return (
     <motion.div
       className="flex-shrink-0 w-full max-w-full sm:max-w-xl md:max-w-3xl lg:max-w-5xl px-2 sm:px-4"
-      initial={false} // disable initial animation
-      animate={false} // disable animate prop
+      initial={false}
+      animate={false}
     >
       <Tilt
         glareEnable={true}
@@ -325,7 +326,7 @@ function CarouselCard({ work, onClick, isActive, index }) {
       >
         <div
           style={{ backgroundColor: cardColors[index] }}
-          className="rounded-2xl px-4 sm:px-6 pt-6 pb-8 sm:pb-10 shadow-xl w-full mx-auto flex flex-col h-auto sm:h-[520px] transition-all duration-300 border border-white/10 dark:border-gray-800 dark:bg-gray-900"
+          className="rounded-2xl px-4 sm:px-6 pt-6 pb-8 sm:pb-10 shadow-xl w-full mx-auto flex flex-col h-[520px] transition-all duration-300 border border-white/10 dark:border-gray-800 dark:bg-gray-900"
         >
           <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start gap-4 sm:gap-6">
             <div className="flex-1">
@@ -357,8 +358,11 @@ function CarouselCard({ work, onClick, isActive, index }) {
               )}
             </div>
           </div>
-          <div className="flex justify-center rounded-3xl overflow-hidden mt-4 sm:mt-6 flex-grow min-h-[200px] sm:min-h-[300px]">
+
+          {/* Image Container */}
+          <div className="flex justify-center rounded-3xl overflow-hidden mt-4 sm:mt-6 flex-grow min-h-[300px]">
             <img
+              loading="lazy"
               src={work.image}
               alt={work.title}
               className="w-full h-full object-contain transition-transform duration-300"
@@ -426,7 +430,6 @@ export default function WorkSection() {
               <CarouselCard
                 key={currentIndex}
                 work={worksData[currentIndex]}
-                isActive={true}
                 onClick={(work) => {
                   setSelectedWork(work);
                   setOpenModal(true);
@@ -513,7 +516,6 @@ export default function WorkSection() {
               onClick={(e) => e.stopPropagation()}
               transition={{ duration: 0.4, ease: "easeOut" }}
             >
-              {/* Cancel button center-top */}
               <button
                 onClick={() => setOpenModal(false)}
                 className="fixed top-20 mt-5 sm:top-20 left-1/2 -translate-x-1/2 bg-gray-800 text-white p-4 sm:p-5 hover:bg-gray-700 transition-all duration-300 rounded-full z-50"
