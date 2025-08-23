@@ -3,36 +3,49 @@
 import React, { useEffect, useState } from "react";
 
 const PrivacyPolicy = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDark, setIsDark] = useState(false);
 
+  // Detect dark mode via html class
   useEffect(() => {
-    // Detect browser theme
-    const darkMediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-    setIsDarkMode(darkMediaQuery.matches);
+    const checkTheme = () =>
+      setIsDark(document.documentElement.classList.contains("dark"));
+    checkTheme();
 
-    const listener = (e) => setIsDarkMode(e.matches);
-    darkMediaQuery.addEventListener("change", listener);
+    const observer = new MutationObserver(() => checkTheme());
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
 
-    return () => darkMediaQuery.removeEventListener("change", listener);
+    return () => observer.disconnect();
   }, []);
 
   return (
     <div
-      className={`flex justify-center w-full px-6 py-12 lg:px-32 py-22 ${
-        isDarkMode ? "bg-black text-white" : "bg-white text-[#313719]"
-      }`}
+      style={{
+        backgroundColor: isDark ? "#000000" : "#FFFFFF",
+        color: isDark ? "#FFFFFF" : "#313719",
+        transition: "background-color 0.5s ease, color 0.5s ease",
+      }}
+      className="flex justify-center w-full px-6 py-12 lg:px-32 py-22"
     >
       {/* Inner container */}
       <div className="w-full max-w-6xl">
         <h1
-          className={`text-4xl font-bold mt-4 mb-2 text-center ${
-            isDarkMode ? "text-white" : "text-[#313719]"
-          }`}
+          style={{
+            color: isDark ? "#FFFFFF" : "#313719",
+          }}
+          className="text-4xl font-bold mt-4 mb-2 text-center"
         >
           Privacy Policy
         </h1>
 
-        <p className="mb-2 italic text-center">Last Updated: 31 July 2025</p>
+        <p
+          style={{ color: isDark ? "#D1D5DB" : "#4B5563" }}
+          className="mb-2 italic text-center"
+        >
+          Last Updated: 31 July 2025
+        </p>
 
         <section className="space-y-6 text-lg my-6">
           <p>
@@ -43,7 +56,12 @@ const PrivacyPolicy = () => {
           </p>
 
           <div>
-            <h2 className="text-2xl font-semibold mt-6 mb-2">Who We Are</h2>
+            <h2
+              style={{ color: isDark ? "#FFFFFF" : "#313719" }}
+              className="text-2xl font-semibold mt-6 mb-2"
+            >
+              Who We Are
+            </h2>
             <p>
               We are a global tech solutions provider offering cutting-edge
               services like Website Development, AI/ML, App Development, SEO,
@@ -53,7 +71,12 @@ const PrivacyPolicy = () => {
           </div>
 
           <div>
-            <h2 className="text-2xl font-semibold mt-6 mb-2">What We Collect</h2>
+            <h2
+              style={{ color: isDark ? "#FFFFFF" : "#313719" }}
+              className="text-2xl font-semibold mt-6 mb-2"
+            >
+              What We Collect
+            </h2>
             <ul className="list-disc list-inside space-y-1">
               <li>Name, email, phone number</li>
               <li>Company name & location</li>
@@ -64,7 +87,10 @@ const PrivacyPolicy = () => {
           </div>
 
           <div>
-            <h2 className="text-2xl font-semibold mt-6 mb-2">
+            <h2
+              style={{ color: isDark ? "#FFFFFF" : "#313719" }}
+              className="text-2xl font-semibold mt-6 mb-2"
+            >
               How We Use Your Info
             </h2>
             <ul className="list-disc list-inside space-y-1">
@@ -77,7 +103,10 @@ const PrivacyPolicy = () => {
           </div>
 
           <div>
-            <h2 className="text-2xl font-semibold mt-6 mb-2">
+            <h2
+              style={{ color: isDark ? "#FFFFFF" : "#313719" }}
+              className="text-2xl font-semibold mt-6 mb-2"
+            >
               We Respect Your Trust
             </h2>
             <ul className="list-disc list-inside space-y-1">
@@ -90,7 +119,12 @@ const PrivacyPolicy = () => {
           </div>
 
           <div>
-            <h2 className="text-2xl font-semibold mt-6 mb-2">Data Protection</h2>
+            <h2
+              style={{ color: isDark ? "#FFFFFF" : "#313719" }}
+              className="text-2xl font-semibold mt-6 mb-2"
+            >
+              Data Protection
+            </h2>
             <p>
               We use secure servers, encrypted communication, and modern access
               controls to safeguard your data. Whether you are in India, the US,
@@ -100,7 +134,10 @@ const PrivacyPolicy = () => {
           </div>
 
           <div>
-            <h2 className="text-2xl font-semibold mt-6 mb-2">
+            <h2
+              style={{ color: isDark ? "#FFFFFF" : "#313719" }}
+              className="text-2xl font-semibold mt-6 mb-2"
+            >
               Cookies? Just the Useful Ones
             </h2>
             <p>
@@ -111,7 +148,10 @@ const PrivacyPolicy = () => {
           </div>
 
           <div>
-            <h2 className="text-2xl font-semibold mt-6 mb-2">
+            <h2
+              style={{ color: isDark ? "#FFFFFF" : "#313719" }}
+              className="text-2xl font-semibold mt-6 mb-2"
+            >
               Third-Party Sharing
             </h2>
             <p>
@@ -123,7 +163,12 @@ const PrivacyPolicy = () => {
           </div>
 
           <div>
-            <h2 className="text-2xl font-semibold mt-6 mb-2">Your Rights</h2>
+            <h2
+              style={{ color: isDark ? "#FFFFFF" : "#313719" }}
+              className="text-2xl font-semibold mt-6 mb-2"
+            >
+              Your Rights
+            </h2>
             <ul className="list-disc list-inside space-y-1">
               <li>Want to see what data we have? Just ask.</li>
               <li>Want it deleted? Say the word.</li>
@@ -131,18 +176,16 @@ const PrivacyPolicy = () => {
                 Have a concern? We’re here to help:{" "}
                 <a
                   href="mailto:support@triovexsolution.com"
-                  className={`underline ${
-                    isDarkMode ? "text-white" : "text-[#313719]"
-                  }`}
+                  style={{ color: isDark ? "#FFFFFF" : "#313719" }}
+                  className="underline"
                 >
                   support@triovexsolution.com
                 </a>{" "}
                 or use our{" "}
                 <a
                   href="/contact"
-                  className={`underline ${
-                    isDarkMode ? "text-white" : "text-[#313719]"
-                  }`}
+                  style={{ color: isDark ? "#FFFFFF" : "#313719" }}
+                  className="underline"
                 >
                   contact form
                 </a>
@@ -152,7 +195,12 @@ const PrivacyPolicy = () => {
           </div>
 
           <div>
-            <h2 className="text-2xl font-semibold mt-6 mb-2">Policy Updates</h2>
+            <h2
+              style={{ color: isDark ? "#FFFFFF" : "#313719" }}
+              className="text-2xl font-semibold mt-6 mb-2"
+            >
+              Policy Updates
+            </h2>
             <p>
               We may update this policy when necessary. If it’s something major,
               we’ll notify you. But feel free to check this page anytime to stay
@@ -161,7 +209,10 @@ const PrivacyPolicy = () => {
           </div>
 
           <div>
-            <h2 className="text-2xl font-semibold mt-6 mb-2">
+            <h2
+              style={{ color: isDark ? "#FFFFFF" : "#313719" }}
+              className="text-2xl font-semibold mt-6 mb-2"
+            >
               Thanks for Trusting Us
             </h2>
             <p>

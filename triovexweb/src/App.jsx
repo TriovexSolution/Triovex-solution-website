@@ -14,7 +14,7 @@ import TermsAndConditions from "./Components/TermsAndConditions";
 import CustomSoftwareModal from "./Components/CustomSoftwareModal";
 import WebDevModal from "./Components/WebDevModal";
 import AppDevModal from "./Components/AppDevModal";
-import SEOModal from "./Components/SEOModal"; 
+import SEOModal from "./Components/SEOModal";
 import DigitalMarketing from "./Components/DigitalMarketingModel";
 import SocialMediaHandling from "./Components/SocialMediaHandling";
 import PaidAdsEmailModal from "./Components/PaidAdsEmailMarketing";
@@ -36,7 +36,7 @@ function App() {
   //   // 🔒 Disable right-click
   //   const handleContextMenu = (e) => e.preventDefault();
   //   document.addEventListener("contextmenu", handleContextMenu);
-  
+
   //   // 🔒 Disable F12, Ctrl+Shift+I/J, Ctrl+U
   //   const handleKeyDown = (e) => {
   //     if (
@@ -48,15 +48,15 @@ function App() {
   //     }
   //   };
   //   document.addEventListener("keydown", handleKeyDown);
-  
+
   //   // 🔒 Disable copy
   //   const handleCopy = (e) => e.preventDefault();
   //   document.addEventListener("copy", handleCopy);
-  
+
   //   // 🔒 Disable text selection
   //   const handleSelectStart = (e) => e.preventDefault();
   //   document.addEventListener("selectstart", handleSelectStart);
-  
+
   //   // 🔒 Disable drag on all images
   //   const handleDragStart = (e) => {
   //     if (e.target.tagName === "IMG") {
@@ -64,7 +64,7 @@ function App() {
   //     }
   //   };
   //   document.addEventListener("dragstart", handleDragStart);
-  
+
   //   // 🧹 Cleanup
   //   return () => {
   //     document.removeEventListener("contextmenu", handleContextMenu);
@@ -80,7 +80,7 @@ function App() {
       <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
         <ScrollToTop />
         <Navbar />
-        
+
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
@@ -91,7 +91,10 @@ function App() {
           <Route path="/works" element={<WorkPage />} />
           <Route path="/privacypolicy" element={<PrivacyPolicy />} />
           <Route path="/termsandconditions" element={<TermsAndConditions />} />
-          <Route path="/customsoftwaremodel" element={<CustomSoftwareModal />} />
+          <Route
+            path="/customsoftwaremodel"
+            element={<CustomSoftwareModal />}
+          />
           <Route path="/webdevmodel" element={<WebDevModal />} />
           <Route path="/appdevmodal" element={<AppDevModal />} />
           <Route path="/seomodel" element={<SEOModal />} />

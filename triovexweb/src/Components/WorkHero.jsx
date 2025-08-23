@@ -14,29 +14,41 @@ const headingWords = [
 const WorksHero = () => {
   const heroRef = useRef(null);
 
-  // Dot color based on system theme
-  const [dotColor, setDotColor] = useState("#E5E5E5");
+  const [isDarkMode, setIsDarkMode] = useState(
+    document.documentElement.classList.contains("dark")
+  );
 
   useEffect(() => {
-    const isDark =
-      window.matchMedia &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches;
-    setDotColor(isDark ? "#2a2a2a" : "#E5E5E5");
-
-    const mq = window.matchMedia("(prefers-color-scheme: dark)");
-    const handler = (e) => setDotColor(e.matches ? "#2a2a2a" : "#E5E5E5");
-    mq.addEventListener("change", handler);
-    return () => mq.removeEventListener("change", handler);
+    // Watch for dark/light theme changes
+    const observer = new MutationObserver(() => {
+      setIsDarkMode(document.documentElement.classList.contains("dark"));
+    });
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+    return () => observer.disconnect();
   }, []);
 
+  // Dot color based on theme
+  const dotColor = isDarkMode ? "#2a2a2a" : "#E5E5E5";
+  const bgColor = isDarkMode ? "#000000" : "#ffffff";
+  const textColor = isDarkMode ? "#ffffff" : "#111827";
+  const subTextColor = isDarkMode ? "#d1d5db" : "#4b5563";
+  const badgeBg = isDarkMode ? "rgba(255,255,255,0.1)" : "rgba(49,55,25,0.1)";
+  const badgeText = isDarkMode ? "#ffffff" : "#000000";
+
   return (
-    <div className="relative w-full h-screen overflow-hidden bg-white dark:bg-black transition-colors duration-500">
+    <div
+      className="relative w-full h-screen overflow-hidden transition-colors duration-500"
+      style={{ backgroundColor: bgColor, color: textColor }}
+    >
       {/* DotGrid Animation Background */}
       <div className="absolute inset-0 z-0">
         <DotGrid
           dotSize={3.0}
           gap={9}
-          baseColor={dotColor} // dynamic based on browser/system theme
+          baseColor={dotColor}
           activeColor="#22c55e"
           proximity={120}
           shockRadius={250}
@@ -53,13 +65,19 @@ const WorksHero = () => {
       >
         {/* Badge */}
         <div className="mb-3 sm:mb-6 mt-6 sm:mt-10">
-          <span className="inline-block bg-[#313719]/10 dark:bg-white/10 px-3 sm:px-6 py-1.5 sm:py-2 rounded-full text-[10px] sm:text-xs md:text-sm font-medium text-black dark:text-white backdrop-blur-sm shadow-md">
+          <span
+            className="inline-block px-3 sm:px-6 py-1.5 sm:py-2 rounded-full text-[10px] sm:text-xs md:text-sm font-medium backdrop-blur-sm shadow-md"
+            style={{ backgroundColor: badgeBg, color: badgeText }}
+          >
             Our Work
           </span>
         </div>
 
         {/* Animated Heading */}
-        <h2 className="mt-6 text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-gray-900 dark:text-white cursor-zoom">
+        <h2
+          className="mt-6 text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold cursor-zoom"
+          style={{ color: textColor }}
+        >
           {headingWords.map((word, index) => (
             <motion.span
               key={index}
@@ -74,7 +92,10 @@ const WorksHero = () => {
         </h2>
 
         {/* Subheading */}
-        <p className="mt-4 text-[9px] sm:text-[11px] md:text-xs lg:text-sm xl:text-base text-gray-600 dark:text-gray-300 max-w-2xl mx-auto px-2">
+        <p
+          className="mt-4 text-[9px] sm:text-[11px] md:text-xs lg:text-sm xl:text-base max-w-2xl mx-auto px-2"
+          style={{ color: subTextColor }}
+        >
           At Triovex Solution, we build intelligent digital ecosystems powered
           by AI/ML from smart web apps to automation and analytics, designed to
           scale, adapt, and transform your business.

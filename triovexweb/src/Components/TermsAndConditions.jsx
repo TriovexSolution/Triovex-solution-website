@@ -3,45 +3,59 @@
 import React, { useEffect, useState } from "react";
 
 const TermsAndConditions = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDark, setIsDark] = useState(false);
 
+  // Detect dark mode from <html> class (set by your navbar toggle)
   useEffect(() => {
-    // Detect browser theme
-    const darkMediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-    setIsDarkMode(darkMediaQuery.matches);
+    const checkTheme = () =>
+      setIsDark(document.documentElement.classList.contains("dark"));
+    checkTheme();
 
-    const listener = (e) => setIsDarkMode(e.matches);
-    darkMediaQuery.addEventListener("change", listener);
+    const observer = new MutationObserver(() => checkTheme());
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
 
-    return () => darkMediaQuery.removeEventListener("change", listener);
+    return () => observer.disconnect();
   }, []);
 
   return (
     <div
-      className={`flex justify-center w-full px-6 py-12 lg:px-32 py-22 ${
-        isDarkMode ? "bg-black text-white" : "bg-white text-[#313719]"
-      }`}
+      style={{
+        backgroundColor: isDark ? "#000000" : "#FFFFFF",
+        color: isDark ? "#FFFFFF" : "#313719",
+        transition: "background-color 0.5s ease, color 0.5s ease",
+      }}
+      className="flex justify-center w-full px-6 py-12 lg:px-32 py-22"
     >
-      {/* Inner container */}
       <div className="w-full max-w-6xl">
         <h1
-          className={`text-4xl font-bold my-4 text-center ${
-            isDarkMode ? "text-white" : "text-[#313719]"
-          }`}
+          style={{ color: isDark ? "#FFFFFF" : "#313719" }}
+          className="text-4xl font-bold my-4 text-center"
         >
           Terms & Conditions
         </h1>
-        <p className="mb-2 italic text-center">Effective Date: 31 July 2025</p>
+        <p
+          style={{ color: isDark ? "#D1D5DB" : "#4B5563" }}
+          className="mb-2 italic text-center"
+        >
+          Effective Date: 31 July 2025
+        </p>
 
         <section className="space-y-6 text-lg my-6">
           <p>
             Welcome to <strong>Triovex Solution</strong>. By using our website
-            and services, you agree to play by the rules outlined below don’t
+            and services, you agree to play by the rules outlined below—don’t
             worry, they are fair, transparent, and written in plain English.
           </p>
 
+          {/* Section 1 */}
           <div>
-            <h2 className="text-2xl font-semibold mt-6 mb-2">
+            <h2
+              style={{ color: isDark ? "#FFFFFF" : "#313719" }}
+              className="text-2xl font-semibold mt-6 mb-2"
+            >
               1. Acceptance of Terms
             </h2>
             <p>
@@ -51,8 +65,12 @@ const TermsAndConditions = () => {
             </p>
           </div>
 
+          {/* Section 2 */}
           <div>
-            <h2 className="text-2xl font-semibold mt-6 mb-2">
+            <h2
+              style={{ color: isDark ? "#FFFFFF" : "#313719" }}
+              className="text-2xl font-semibold mt-6 mb-2"
+            >
               2. Services We Provide
             </h2>
             <ul className="list-disc list-inside space-y-1">
@@ -68,14 +86,16 @@ const TermsAndConditions = () => {
             </p>
           </div>
 
+          {/* Section 3 */}
           <div>
-            <h2 className="text-2xl font-semibold mt-6 mb-2">
+            <h2
+              style={{ color: isDark ? "#FFFFFF" : "#313719" }}
+              className="text-2xl font-semibold mt-6 mb-2"
+            >
               3. Payments & Invoices
             </h2>
             <ul className="list-disc list-inside space-y-1">
-              <li>
-                All pricing is quoted in your local or agreed-upon currency.
-              </li>
+              <li>All pricing is quoted in your local or agreed-upon currency.</li>
               <li>
                 Payment terms (50/50 split, milestone-based, or subscription)
                 will be outlined before project kick-off.
@@ -86,108 +106,134 @@ const TermsAndConditions = () => {
             </ul>
           </div>
 
+          {/* Section 4 */}
           <div>
-            <h2 className="text-2xl font-semibold mt-6 mb-2">
-              4. User Responsibilities
-            </h2>
-            <ul className="list-disc list-inside space-y-1">
-              <li>Provide accurate information and project details.</li>
-              <li>Respect our copyrights, branding, and deliverables.</li>
-              <li>Not use our work for illegal or unauthorized purposes.</li>
-            </ul>
-          </div>
-
-          <div>
-            <h2 className="text-2xl font-semibold mt-6 mb-2">
-              5. Intellectual Property
-            </h2>
-            <ul className="list-disc list-inside space-y-1">
-              <li>
-                All designs, code, and deliverables are original and provided
-                under the usage rights discussed in your project contract.
-              </li>
-              <li>
-                You may not resell or redistribute any of our work without
-                written permission.
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h2 className="text-2xl font-semibold mt-6 mb-2">
-              6. Limitation of Liability
+            <h2
+              style={{ color: isDark ? "#FFFFFF" : "#313719" }}
+              className="text-2xl font-semibold mt-6 mb-2"
+            >
+              4. Intellectual Property
             </h2>
             <p>
-              We strive for perfection but we are also human (and sometimes
-              servers crash). We are not liable for:
-            </p>
-            <ul className="list-disc list-inside space-y-1">
-              <li>Temporary unavailability of services</li>
-              <li>Losses from third-party integrations or hosting providers</li>
-              <li>
-                Unforeseen delays due to external issues (e.g. natural
-                disasters, outages)
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h2 className="text-2xl font-semibold mt-6 mb-2">
-              7. Revisions & Support
-            </h2>
-            <ul className="list-disc list-inside space-y-1">
-              <li>
-                We offer a fixed number of revisions per project scope typically
-                outlined in your proposal.
-              </li>
-              <li>
-                Post-launch support is available for a limited time; extended
-                support can be included as a service add-on.
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h2 className="text-2xl font-semibold mt-6 mb-2">
-              8. Global Compliance
-            </h2>
-            <p>
-              We aim to follow global standards including GDPR, CAN-SPAM, and
-              industry-specific norms. If you are in a specific country with
-              unique regulations, let us know we will do our best to comply.
+              All designs, content, code, and assets developed by Triovex remain
+              our intellectual property until full payment is received. Upon
+              payment, ownership will be transferred to the client unless agreed
+              otherwise.
             </p>
           </div>
 
+          {/* Section 5 */}
           <div>
-            <h2 className="text-2xl font-semibold mt-6 mb-2">
-              9. Cancellation & Refunds
+            <h2
+              style={{ color: isDark ? "#FFFFFF" : "#313719" }}
+              className="text-2xl font-semibold mt-6 mb-2"
+            >
+              5. Client Responsibilities
             </h2>
+            <p>To ensure smooth delivery, clients agree to:</p>
             <ul className="list-disc list-inside space-y-1">
-              <li>Project cancellations must be requested in writing.</li>
+              <li>Provide timely feedback and approvals.</li>
               <li>
-                Refunds (if applicable) are subject to the completed work and
-                time invested.
+                Supply accurate content, images, or other required material.
               </li>
               <li>
-                Subscription-based services can be cancelled anytime, but are
-                non-refundable for the current billing cycle.
+                Respect agreed timelines to avoid unnecessary project delays.
               </li>
             </ul>
           </div>
 
+          {/* Section 6 */}
           <div>
-            <h2 className="text-2xl font-semibold mt-6 mb-2">10. Contact Us</h2>
+            <h2
+              style={{ color: isDark ? "#FFFFFF" : "#313719" }}
+              className="text-2xl font-semibold mt-6 mb-2"
+            >
+              6. Confidentiality
+            </h2>
+            <p>
+              Any data, strategies, or business information you share with us
+              will be kept 100% confidential. Similarly, we expect the same
+              respect for our internal processes, tools, and know-how.
+            </p>
+          </div>
+
+          {/* Section 7 */}
+          <div>
+            <h2
+              style={{ color: isDark ? "#FFFFFF" : "#313719" }}
+              className="text-2xl font-semibold mt-6 mb-2"
+            >
+              7. Limitation of Liability
+            </h2>
+            <p>
+              While we aim for perfection, Triovex Solution is not liable for:
+            </p>
+            <ul className="list-disc list-inside space-y-1">
+              <li>Any indirect or consequential damages.</li>
+              <li>
+                Losses resulting from third-party platforms, hosting, or tools.
+              </li>
+              <li>
+                Client misuse, delays, or lack of communication impacting
+                delivery.
+              </li>
+            </ul>
+          </div>
+
+          {/* Section 8 */}
+          <div>
+            <h2
+              style={{ color: isDark ? "#FFFFFF" : "#313719" }}
+              className="text-2xl font-semibold mt-6 mb-2"
+            >
+              8. Refunds & Cancellations
+            </h2>
+            <ul className="list-disc list-inside space-y-1">
+              <li>
+                Refunds will only be provided for services not yet initiated.
+              </li>
+              <li>
+                Once a project has started, partial or full refunds will not be
+                entertained unless explicitly agreed in writing.
+              </li>
+              <li>
+                Subscription-based services can be canceled with one month’s
+                notice.
+              </li>
+            </ul>
+          </div>
+
+          {/* Section 9 */}
+          <div>
+            <h2
+              style={{ color: isDark ? "#FFFFFF" : "#313719" }}
+              className="text-2xl font-semibold mt-6 mb-2"
+            >
+              9. Changes to Terms
+            </h2>
+            <p>
+              We may update these Terms from time to time. Any updates will be
+              posted on this page, and continued use of our services means you
+              accept the updated version.
+            </p>
+          </div>
+
+          {/* Section 10 */}
+          <div>
+            <h2
+              style={{ color: isDark ? "#FFFFFF" : "#313719" }}
+              className="text-2xl font-semibold mt-6 mb-2"
+            >
+              10. Contact Us
+            </h2>
             <p>Have a question or need help? We are always here:</p>
             <ul className="list-inside list-disc space-y-1">
               <li>
                 <strong>Email:</strong>{" "}
                 <a
-                  href="https://mail.google.com/mail/u/0/?tab=rm&ogbl#search/support%40triovexsolution.com?compose=new"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`hover:underline ${
-                    isDarkMode ? "text-white" : "text-[#313719]"
-                  }`}
+                  href="mailto:support@triovexsolution.com"
+                  style={{ color: isDark ? "#FFFFFF" : "#313719" }}
+                  className="hover:underline"
                 >
                   support@triovexsolution.com
                 </a>
@@ -198,9 +244,8 @@ const TermsAndConditions = () => {
                   href="https://wa.me/+919978985611"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`hover:underline ${
-                    isDarkMode ? "text-white" : "text-[#313719]"
-                  }`}
+                  style={{ color: isDark ? "#FFFFFF" : "#313719" }}
+                  className="hover:underline"
                 >
                   +91 99789 85611
                 </a>
@@ -208,12 +253,11 @@ const TermsAndConditions = () => {
               <li>
                 <strong>Address:</strong>{" "}
                 <a
-                  href="https://www.google.com/maps/place/Shivalik+Shilp/@23.0270241,72.5063417,16z/data=!3m1!4b1!4m6!3m5!1s0x395e9b398e5880f1:0x32614b29d1226274!8m2!3d23.0270241!4d72.5063417!16s%2Fg%2F11dxchwdc9?entry=ttu&g_ep=EgoyMDI1MDcyNy4wIKXMDSoASAFQAw%3D%3D"
+                  href="https://www.google.com/maps/place/Shivalik+Shilp/@23.0270241,72.5063417,16z"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`hover:underline ${
-                    isDarkMode ? "text-white" : "text-[#313719]"
-                  }`}
+                  style={{ color: isDark ? "#FFFFFF" : "#313719" }}
+                  className="hover:underline"
                 >
                   1306, Shivalik Shilp, Iscon Cross Road, Sanidhya, Ahmedabad -
                   380054
@@ -222,25 +266,18 @@ const TermsAndConditions = () => {
             </ul>
           </div>
 
+          {/* Section 11 */}
           <div>
-            <h2 className="text-2xl font-semibold mt-6 mb-2">
-              11. Updates to Terms
+            <h2
+              style={{ color: isDark ? "#FFFFFF" : "#313719" }}
+              className="text-2xl font-semibold mt-6 mb-2"
+            >
+              11. Governing Law
             </h2>
             <p>
-              These terms may change over time. When we update them, we will
-              revise the "Effective Date" and inform you if changes are
-              substantial.
-            </p>
-          </div>
-
-          <div>
-            <h2 className="text-2xl font-semibold mt-6 mb-2">
-              Let Us Work Together
-            </h2>
-            <p>
-              We are excited to be part of your digital journey. These terms
-              exist not to restrict you, but to ensure clarity and smooth
-              collaboration every step of the way.
+              These Terms shall be governed by and construed in accordance with
+              the laws of India. Any disputes will be subject to the exclusive
+              jurisdiction of the courts in Ahmedabad, Gujarat.
             </p>
           </div>
         </section>

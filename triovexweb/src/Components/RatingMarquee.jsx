@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { Star } from "lucide-react";
 import l1 from "../assets/l1.svg";
 import l2 from "../assets/l2.svg";
@@ -8,10 +8,17 @@ import l4 from "../assets/l4.svg";
 import l5 from "../assets/l5.svg";
 import l6 from "../assets/l6.svg";
 
-const Stars = () => (
+const Stars = ({ isDark }) => (
   <div className="flex justify-center space-x-1">
     {Array.from({ length: 5 }).map((_, i) => (
-      <Star key={i} className="w-4 h-4 fill-yellow-400 stroke-yellow-400" />
+      <Star
+        key={i}
+        className="w-4 h-4"
+        style={{
+          fill: isDark ? "#facc15" : "#facc15", // yellow in both themes
+          stroke: isDark ? "#facc15" : "#facc15",
+        }}
+      />
     ))}
   </div>
 );
@@ -19,6 +26,24 @@ const Stars = () => (
 const RatingMarquee = () => {
   const sliderRef = useRef(null);
   const animationRef = useRef(null);
+
+  const [theme, setTheme] = useState("light");
+
+  // detect current theme from html class
+  useEffect(() => {
+    const html = document.documentElement;
+    const observer = new MutationObserver(() => {
+      setTheme(html.classList.contains("dark") ? "dark" : "light");
+    });
+    observer.observe(html, { attributes: true, attributeFilter: ["class"] });
+
+    // initial
+    setTheme(html.classList.contains("dark") ? "dark" : "light");
+
+    return () => observer.disconnect();
+  }, []);
+
+  const isDark = theme === "dark";
 
   const brands = [
     { name: "Lumina", image: l1 },
@@ -51,12 +76,22 @@ const RatingMarquee = () => {
   }, []);
 
   return (
-    <section className="py-10 sm:py-12 bg-white dark:bg-black transition-colors duration-300">
+    <section
+      style={{
+        backgroundColor: isDark ? "#000000" : "#ffffff",
+        color: isDark ? "#e5e5e5" : "#111111",
+        transition: "all 0.3s ease-in-out",
+      }}
+      className="py-10 sm:py-12"
+    >
       {/* Stars */}
-      <Stars />
+      <Stars isDark={isDark} />
 
       {/* Rating Text */}
-      <p className="mt-3 text-center text-sm sm:text-base font-medium text-gray-700 dark:text-gray-300">
+      <p
+        className="mt-3 text-center text-sm sm:text-base font-medium"
+        style={{ color: isDark ? "#d1d5db" : "#374151" }}
+      >
         4.9/5 From 3,602 Customers
       </p>
 
@@ -64,16 +99,20 @@ const RatingMarquee = () => {
       <div className="mt-6 sm:mt-8 relative overflow-hidden">
         {/* Left and Right Fade */}
         <div
-          className="pointer-events-none absolute inset-y-0 left-0 w-10 sm:w-20 
-          bg-gradient-to-r from-white via-white/80 to-transparent 
-          dark:from-black dark:via-black/80 dark:to-transparent 
-          z-10"
+          className="pointer-events-none absolute inset-y-0 left-0 w-10 sm:w-20 z-10"
+          style={{
+            background: isDark
+              ? "linear-gradient(to right, black, rgba(0,0,0,0.8), transparent)"
+              : "linear-gradient(to right, white, rgba(255,255,255,0.8), transparent)",
+          }}
         />
         <div
-          className="pointer-events-none absolute inset-y-0 right-0 w-10 sm:w-20 
-          bg-gradient-to-l from-white via-white/80 to-transparent 
-          dark:from-black dark:via-black/80 dark:to-transparent 
-          z-10"
+          className="pointer-events-none absolute inset-y-0 right-0 w-10 sm:w-20 z-10"
+          style={{
+            background: isDark
+              ? "linear-gradient(to left, black, rgba(0,0,0,0.8), transparent)"
+              : "linear-gradient(to left, white, rgba(255,255,255,0.8), transparent)",
+          }}
         />
 
         {/* Scroll Track */}
@@ -94,8 +133,11 @@ const RatingMarquee = () => {
               <img
                 src={image}
                 alt={`${name} Logo`}
-                className="h-6 sm:h-8 w-auto object-contain opacity-70 hover:opacity-100 transition duration-300 grayscale hover:grayscale-0 
-             dark:brightness-0 dark:invert"
+                className="h-6 sm:h-8 w-auto object-contain transition duration-300"
+                style={{
+                  opacity: 0.7,
+                  filter: isDark ? "invert(1) brightness(1.2)" : "none",
+                }}
               />
             </div>
           ))}

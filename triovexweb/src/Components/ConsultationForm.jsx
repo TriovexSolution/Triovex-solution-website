@@ -65,6 +65,19 @@ const ConsultationForm = () => {
     (formData.serviceInterest !== "Other (please specify)" ||
       formData.otherService);
 
+  // Detect dark mode dynamically
+  const [isDark, setIsDark] = useState(
+    document.documentElement.classList.contains("dark")
+  );
+  useEffect(() => {
+    const html = document.documentElement;
+    const observer = new MutationObserver(() =>
+      setIsDark(html.classList.contains("dark"))
+    );
+    observer.observe(html, { attributes: true, attributeFilter: ["class"] });
+    return () => observer.disconnect();
+  }, []);
+
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData((prev) => ({
@@ -105,95 +118,137 @@ const ConsultationForm = () => {
     setMethodDropdownOpen(false);
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!isFormValid) return;
+ const handleSubmit = async (e) => {
+  e.preventDefault();
+  if (!isFormValid) return;
 
-    const browserDarkMode =
-      window.matchMedia &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches;
+  // Use the current theme dynamically
+  const currentTheme = isDark ? "dark" : "light";
 
-    const toastId = toast.loading("Submitting your consultation request...", {
-      theme: browserDarkMode ? "dark" : "light",
+  const toastId = toast.loading("Submitting your consultation request...", {
+    theme: currentTheme,
+    style: {
+      background: isDark ? "#1F2937" : "#fff",
+      color: isDark ? "#fff" : "#000",
+    },
+    progressStyle: {
+      background: isDark ? "#BB86FC" : "#313719",
+    },
+  });
+
+  try {
+    await axios.post(`${baseURL}/api/consultant/submit`, formData);
+
+    toast.update(toastId, {
+      render: "Consultation request sent successfully!",
+      type: "success",
+      isLoading: false,
+      autoClose: 3000,
+      closeOnClick: true,
+      theme: currentTheme,
       style: {
-        background: browserDarkMode ? "#1F2937" : "#fff", // dark bg
-        color: browserDarkMode ? "#fff" : "#000", // text color
-      },
-      progressStyle: {
-        background: browserDarkMode ? "#BB86FC" : "#313719", // loading bar color
+        background: isDark ? "#1F2937" : "#fff",
+        color: isDark ? "#fff" : "#000",
       },
     });
 
-    try {
-      await axios.post(`${baseURL}/api/consultant/submit`, formData);
+    // Reset form
+    setFormData({
+      fullName: "",
+      email: "",
+      phone: "",
+      preferredMethod: "",
+      preferredDate: "",
+      preferredTime: "",
+      serviceInterest: "",
+      projectDetails: "",
+      agreement: false,
+      otherService: "",
+    });
+    setServiceDropdownOpen(false);
+    setMethodDropdownOpen(false);
+    setHighlightedMethodIndex(defaultIndex);
+    setHighlightedServiceIndex(defaultIndex);
+  } catch (error) {
+    console.error(error);
+    toast.update(toastId, {
+      render: "Something went wrong. Please try again later.",
+      type: "error",
+      isLoading: false,
+      autoClose: 3000,
+      closeOnClick: true,
+      theme: currentTheme,
+      style: {
+        background: isDark ? "#1F2937" : "#fff",
+        color: isDark ? "#fff" : "#000",
+      },
+    });
+  }
+};
 
-      toast.update(toastId, {
-        render: "Consultation request sent successfully!",
-        type: "success",
-        isLoading: false,
-        autoClose: 3000,
-        closeOnClick: true,
-        theme: browserDarkMode ? "dark" : "light",
-        style: {
-          background: browserDarkMode ? "#1F2937" : "#fff",
-          color: browserDarkMode ? "#fff" : "#000",
-        },
-      });
+  // Inline theme styles
+  const containerStyle = {
+    backgroundColor: isDark ? "#000000" : "#ffffff",
+    color: isDark ? "#e5e5e5" : "#111111",
+    transition: "all 0.3s ease-in-out",
+  };
 
-      setFormData({
-        fullName: "",
-        email: "",
-        phone: "",
-        preferredMethod: "",
-        preferredDate: "",
-        preferredTime: "",
-        serviceInterest: "",
-        projectDetails: "",
-        agreement: false,
-        otherService: "",
-      });
-      setServiceDropdownOpen(false);
-      setMethodDropdownOpen(false);
-      setHighlightedMethodIndex(defaultIndex);
-      setHighlightedServiceIndex(defaultIndex);
-    } catch (error) {
-      console.error("Error submitting form:", error);
-      toast.update(toastId, {
-        render: "Something went wrong. Please try again later.",
-        type: "error",
-        isLoading: false,
-        autoClose: 3000,
-        closeOnClick: true,
-        theme: browserDarkMode ? "dark" : "light",
-        style: {
-          background: browserDarkMode ? "#1F2937" : "#fff",
-          color: browserDarkMode ? "#fff" : "#000",
-        },
-      });
-    }
+  const cardStyle = {
+    backgroundColor: isDark ? "#1F2937" : "#FAFAFA",
+    color: isDark ? "#e5e5e5" : "#111111",
+    transition: "all 0.3s ease-in-out",
+  };
+
+  const inputStyle = {
+    backgroundColor: isDark ? "#374151" : "#EAEEDC",
+    color: isDark ? "#fff" : "#000",
+  };
+
+  const buttonStyle = {
+    backgroundColor: "#2B2F18",
+    color: "#fff",
   };
 
   return (
     <div
-      className="min-h-screen bg-white dark:bg-black px-4 py-12 flex flex-col items-center pt-5 transition-colors duration-500"
+      className="min-h-screen px-4 py-12 flex flex-col items-center pt-5 transition-colors duration-500"
+      style={containerStyle}
       id="Consultation"
     >
-      <button className="bg-[#EAEEDC]  text-[#313719] dark:bg-emerald-900/40 dark:text-emerald-300 px-5 py-1 rounded-full text-sm font-semibold mb-3 shadow-sm transition-colors duration-300">
+      {/* Header */}
+      <button
+        className="px-5 py-1 rounded-full text-sm font-semibold mb-3 shadow-sm transition-colors duration-300"
+        style={{
+          backgroundColor: isDark ? "rgba(6,95,70,0.4)" : "#EAEEDC",
+          color: isDark ? "#6ee7b7" : "#313719",
+        }}
+      >
         Schedule a Consultation
       </button>
-      <p className="text-center text-sm text-gray-700 dark:text-gray-300 mb-8 max-w-md transition-colors duration-300">
+      <p
+        className="text-center text-sm mb-8 max-w-md transition-colors duration-300"
+        style={{ color: isDark ? "#d1d5db" : "#4b5563" }}
+      >
         Ready to transform your business with cutting-edge AI, cloud, and
         digital solutions? Fill out the form and our expert team will connect
         with you to craft a strategy tailored to your goals fast, reliable, and
         built for success.
       </p>
 
-      <div className="bg-[#FAFAFA] dark:bg-gray-800 rounded-3xl p-8 w-full max-w-5xl shadow-md flex flex-col md:flex-row gap-10 transition-colors duration-300">
-        {/* Left Section */}
+      {/* Form & Image Card */}
+      <div
+        className="rounded-3xl p-8 w-full max-w-5xl shadow-md flex flex-col md:flex-row gap-10 transition-colors duration-300"
+        style={cardStyle}
+      >
+        {/* Form Section */}
         <form className="space-y-6 flex-1" onSubmit={handleSubmit} noValidate>
+          {/* All input fields, dropdowns, checkboxes, textarea */}
           {/* Full Name */}
           <div>
-            <label className="block text-sm font-medium text-gray-800 dark:text-gray-200 mb-1">
+            <label
+              className="block text-sm font-medium mb-1"
+              style={{ color: isDark ? "#e5e5e5" : "#111827" }}
+            >
               Full Name <span className="text-red-600">*</span>
             </label>
             <input
@@ -202,7 +257,8 @@ const ConsultationForm = () => {
               value={formData.fullName}
               onChange={handleChange}
               placeholder="Enter your Full Name"
-              className="w-full bg-[#EAEEDC] dark:bg-gray-700 text-sm px-5 py-3 rounded-full focus:outline-none focus:ring-2 focus:ring-[#313719] dark:focus:ring-[#BB86FC] text-black dark:text-white transition-colors duration-300"
+              style={inputStyle}
+              className="w-full text-sm px-5 py-3 rounded-full focus:outline-none focus:ring-2 transition-colors duration-300"
               required
             />
           </div>
@@ -210,7 +266,10 @@ const ConsultationForm = () => {
           {/* Email & Phone */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-800 dark:text-gray-200 mb-1">
+              <label
+                className="block text-sm font-medium mb-1"
+                style={{ color: isDark ? "#e5e5e5" : "#111827" }}
+              >
                 Email <span className="text-red-600">*</span>
               </label>
               <input
@@ -219,12 +278,16 @@ const ConsultationForm = () => {
                 value={formData.email}
                 onChange={handleChange}
                 placeholder="Enter your Email"
-                className="w-full bg-[#EAEEDC] dark:bg-gray-700 text-sm px-5 py-3 rounded-full focus:outline-none focus:ring-2 focus:ring-[#313719] dark:focus:ring-[#BB86FC] text-black dark:text-white transition-colors duration-300"
+                style={inputStyle}
+                className="w-full text-sm px-5 py-3 rounded-full focus:outline-none focus:ring-2 transition-colors duration-300"
                 required
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-800 dark:text-gray-200 mb-1">
+              <label
+                className="block text-sm font-medium mb-1"
+                style={{ color: isDark ? "#e5e5e5" : "#111827" }}
+              >
                 Phone
               </label>
               <input
@@ -233,19 +296,27 @@ const ConsultationForm = () => {
                 value={formData.phone}
                 onChange={handleChange}
                 placeholder="Enter your phone number"
-                className="w-full bg-[#EAEEDC] dark:bg-gray-700 text-sm px-5 py-3 rounded-full focus:outline-none focus:ring-2 focus:ring-[#313719] dark:focus:ring-[#BB86FC] text-black dark:text-white transition-colors duration-300"
+                style={inputStyle}
+                className="w-full text-sm px-5 py-3 rounded-full focus:outline-none focus:ring-2 transition-colors duration-300"
               />
             </div>
           </div>
 
           {/* Preferred Method */}
           <div className="relative">
-            <label className="block text-sm font-medium text-gray-800 dark:text-gray-200 mb-1">
+            <label
+              style={{ color: isDark ? "#e5e5e5" : "#111827" }}
+              className="block text-sm font-medium mb-1"
+            >
               Preferred Method
             </label>
             <div
               onClick={() => setMethodDropdownOpen((prev) => !prev)}
-              className="cursor-pointer w-full bg-[#EAEEDC] dark:bg-gray-700 text-sm px-5 py-3 rounded-full flex items-center justify-between transition-colors duration-300 text-black dark:text-white"
+              style={{
+                backgroundColor: isDark ? "#374151" : "#EAEEDC",
+                color: isDark ? "#fff" : "#000",
+              }}
+              className="cursor-pointer w-full text-sm px-5 py-3 rounded-full flex items-center justify-between transition-colors duration-300"
             >
               <span>{formData.preferredMethod || "Select a method"}</span>
               <svg
@@ -268,7 +339,8 @@ const ConsultationForm = () => {
             {methodDropdownOpen && (
               <ul
                 ref={methodRef}
-                className="absolute z-10 mt-1 w-full h-[120px] overflow-y-scroll overflow-x-hidden rounded-xl bg-[#EAEEDC] dark:bg-gray-700 shadow-lg transition-colors duration-300"
+                style={{ backgroundColor: isDark ? "#374151" : "#EAEEDC" }}
+                className="absolute z-10 mt-1 w-full h-[120px] overflow-y-scroll overflow-x-hidden rounded-xl shadow-lg transition-colors duration-300"
               >
                 {methods.map((method, idx) => (
                   <motion.li
@@ -278,14 +350,16 @@ const ConsultationForm = () => {
                       height: `${optionHeight}px`,
                       fontWeight:
                         method === formData.preferredMethod ? "bold" : "normal",
+                      color:
+                        method === formData.preferredMethod
+                          ? isDark
+                            ? "#fff"
+                            : "#313719"
+                          : isDark
+                          ? "#fff"
+                          : "#111827",
                     }}
-                    className={`select-none px-5 py-2 text-sm cursor-pointer transition-colors duration-300
-  ${
-    method === formData.preferredMethod
-      ? "text-[#313719] dark:text-white"
-      : "text-gray-800 dark:text-white"
-  }
-`}
+                    className="select-none px-5 py-2 text-sm cursor-pointer transition-colors duration-300"
                     whileHover={{
                       scale: 1.05,
                       backgroundColor: "rgba(49,55,25,0.1)",
@@ -302,7 +376,10 @@ const ConsultationForm = () => {
           {/* Date & Time */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-800 dark:text-gray-200 mb-1">
+              <label
+                style={{ color: isDark ? "#e5e5e5" : "#111827" }}
+                className="block text-sm font-medium mb-1"
+              >
                 Preferred Date <span className="text-red-600">*</span>
               </label>
               <input
@@ -310,12 +387,20 @@ const ConsultationForm = () => {
                 name="preferredDate"
                 value={formData.preferredDate}
                 onChange={handleChange}
-                className="w-full bg-[#EAEEDC] dark:bg-gray-700 text-sm px-5 py-3 rounded-full focus:outline-none focus:ring-2 focus:ring-[#313719] dark:focus:ring-[#BB86FC] text-black dark:text-white transition-colors duration-300"
+                min={new Date().toISOString().split("T")[0]}
+                style={{
+                  backgroundColor: isDark ? "#374151" : "#EAEEDC",
+                  color: isDark ? "#fff" : "#000",
+                }}
+                className="w-full text-sm px-5 py-3 rounded-full focus:outline-none focus:ring-2 transition-colors duration-300"
                 required
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-800 dark:text-gray-200 mb-1">
+              <label
+                style={{ color: isDark ? "#e5e5e5" : "#111827" }}
+                className="block text-sm font-medium mb-1"
+              >
                 Preferred Time <span className="text-red-600">*</span>
               </label>
               <input
@@ -323,7 +408,12 @@ const ConsultationForm = () => {
                 name="preferredTime"
                 value={formData.preferredTime}
                 onChange={handleChange}
-                className="w-full bg-[#EAEEDC] dark:bg-gray-700 text-sm px-5 py-3 rounded-full focus:outline-none focus:ring-2 focus:ring-[#313719] dark:focus:ring-[#BB86FC] text-black dark:text-white transition-colors duration-300"
+                step="60"
+                style={{
+                  backgroundColor: isDark ? "#374151" : "#EAEEDC",
+                  color: isDark ? "#fff" : "#000",
+                }}
+                className="w-full text-sm px-5 py-3 rounded-full focus:outline-none focus:ring-2 transition-colors duration-300"
                 required
               />
             </div>
@@ -331,12 +421,19 @@ const ConsultationForm = () => {
 
           {/* Service Interest */}
           <div className="relative">
-            <label className="block text-sm font-medium text-gray-800 dark:text-gray-200 mb-1">
+            <label
+              style={{ color: isDark ? "#e5e5e5" : "#111827" }}
+              className="block text-sm font-medium mb-1"
+            >
               Service Interest <span className="text-red-600">*</span>
             </label>
             <div
-              onClick={() => setServiceDropdownOpen((open) => !open)}
-              className="cursor-pointer w-full bg-[#EAEEDC] dark:bg-gray-700 text-sm px-5 py-3 rounded-full flex items-center justify-between transition-colors duration-300 text-black dark:text-white"
+              onClick={() => setServiceDropdownOpen((prev) => !prev)}
+              style={{
+                backgroundColor: isDark ? "#374151" : "#EAEEDC",
+                color: isDark ? "#fff" : "#000",
+              }}
+              className="cursor-pointer w-full text-sm px-5 py-3 rounded-full flex items-center justify-between transition-colors duration-300"
             >
               <span>{formData.serviceInterest || "Select a service"}</span>
               <svg
@@ -359,7 +456,8 @@ const ConsultationForm = () => {
             {serviceDropdownOpen && (
               <ul
                 ref={serviceRef}
-                className="absolute z-10 mt-1 w-full h-[120px] overflow-y-scroll overflow-x-hidden rounded-xl bg-[#EAEEDC] dark:bg-gray-700 shadow-lg transition-colors duration-300"
+                style={{ backgroundColor: isDark ? "#374151" : "#EAEEDC" }}
+                className="absolute z-10 mt-1 w-full h-[120px] overflow-y-scroll overflow-x-hidden rounded-xl shadow-lg transition-colors duration-300"
               >
                 {services.map((service, idx) => (
                   <motion.li
@@ -371,14 +469,16 @@ const ConsultationForm = () => {
                         service === formData.serviceInterest
                           ? "bold"
                           : "normal",
+                      color:
+                        service === formData.serviceInterest
+                          ? isDark
+                            ? "#fff"
+                            : "#313719"
+                          : isDark
+                          ? "#fff"
+                          : "#111827",
                     }}
-                    className={`select-none px-5 py-2 text-sm cursor-pointer transition-colors duration-300
-  ${
-    service === formData.serviceInterest
-      ? "text-[#313719] dark:text-white"
-      : "text-gray-800 dark:text-white"
-  }
-`}
+                    className="select-none px-5 py-2 text-sm cursor-pointer transition-colors duration-300"
                     whileHover={{
                       scale: 1.05,
                       backgroundColor: "rgba(49,55,25,0.1)",
@@ -398,7 +498,11 @@ const ConsultationForm = () => {
                 placeholder="Please specify"
                 value={formData.otherService}
                 onChange={handleChange}
-                className="mt-3 w-full bg-[#EAEEDC] dark:bg-gray-700 text-sm px-5 py-3 rounded-full focus:outline-none focus:ring-2 focus:ring-[#313719] dark:focus:ring-[#BB86FC] text-black dark:text-white transition-colors duration-300"
+                style={{
+                  backgroundColor: isDark ? "#374151" : "#EAEEDC",
+                  color: isDark ? "#fff" : "#000",
+                }}
+                className="mt-3 w-full text-sm px-5 py-3 rounded-full focus:outline-none focus:ring-2 transition-colors duration-300"
                 required
               />
             )}
@@ -406,7 +510,10 @@ const ConsultationForm = () => {
 
           {/* Project Details */}
           <div>
-            <label className="block text-sm font-medium text-gray-800 dark:text-gray-200 mb-1">
+            <label
+              style={{ color: isDark ? "#e5e5e5" : "#111827" }}
+              className="block text-sm font-medium mb-1"
+            >
               Project Details <span className="text-red-600">*</span>
             </label>
             <textarea
@@ -414,14 +521,21 @@ const ConsultationForm = () => {
               value={formData.projectDetails}
               onChange={handleChange}
               rows={3}
-              className="w-full bg-[#EAEEDC] dark:bg-gray-700 text-sm px-5 py-3 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#313719] dark:focus:ring-[#BB86FC] text-black dark:text-white transition-colors duration-300"
-              required
               placeholder="Enter Project Details"
+              style={{
+                backgroundColor: isDark ? "#374151" : "#EAEEDC",
+                color: isDark ? "#fff" : "#000",
+              }}
+              className="w-full text-sm px-5 py-3 rounded-2xl focus:outline-none focus:ring-2 transition-colors duration-300"
+              required
             />
           </div>
 
           {/* Agreement */}
-          <div className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-300">
+          <div
+            className="flex items-start gap-2 text-sm"
+            style={{ color: isDark ? "#d1d5db" : "#4b5563" }}
+          >
             <input
               type="checkbox"
               id="agreement"
@@ -437,7 +551,8 @@ const ConsultationForm = () => {
                 href="/privacypolicy"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-semibold text-[#313719] dark:text-white hover:text-[#253013] dark:hover:text-gray-300"
+                style={{ color: isDark ? "#fff" : "#313719" }}
+                className="font-semibold hover:underline"
               >
                 Privacy Policy
               </a>{" "}
@@ -446,7 +561,8 @@ const ConsultationForm = () => {
                 href="/termsandconditions"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-semibold text-[#313719] dark:text-white hover:text-[#253013] dark:hover:text-gray-300"
+                style={{ color: isDark ? "#fff" : "#313719" }}
+                className="font-semibold hover:underline"
               >
                 Terms of Service
               </a>
@@ -458,33 +574,42 @@ const ConsultationForm = () => {
           <button
             type="submit"
             disabled={!isFormValid}
-            className={`w-full text-sm py-3 rounded-full font-semibold transition-all duration-300 ${
-              isFormValid
-                ? "bg-[#EAEEDC] text-black hover:bg-[#313719] hover:text-white"
-                : "bg-[#EAEEDC] text-black opacity-50 cursor-not-allowed"
-            }`}
+            style={{
+              backgroundColor: "#2B2F18",
+              color: "#fff",
+              opacity: isFormValid ? 1 : 0.5,
+              cursor: isFormValid ? "pointer" : "not-allowed",
+            }}
+            className="w-full text-sm py-3 rounded-full font-semibold transition-all duration-300 hover:brightness-110"
           >
             Get In Touch With Us
           </button>
         </form>
 
-        {/* Right Section */}
-        <div className="flex flex-col items-center justify-center text-center text-gray-700 dark:text-gray-300 max-w-xs mx-auto md:mx-0 transition-colors duration-300">
+        {/* Right Section Image & Contact */}
+        <div
+          className="flex flex-col items-center justify-center text-center max-w-xs mx-auto md:mx-0 transition-colors duration-300"
+          style={{ color: isDark ? "#e5e5e5" : "#4b5563" }}
+        >
           <img
             src={nihar}
             alt="Mr.Nihar Gami"
             className="w-auto rounded-xl object-cover mb-3 max-h-[600px]"
           />
-          <h3 className="font-semibold text-[#313719] dark:text-white mb-2">
+          <h3
+            style={{ color: isDark ? "#fff" : "#313719" }}
+            className="font-semibold mb-2"
+          >
             Mr. Nihar Gami
           </h3>
-          <p className="text-sm mb-4 max-w-xs">
-            Helping businesses design the right tech strategy and develop
-            high-performance digital solutions.
-          </p>
+          <p className="text-sm mb-4 max-w-xs">{`Helping businesses design the right tech strategy and develop high-performance digital solutions.`}</p>
           <button
             onClick={() => window.open("tel:+919978985611")}
-            className="bg-[#EAEEDC] dark:bg-gray-700 text-dark dark:text-white font-semibold px-6 py-3  rounded-full flex items-center gap-2 hover:bg-[#313719] dark:hover:bg-[#BB86FC] hover:text-white transition-colors duration-300"
+            className="font-semibold px-6 py-3 rounded-full flex items-center gap-2 transition-colors duration-300"
+            style={{
+              backgroundColor: isDark ? "#374151" : "#EAEEDC",
+              color: isDark ? "#fff" : "#313719",
+            }}
           >
             <HiPhone className="h-5 w-5" />
             CALL US NOW

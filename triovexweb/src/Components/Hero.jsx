@@ -2,6 +2,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import DotGrid from "../Components/AnimationComponents/dotgrid";
+import { useTheme } from "./ThemeContext.jsx";
 
 import hp1 from "../assets/hp1.jpg";
 import hp2 from "../assets/hp2.jpg";
@@ -16,26 +17,14 @@ import hp9 from "../assets/hp9.jpg";
 const Hero = () => {
   const heroRef = useRef(null);
   const carouselRef = useRef(null);
+  const { theme } = useTheme();
 
-  // state to hold theme-based dot color
   const [dotColor, setDotColor] = useState("#E5E5E5");
 
   useEffect(() => {
-    // initial load
-    const isDark =
-      window.matchMedia &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches;
-    setDotColor(isDark ? "#2a2a2a" : "#E5E5E5");
-
-    // listener for system/browser theme changes
-    const mq = window.matchMedia("(prefers-color-scheme: dark)");
-    const handler = (e) => {
-      setDotColor(e.matches ? "#2a2a2a" : "#E5E5E5");
-    };
-    mq.addEventListener("change", handler);
-
-    return () => mq.removeEventListener("change", handler);
-  }, []);
+    setDotColor(theme === "dark" ? "#2a2a2a" : "#E5E5E5");
+    console.log("Hero theme ->", theme);
+  }, [theme]);
 
   const headingWords = [
     "Where",
@@ -52,13 +41,13 @@ const Hero = () => {
     portfolioImages
   );
 
+  // simple carousel animation
   useEffect(() => {
     const carousel = carouselRef.current;
     if (!carousel) return;
 
     const singleSetWidth = carousel.scrollWidth / 3;
     let scrollPosition = 0;
-
     const referenceWidth = 1440;
     const screenWidth = window.innerWidth;
     const baseSpeed = 1.2;
@@ -83,17 +72,24 @@ const Hero = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  // theme-based styles
+  const heroStyles = {
+    backgroundColor: theme === "dark" ? "#000000" : "#ffffff",
+    color: theme === "dark" ? "#ffffff" : "#000000",
+    transition: "all 0.5s ease",
+  };
+
   return (
     <div
-      className="relative w-full min-h-[90vh] sm:min-h-[150vh] overflow-hidden 
-                 bg-white dark:bg-black transition-colors duration-500"
+      className="relative w-full min-h-[90vh] sm:min-h-[150vh] overflow-hidden cursor-none"
+      style={heroStyles}
     >
       {/* DotGrid Background */}
-      <div className="absolute inset-0 z-0 w-full top-0 left-0 m-0 p-0">
+      <div className="absolute inset-0 z-0">
         <DotGrid
           dotSize={3.0}
           gap={9}
-          baseColor={dotColor} // dynamic based on browser/system theme
+          baseColor={dotColor} // 👈 dynamic
           activeColor="#22c55e"
           proximity={120}
           shockRadius={250}
@@ -106,12 +102,11 @@ const Hero = () => {
       {/* Hero Content */}
       <div
         ref={heroRef}
-        className="relative min-h-[80vh] sm:min-h-screen 
-               w-full flex flex-col items-center justify-center 
-               px-4 sm:px-6 lg:px-8 text-center"
+        className="relative min-h-[80vh] sm:min-h-screen w-full flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 text-center"
       >
         <motion.div
-          className="max-w-2xl sm:max-w-4xl w-full text-black dark:text-white"
+          className="max-w-2xl sm:max-w-4xl w-full"
+          style={{ color: theme === "dark" ? "#ffffff" : "#000000" }}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2 }}
@@ -119,9 +114,11 @@ const Hero = () => {
           {/* Badge */}
           <div className="mb-3 sm:mb-6 mt-6 sm:mt-10">
             <span
-              className="inline-block bg-[#313719]/10 px-3 sm:px-6 py-1.5 sm:py-3 
-                         rounded-full text-[10px] sm:text-xs md:text-sm font-medium 
-                         backdrop-blur-sm shadow-md text-black dark:text-white"
+              style={{
+                backgroundColor: theme === "dark" ? "rgba(49,55,25,0.4)" : "#f0f0f0",
+                color: theme === "dark" ? "#ffffff" : "#000000",
+              }}
+              className="inline-block px-3 sm:px-6 py-1.5 sm:py-3 rounded-full text-[10px] sm:text-xs md:text-sm font-medium backdrop-blur-sm shadow-md"
             >
               Beyond code Towards intelligence
             </span>
@@ -129,14 +126,7 @@ const Hero = () => {
 
           {/* Animated Heading */}
           <motion.h2
-            className="mt-4 text-base sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl 
-                   font-bold text-gray-900 dark:text-gray-100"
-            initial="hidden"
-            animate="visible"
-            variants={{
-              hidden: {},
-              visible: { transition: { staggerChildren: 0.07 } },
-            }}
+            className="mt-4 text-base sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold"
           >
             {headingWords.map((word, index) => (
               <motion.span
@@ -153,9 +143,8 @@ const Hero = () => {
 
           {/* Subheading */}
           <p
-            className="mt-3 text-[11px] sm:text-xs md:text-sm lg:text-base 
-                   text-gray-600 dark:text-gray-300 
-                   max-w-md sm:max-w-2xl mx-auto leading-relaxed"
+            className="mt-3 text-[11px] sm:text-xs md:text-sm lg:text-base max-w-md sm:max-w-2xl mx-auto leading-relaxed"
+            style={{ color: theme === "dark" ? "#d1d5db" : "#4b5563" }}
           >
             We craft intelligent digital solutions that blend creative design,
             strategic thinking, and cutting-edge AI/ML technology to drive
@@ -168,17 +157,17 @@ const Hero = () => {
               const element = document.getElementById("Consultation");
               if (element) element.scrollIntoView({ behavior: "smooth" });
             }}
-            className="mt-6 bg-[#313719] text-white hover:bg-white hover:text-[#313719] 
-                   px-5 sm:px-8 py-2.5 sm:py-3 rounded-full 
-                   text-sm sm:text-base font-semibold transition-all duration-300 
-                   transform hover:scale-105 shadow-md hover:shadow-lg border 
-                   border-green-500/30"
+            className="mt-6 px-5 sm:px-8 py-2.5 sm:py-3 rounded-full text-sm sm:text-base font-semibold transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg border border-green-500/30"
+            style={{
+              backgroundColor: "#313719",
+              color: "#ffffff",
+            }}
           >
             Talk to an Expert
           </button>
 
           {/* Support */}
-          <div className="flex flex-col items-center justify-center mt-6 sm:mt-10 text-black dark:text-white">
+          <div className="flex flex-col items-center justify-center mt-6 sm:mt-10">
             <div className="flex items-center space-x-2">
               <span className="w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse" />
               <span className="text-[10px] sm:text-xs font-medium">

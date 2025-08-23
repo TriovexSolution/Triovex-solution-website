@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import about1 from "../assets/homeabout1.png";
 import about4 from "../assets/homeabout4.png";
@@ -7,6 +8,24 @@ import about3 from "../assets/homeabout3.png";
 import about5 from "../assets/homeabout5.png";
 
 export default function AboutUs() {
+  const [theme, setTheme] = useState("light");
+
+  // Watch for theme changes on <html class="dark">
+  useEffect(() => {
+    const html = document.documentElement;
+    const observer = new MutationObserver(() => {
+      setTheme(html.classList.contains("dark") ? "dark" : "light");
+    });
+    observer.observe(html, { attributes: true, attributeFilter: ["class"] });
+
+    // set initial
+    setTheme(html.classList.contains("dark") ? "dark" : "light");
+
+    return () => observer.disconnect();
+  }, []);
+
+  const isDark = theme === "dark";
+
   const fadeFrom = {
     left: (delay = 0) => ({
       hidden: { opacity: 0, y: 40 },
@@ -29,31 +48,57 @@ export default function AboutUs() {
   return (
     <section
       id="about"
-      className="w-full bg-white dark:bg-black px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-24 py-12 sm:py-16 md:py-20 max-w-screen-4xl mx-auto relative overflow-x-hidden"
+      className="w-full px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 2xl:px-24 py-12 sm:py-16 md:py-20 max-w-screen-4xl mx-auto relative overflow-x-hidden"
+      style={{
+        backgroundColor: isDark ? "#000000" : "#ffffff",
+        color: isDark ? "#e5e5e5" : "#111111",
+        transition: "all 0.3s ease-in-out",
+      }}
     >
       {/* Background Blobs */}
       <span
-        className="hidden sm:block absolute top-20 left-10 w-24 sm:w-28 md:w-32 h-24 sm:h-28 md:h-32 bg-gradient-to-br from-lime-300/40 to-emerald-500/20 rounded-full blur-2xl animate-pulse"
-        style={{ animationDuration: "4s" }}
+        className="hidden sm:block absolute top-20 left-10 w-24 sm:w-28 md:w-32 h-24 sm:h-28 md:h-32 rounded-full blur-2xl animate-pulse"
+        style={{
+          background: "linear-gradient(to bottom right, rgba(163,230,53,0.4), rgba(16,185,129,0.2))",
+          animationDuration: "4s",
+        }}
       />
       <span
-        className="hidden sm:block absolute top-40 right-10 sm:right-16 md:right-20 w-28 sm:w-32 md:w-40 h-28 sm:h-32 md:h-40 bg-gradient-to-br from-emerald-300/30 to-lime-500/20 rounded-full blur-2xl animate-pulse"
-        style={{ animationDuration: "6s" }}
+        className="hidden sm:block absolute top-40 right-10 sm:right-16 md:right-20 w-28 sm:w-32 md:w-40 h-28 sm:h-32 md:h-40 rounded-full blur-2xl animate-pulse"
+        style={{
+          background: "linear-gradient(to bottom right, rgba(110,231,183,0.3), rgba(132,204,22,0.2))",
+          animationDuration: "6s",
+        }}
       />
       <span
-        className="hidden sm:block absolute bottom-20 left-1/4 w-24 sm:w-28 md:w-36 h-24 sm:h-28 md:h-36 bg-gradient-to-br from-lime-400/30 to-emerald-400/20 rounded-full blur-2xl animate-pulse"
-        style={{ animationDuration: "5s" }}
+        className="hidden sm:block absolute bottom-20 left-1/4 w-24 sm:w-28 md:w-36 h-24 sm:h-28 md:h-36 rounded-full blur-2xl animate-pulse"
+        style={{
+          background: "linear-gradient(to bottom right, rgba(132,204,22,0.3), rgba(52,211,153,0.2))",
+          animationDuration: "5s",
+        }}
       />
 
       {/* Header */}
       <div className="text-center mb-10 sm:mb-12 md:mb-16">
-        <span className="inline-block mb-3 sm:mb-4 px-3 sm:px-4 py-1 rounded-full text-xs sm:text-sm font-medium bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300">
+        <span
+          className="inline-block mb-3 sm:mb-4 px-3 sm:px-4 py-1 rounded-full text-xs sm:text-sm font-medium"
+          style={{
+            backgroundColor: isDark ? "rgba(6,95,70,0.4)" : "#d1fae5",
+            color: isDark ? "#6ee7b7" : "#047857",
+          }}
+        >
           About us
         </span>
-        <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold leading-tight tracking-tight text-gray-900 dark:text-white mb-3 sm:mb-4">
+        <h2
+          className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold leading-tight tracking-tight mb-3 sm:mb-4"
+          style={{ color: isDark ? "#ffffff" : "#111827" }}
+        >
           Fueling Digital Growth with Intelligence, Creativity & Code
         </h2>
-        <p className="mx-auto max-w-md sm:max-w-lg md:max-w-2xl lg:max-w-3xl text-sm sm:text-base md:text-lg text-gray-600 dark:text-gray-300">
+        <p
+          className="mx-auto max-w-md sm:max-w-lg md:max-w-2xl lg:max-w-3xl text-sm sm:text-base md:text-lg"
+          style={{ color: isDark ? "#d1d5db" : "#4b5563" }}
+        >
           At Triovex Solution, we merge AI-driven tech with design and strategy
           to craft smart digital experiences that scale and succeed.
         </p>
@@ -67,7 +112,11 @@ export default function AboutUs() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
-          className="col-span-1 md:col-span-2 lg:col-span-2 relative overflow-hidden bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-md p-4 h-64 flex items-center justify-center"
+          className="col-span-1 md:col-span-2 lg:col-span-2 relative overflow-hidden rounded-2xl shadow-md p-4 h-64 flex items-center justify-center"
+          style={{
+            backgroundColor: isDark ? "#111827" : "#ffffff",
+            border: `1px solid ${isDark ? "#374151" : "#e5e7eb"}`,
+          }}
         >
           {/* Decorative icons */}
           <img src={about1} className="absolute top-2 left-2 w-8 sm:w-10 md:w-12" alt="icon" />
@@ -83,10 +132,16 @@ export default function AboutUs() {
 
           {/* Center Content */}
           <div className="z-10 flex flex-col items-center justify-center h-full text-center relative">
-            <h3 className="font-bold text-3xl sm:text-4xl lg:text-5xl text-gray-900 dark:text-white">
+            <h3
+              className="font-bold text-3xl sm:text-4xl lg:text-5xl"
+              style={{ color: isDark ? "#ffffff" : "#111827" }}
+            >
               10+
             </h3>
-            <p className="text-base sm:text-lg text-gray-800 dark:text-gray-300 mt-2">
+            <p
+              className="text-base sm:text-lg mt-2"
+              style={{ color: isDark ? "#d1d5db" : "#1f2937" }}
+            >
               Industries Served
             </p>
           </div>
@@ -98,14 +153,24 @@ export default function AboutUs() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
-          className="col-span-1 md:col-span-3 lg:col-span-3 bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-md p-6 sm:p-8 flex flex-col justify-center"
+          className="col-span-1 md:col-span-3 lg:col-span-3 rounded-2xl shadow-md p-6 sm:p-8 flex flex-col justify-center"
+          style={{
+            backgroundColor: isDark ? "#111827" : "#ffffff",
+            border: `1px solid ${isDark ? "#374151" : "#e5e7eb"}`,
+          }}
         >
           <div className="flex flex-col md:flex-row items-center justify-between h-full">
             <div className="max-w-xl text-center md:text-left">
-              <h3 className="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-900 dark:text-white mb-4">
+              <h3
+                className="text-xl sm:text-2xl md:text-3xl font-semibold mb-4"
+                style={{ color: isDark ? "#ffffff" : "#111827" }}
+              >
                 Smart, Scalable & Future-Ready Digital Solutions
               </h3>
-              <p className="text-sm sm:text-base md:text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
+              <p
+                className="text-sm sm:text-base md:text-lg leading-relaxed"
+                style={{ color: isDark ? "#d1d5db" : "#374151" }}
+              >
                 From intelligent websites and AI-integrated apps to SEO and
                 marketing, we build solutions to scale with speed, strategy, and
                 long-term impact.
@@ -127,13 +192,23 @@ export default function AboutUs() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
-          className="col-span-1 md:col-span-1 lg:col-span-2 bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-md p-6 sm:p-8 flex flex-col justify-between"
+          className="col-span-1 md:col-span-1 lg:col-span-2 rounded-2xl shadow-md p-6 sm:p-8 flex flex-col justify-between"
+          style={{
+            backgroundColor: isDark ? "#111827" : "#ffffff",
+            border: `1px solid ${isDark ? "#374151" : "#e5e7eb"}`,
+          }}
         >
           <div className="relative z-10 h-full flex flex-col text-center justify-between">
-            <h3 className="font-semibold text-lg sm:text-xl text-gray-800 dark:text-gray-200">
+            <h3
+              className="font-semibold text-lg sm:text-xl"
+              style={{ color: isDark ? "#e5e5e5" : "#1f2937" }}
+            >
               Where Creative Vision Meets AI Precision
             </h3>
-            <p className="text-sm text-gray-600 dark:text-gray-400 mt-2 leading-relaxed">
+            <p
+              className="text-sm mt-2 leading-relaxed"
+              style={{ color: isDark ? "#9ca3af" : "#4b5563" }}
+            >
               We merge bold design with smart technology from AI-powered
               websites to automated marketing and intelligent SEO every project
               is built to perform, adapt, and scale.
@@ -158,13 +233,23 @@ export default function AboutUs() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
-          className="col-span-1 md:col-span-1 lg:col-span-1 bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-md p-6 sm:p-8 flex flex-col items-center justify-between"
+          className="col-span-1 md:col-span-1 lg:col-span-1 rounded-2xl shadow-md p-6 sm:p-8 flex flex-col items-center justify-between"
+          style={{
+            backgroundColor: isDark ? "#111827" : "#ffffff",
+            border: `1px solid ${isDark ? "#374151" : "#e5e7eb"}`,
+          }}
         >
           <div className="h-full flex flex-col items-center justify-between text-center">
-            <h3 className="font-semibold text-lg sm:text-xl text-black dark:text-white mb-2">
+            <h3
+              className="font-semibold text-lg sm:text-xl mb-2"
+              style={{ color: isDark ? "#ffffff" : "#111827" }}
+            >
               Collaborative & Enduring
             </h3>
-            <p className="text-sm text-gray-800 dark:text-gray-300 mb-4">
+            <p
+              className="text-sm mb-4"
+              style={{ color: isDark ? "#d1d5db" : "#1f2937" }}
+            >
               We create evolving, AI-powered digital partnerships.
             </p>
             <motion.img
@@ -180,10 +265,7 @@ export default function AboutUs() {
                 ],
               }}
               transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-              style={{
-                transformStyle: "preserve-3d",
-                perspective: 800,
-              }}
+              style={{ transformStyle: "preserve-3d", perspective: 800 }}
             />
           </div>
         </motion.div>
@@ -194,14 +276,24 @@ export default function AboutUs() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
-          className="col-span-1 md:col-span-2 lg:col-span-2 bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-md p-6 sm:p-8 flex flex-col justify-between"
+          className="col-span-1 md:col-span-2 lg:col-span-2 rounded-2xl shadow-md p-6 sm:p-8 flex flex-col justify-between"
+          style={{
+            backgroundColor: isDark ? "#111827" : "#ffffff",
+            border: `1px solid ${isDark ? "#374151" : "#e5e7eb"}`,
+          }}
         >
           <div className="h-full flex flex-col justify-between">
             <div>
-              <h3 className="text-xl font-bold text-gray-800 dark:text-gray-200 text-center mb-2">
+              <h3
+                className="text-xl font-bold text-center mb-2"
+                style={{ color: isDark ? "#e5e5e5" : "#1f2937" }}
+              >
                 Data-Driven. Impact-Obsessed.
               </h3>
-              <p className="text-base text-gray-700 dark:text-gray-300 text-center">
+              <p
+                className="text-base text-center"
+                style={{ color: isDark ? "#d1d5db" : "#374151" }}
+              >
                 At Triovex, every pixel, click, and line of code is engineered
                 for measurable growth from intuitive UX to high-performance
                 backend systems, we turn strategy into scalable success.

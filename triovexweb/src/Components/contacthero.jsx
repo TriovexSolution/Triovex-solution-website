@@ -15,30 +15,41 @@ const headingWords = [
 
 const ContactHero = () => {
   const heroRef = useRef(null);
-
-  // Dot color based on system/browser theme
+  const [isDark, setIsDark] = useState(false);
   const [dotColor, setDotColor] = useState("#E5E5E5");
 
+  // Detect dark class on html
   useEffect(() => {
-    const isDark =
-      window.matchMedia &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches;
-    setDotColor(isDark ? "#2a2a2a" : "#E5E5E5");
+    const checkTheme = () =>
+      setIsDark(document.documentElement.classList.contains("dark"));
+    checkTheme();
 
-    const mq = window.matchMedia("(prefers-color-scheme: dark)");
-    const handler = (e) => setDotColor(e.matches ? "#2a2a2a" : "#E5E5E5");
-    mq.addEventListener("change", handler);
-    return () => mq.removeEventListener("change", handler);
+    const observer = new MutationObserver(() => checkTheme());
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+
+    return () => observer.disconnect();
   }, []);
 
+  // Update dot color
+  useEffect(() => {
+    setDotColor(isDark ? "#2a2a2a" : "#E5E5E5");
+  }, [isDark]);
+
   return (
-    <div className="relative w-full h-screen overflow-hidden bg-white dark:bg-black transition-colors duration-500">
+    <div
+      ref={heroRef}
+      className="relative w-full h-screen overflow-hidden transition-colors duration-500"
+      style={{ backgroundColor: isDark ? "#000000" : "#ffffff" }}
+    >
       {/* DotGrid Background */}
       <div className="absolute inset-0 z-0">
         <DotGrid
           dotSize={3.0}
           gap={9}
-          baseColor={dotColor} // dynamic based on theme
+          baseColor={dotColor}
           activeColor="#22c55e"
           proximity={120}
           shockRadius={250}
@@ -49,19 +60,25 @@ const ContactHero = () => {
       </div>
 
       {/* Hero Content */}
-      <div
-        ref={heroRef}
-        className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-8 cursor-none"
-      >
+      <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-8 cursor-none">
         {/* Badge */}
         <div className="mb-3 sm:mb-6 mt-6 sm:mt-10">
-          <span className="inline-block bg-[#313719]/10 dark:bg-white/10 px-3 sm:px-6 py-1.5 sm:py-2 rounded-full text-[10px] sm:text-xs md:text-sm font-medium text-black dark:text-white backdrop-blur-sm shadow-md">
+          <span
+            className="inline-block px-3 sm:px-6 py-1.5 sm:py-2 rounded-full font-medium backdrop-blur-sm shadow-md text-[10px] sm:text-xs md:text-sm transition-colors duration-300"
+            style={{
+              backgroundColor: isDark ? "rgba(255,255,255,0.1)" : "rgba(49,55,25,0.1)",
+              color: isDark ? "#ffffff" : "#000000",
+            }}
+          >
             Contact
           </span>
         </div>
 
         {/* Animated Heading */}
-        <h2 className="mt-6 text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-gray-900 dark:text-white cursor-zoom">
+        <h2
+          className="mt-6 text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold cursor-zoom transition-colors duration-300"
+          style={{ color: isDark ? "#ffffff" : "#111827" }}
+        >
           {headingWords.map((word, index) => (
             <motion.span
               key={index}
@@ -76,7 +93,10 @@ const ContactHero = () => {
         </h2>
 
         {/* Subheading */}
-        <p className="mt-4 text-[9px] sm:text-[11px] md:text-xs lg:text-sm xl:text-base text-gray-600 dark:text-gray-300 max-w-2xl mx-auto px-2">
+        <p
+          className="mt-4 text-[9px] sm:text-[11px] md:text-xs lg:text-sm xl:text-base max-w-2xl mx-auto px-2 transition-colors duration-300"
+          style={{ color: isDark ? "#d1d5db" : "#4b5563" }}
+        >
           Have a question or a project in mind? Our team is just a message away ready to assist you with expert support, 24/7.
         </p>
       </div>

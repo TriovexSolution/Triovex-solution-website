@@ -38,47 +38,65 @@ export default function Work() {
     <>
       <section
         id="about"
-        className="w-full min-h-screen bg-black text-white relative overflow-hidden"
+        className="w-full min-h-screen relative overflow-hidden"
+        style={{
+          backgroundColor: "black",
+          color: "white",
+        }}
       >
         {/* Text Content */}
         <div className="max-w-7xl mx-auto text-center relative z-10 px-4 py-12">
           <a
             href="#work"
-            className="inline-block mb-4 px-4 py-2 text-sm font-medium bg-white/10  dark:bg-emerald-900/40 dark:text-emerald-300 rounded-full transition-colors"
+            className="inline-block mb-4 px-4 py-2 text-sm font-medium rounded-full transition-colors"
+            style={{
+              backgroundColor: "rgba(255,255,255,0.1)",
+              color: "white",
+            }}
           >
             Our Work
           </a>
 
           <h2 className="text-4xl font-bold leading-tight mb-6">
-           Engineering Impact with AI, Design & Scalable Code
-
+            Engineering Impact with AI, Design & Scalable Code
           </h2>
 
-          <p className="text-lg max-w-2xl mx-auto mb-8 text-[#6D706A]">
-            At Triovex Solution, we craft intelligent digital products that solve real-world challenges and ignite measurable business growth powered by strategy, creativity, and future-ready tech.
+          <p
+            className="text-lg max-w-2xl mx-auto mb-8"
+            style={{ color: "#cccccc" }}
+          >
+            At Triovex Solution, we craft intelligent digital products that solve
+            real-world challenges and ignite measurable business growth powered
+            by strategy, creativity, and future-ready tech.
           </p>
 
           <NavLink
             to="/works"
-            className="inline-block px-8 py-4 bg-[#313719] text-white rounded-full hover:bg-white hover:text-[#313719] transition-colors"
+            className="inline-block px-8 py-4 rounded-full transition-colors"
+            style={{
+              backgroundColor: "#313719",
+              color: "white",
+            }}
           >
             View More Works
           </NavLink>
-          
         </div>
 
         {/* 3D Section with Scroll Button */}
         <div className="relative w-full h-[600px] overflow-y-auto md:overflow-hidden touch-pan-y">
           <button
             onClick={handleScrollClick}
-            className="absolute bottom-10 right-4 z-20 text-white text-sm px-4 py-2 rounded-full shadow-lg flex items-center gap-2 transition-all duration-300
-              bg-gradient-to-r from-[#313719] via-[#5a6133] to-[#8c9445]
-              hover:from-[#8c9445] hover:to-[#313719] cursor-pointer"
+            className="absolute bottom-10 right-4 z-20 flex items-center gap-2 rounded-full px-3 py-2 shadow-lg transition-all duration-300 cursor-pointer"
+            style={{
+              color: "white",
+              background:
+                "linear-gradient(to right, #313719, #5a6133, #8c9445)",
+            }}
           >
             {scrollDirection === "down" ? (
-              <ChevronDown className="w-8 h-8" />
+              <ChevronDown className="w-8  h-8  " />
             ) : (
-              <ChevronUp className="w-8 h-8" />
+              <ChevronUp className="w-8  h-8  " />
             )}
           </button>
 
@@ -107,8 +125,6 @@ export default function Work() {
           </Canvas>
         </div>
       </section>
-
-      {/* 👇 Your Services Section */}
     </>
   );
 }

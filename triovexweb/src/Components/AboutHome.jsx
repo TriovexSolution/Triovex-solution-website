@@ -13,29 +13,43 @@ const headingWords = [
 const WorksHero = () => {
   const heroRef = useRef(null);
 
-  // Dot color based on system theme
+  const [isDark, setIsDark] = useState(false);
   const [dotColor, setDotColor] = useState("#E5E5E5");
 
+  // Detect system or class-based theme
   useEffect(() => {
-    const isDark =
-      window.matchMedia &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches;
-    setDotColor(isDark ? "#2a2a2a" : "#E5E5E5");
+    const checkTheme = () =>
+      setIsDark(document.documentElement.classList.contains("dark"));
 
-    const mq = window.matchMedia("(prefers-color-scheme: dark)");
-    const handler = (e) => setDotColor(e.matches ? "#2a2a2a" : "#E5E5E5");
-    mq.addEventListener("change", handler);
-    return () => mq.removeEventListener("change", handler);
+    checkTheme(); // initial check
+
+    // Observe class changes on <html>
+    const observer = new MutationObserver(() => checkTheme());
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+
+    return () => observer.disconnect();
   }, []);
 
+  // Update dot color based on theme
+  useEffect(() => {
+    setDotColor(isDark ? "#2a2a2a" : "#E5E5E5");
+  }, [isDark]);
+
   return (
-    <div className="relative w-full h-screen overflow-hidden bg-white dark:bg-black transition-colors duration-500">
+    <div
+      ref={heroRef}
+      className="relative w-full h-screen overflow-hidden transition-colors duration-500"
+      style={{ backgroundColor: isDark ? "#000000" : "#ffffff" }}
+    >
       {/* DotGrid Animation Background */}
       <div className="absolute inset-0 z-0">
         <DotGrid
           dotSize={3.0}
           gap={9}
-          baseColor={dotColor} // dynamic color
+          baseColor={dotColor} // dynamically set based on theme
           activeColor="#22c55e"
           proximity={120}
           shockRadius={250}
@@ -46,15 +60,21 @@ const WorksHero = () => {
       </div>
 
       {/* Hero Content */}
-      <div
-        ref={heroRef}
-        className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-8 cursor-none"
-      >
-        <a className="inline-block bg-gray-200 text-gray-700 px-3 sm:px-4 md:px-5 py-1.5 sm:py-2 md:py-2.5 rounded-full text-xs sm:text-sm md:text-base font-medium">
+      <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-8 cursor-none">
+        <a
+          className="inline-block px-3 sm:px-4 md:px-5 py-1.5 sm:py-2 md:py-2.5 rounded-full text-xs sm:text-sm md:text-base font-medium transition-colors duration-300"
+          style={{
+            backgroundColor: isDark ? "#222222" : "#e5e5e5",
+            color: isDark ? "#ffffff" : "#1f2937",
+          }}
+        >
           About
         </a>
 
-        <h2 className="mt-6 text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-gray-900 dark:text-white cursor-zoom">
+        <h2
+          className="mt-6 text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold cursor-zoom"
+          style={{ color: isDark ? "#ffffff" : "#111827" }}
+        >
           {headingWords.map((word, index) => (
             <motion.span
               key={index}
@@ -68,7 +88,10 @@ const WorksHero = () => {
           ))}
         </h2>
 
-        <p className="mt-4 text-[9px] sm:text-[11px] md:text-xs lg:text-sm xl:text-base text-gray-600 dark:text-gray-300 max-w-2xl mx-auto px-2">
+        <p
+          className="mt-4 text-[9px] sm:text-[11px] md:text-xs lg:text-sm xl:text-base max-w-2xl mx-auto px-2 transition-colors duration-300"
+          style={{ color: isDark ? "#d1d5db" : "#4b5563" }}
+        >
           We fuse creativity, strategy, and Artificial Intelligence to build
           future-ready solutions that accelerate growth and redefine digital success.
         </p>

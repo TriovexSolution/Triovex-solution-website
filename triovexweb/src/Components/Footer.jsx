@@ -4,27 +4,33 @@ import logo from "../assets/logo1.png";
 import footerarrow from "../assets/footerarrow.png";
 
 const Footer = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(
+    document.documentElement.classList.contains("dark")
+  );
 
-  // Detect browser dark mode
   useEffect(() => {
-    const darkModeQuery = window.matchMedia("(prefers-color-scheme: dark)");
-    setIsDarkMode(darkModeQuery.matches);
-
-    const handleChange = (e) => setIsDarkMode(e.matches);
-    darkModeQuery.addEventListener("change", handleChange);
-    return () => darkModeQuery.removeEventListener("change", handleChange);
+    // Observer to detect class changes on <html>
+    const observer = new MutationObserver(() => {
+      setIsDarkMode(document.documentElement.classList.contains("dark"));
+    });
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+    return () => observer.disconnect();
   }, []);
+
+  const bgColor = isDarkMode ? "#000000" : "#313719";
+  const textColor = isDarkMode ? "#ffffff" : "#111827";
+  const secondaryTextColor = isDarkMode ? "#d1d5db" : "#FFFFFF";
 
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
   return (
     <footer
-      className={`relative overflow-x-hidden dark:border-t dark:border-gray-600 transition-colors duration-500 ${
-        isDarkMode ? "bg-black text-white" : "bg-[#2d3318] text-white"
-      }`}
+      style={{ backgroundColor: bgColor, color: textColor }}
+      className="relative overflow-x-hidden transition-colors duration-500"
     >
-      {/* Top Section */}
       <div className="mx-auto max-w-screen-2xl px-4 pt-14 pb-10 overflow-x-hidden">
         <div className="flex flex-wrap justify-center md:justify-between gap-4 md:gap-6 text-sm">
           {/* Logo */}
@@ -36,9 +42,8 @@ const Footer = () => {
 
           {/* Address */}
           <div
-            className={`text-center md:text-left space-y-2 leading-relaxed w-full sm:w-auto ${
-              isDarkMode ? "text-gray-300" : "text-white"
-            }`}
+            className="text-center md:text-left space-y-2 leading-relaxed w-full sm:w-auto"
+            style={{ color: secondaryTextColor }}
           >
             <a
               href="https://www.google.com/maps/place/Shivalik+Shilp/@23.0270241,72.5063417,16z/data=!3m1!4b1!4m6!3m5!1s0x395e9b398e5880f1:0x32614b29d1226274!8m2!3d23.0270241!4d72.5063417!16s%2Fg%2F11dxchwdc9?entry=ttu"
@@ -57,7 +62,6 @@ const Footer = () => {
             >
               +91 99789 85611
             </a>
-
             <a
               href="mailto:support@triovexsolution.com"
               target="_blank"
@@ -68,45 +72,44 @@ const Footer = () => {
             </a>
           </div>
 
-          {/* Navigation + Social in Grid */}
+          {/* Navigation + Social */}
           <div className="grid grid-cols-2 gap-6 w-full sm:w-auto text-center md:text-left">
-            {/* Navigation */}
             <div className="flex flex-col items-start space-y-1 pl-4">
-              <Link to="/about" className="hover:underline">
-                About
-              </Link>
-              <Link to="/works" className="hover:underline">
-                Works
-              </Link>
-              <Link to="/services" className="hover:underline">
-                Services
-              </Link>
-              <Link to="/contact" className="hover:underline">
-                Contact
-              </Link>
-              <Link to="/careers" className="hover:underline">
-                Career
-              </Link>
+              {["About", "Works", "Services", "Contact", "Career"].map(
+                (nav) => (
+                  <Link
+                    key={nav}
+                    to={`/${nav.toLowerCase()}`}
+                    className="hover:underline"
+                    style={{ color: secondaryTextColor }}
+                  >
+                    {nav}
+                  </Link>
+                )
+              )}
             </div>
-
-            {/* Social Links */}
             <div className="flex flex-col space-y-1">
-              <a
-                href="https://www.linkedin.com/company/triovex-solution-private-limited"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:underline"
-              >
-                LinkedIn
-              </a>
-              <a
-                href="https://www.instagram.com/triovex.solution"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:underline"
-              >
-                Instagram
-              </a>
+              {[
+                {
+                  name: "LinkedIn",
+                  href: "https://www.linkedin.com/company/triovex-solution-private-limited",
+                },
+                {
+                  name: "Instagram",
+                  href: "https://www.instagram.com/triovex.solution",
+                },
+              ].map((link) => (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:underline"
+                  style={{ color: secondaryTextColor }}
+                >
+                  {link.name}
+                </a>
+              ))}
             </div>
           </div>
 
@@ -122,14 +125,27 @@ const Footer = () => {
         </div>
 
         {/* Divider and Bottom Bar */}
-        <div className="mt-10 border-t border-white/10 pt-6">
-          <div className="flex flex-col md:flex-row md:justify-between items-center text-xs text-center space-y-4 md:space-y-0">
-            <p>© 2025 Triovex Solution. All rights reserved.</p>
+        <div
+          className=" mt-10"
+          style={{ borderTop: `1px solid ${secondaryTextColor}` }}
+        >
+          <div className="flex flex-col  md:flex-row md:justify-between items-center text-xs text-center space-y-4 md:space-y-0  mt-3">
+            <p style={{ color: secondaryTextColor }}>
+              © 2025 Triovex Solution. All rights reserved.
+            </p>
             <div className="flex space-x-6">
-              <Link to="/privacypolicy" className="hover:underline">
+              <Link
+                to="/privacypolicy"
+                style={{ color: secondaryTextColor }}
+                className="hover:underline"
+              >
                 Privacy Policy
               </Link>
-              <Link to="/termsandconditions" className="hover:underline">
+              <Link
+                to="/termsandconditions"
+                style={{ color: secondaryTextColor }}
+                className="hover:underline"
+              >
                 Terms &amp; Condition
               </Link>
             </div>

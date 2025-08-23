@@ -25,6 +25,7 @@ import dreampod from "../assets/dreampod.png";
 import rydeathon from "../assets/rydeathon.png";
 import etickets from "../assets/etickets.png";
 
+// Paste your worksData array here (as in your provided code)
 const worksData = [
   {
     id: 1,
@@ -309,60 +310,56 @@ function CarouselCard({ work, onClick, index }) {
   ];
 
   return (
-    <motion.div
-      className="flex-shrink-0 w-full max-w-full sm:max-w-xl md:max-w-3xl lg:max-w-5xl px-2 sm:px-4"
-      initial={false}
-      animate={false}
-    >
+    <motion.div className="flex-shrink-0 w-full max-w-full sm:max-w-xl md:max-w-3xl lg:max-w-4xl px-2 sm:px-4">
       <Tilt
-        glareEnable={true}
+        glareEnable
         glareMaxOpacity={0.15}
         glareBorderRadius="16px"
         tiltMaxAngleX={8}
         tiltMaxAngleY={8}
         perspective={1000}
         transitionSpeed={1000}
-        className="w-full"
+        className="w-full h-full"
       >
         <div
           style={{ backgroundColor: cardColors[index] }}
-          className="rounded-2xl px-4 sm:px-6 pt-6 pb-8 sm:pb-10 shadow-xl w-full mx-auto flex flex-col h-[520px] transition-all duration-300 border border-white/10 dark:border-gray-800 dark:bg-gray-900"
+          className="rounded-2xl px-4 sm:px-6 pt-6 pb-6 sm:pb-10 shadow-xl w-full mx-auto flex flex-col transition-all duration-300 border border-white/10 dark:border-gray-800
+                     h-[550px] sm:h-[580px] lg:h-[650px]"
         >
-          <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start gap-4 sm:gap-6">
-            <div className="flex-1">
-              <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-700 mb-2 sm:mb-3 leading-tight">
-                {work.title}
-              </h3>
-              <p className="text-gray-600 text-sm sm:text-base leading-relaxed max-w-full sm:max-w-2xl">
-                {work.description}
-              </p>
-            </div>
-            <div className="flex flex-row justify-center lg:justify-end items-center gap-2 sm:gap-4 mt-3 lg:mt-0 flex-wrap">
+          {/* Text */}
+          <div className="flex flex-col justify-between mb-4 h-[150px] sm:h-[180px] lg:h-[220px]">
+            <h3 className="text-lg sm:text-xl lg:text-3xl font-bold text-gray-700 mb-1 sm:mb-2 leading-tight">
+              {work.title}
+            </h3>
+            <p className="text-gray-600 text-xs sm:text-sm lg:text-base leading-relaxed">
+              {work.description}
+            </p>
+            <div className="flex flex-wrap gap-2 sm:gap-4 mt-2 sm:mt-4">
               <button
                 onClick={() => onClick(work)}
-                className="bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white px-3 py-1 sm:px-4 sm:py-2 rounded-lg font-medium flex items-center gap-1 sm:gap-2 transition-all duration-300 shadow-sm cursor-pointer"
+                className="bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white px-3 py-1 sm:px-4 sm:py-2 rounded-lg font-medium flex items-center gap-1 sm:gap-2 shadow-sm transition-all duration-300"
               >
-                <FileText className="w-3 h-3 sm:w-4 sm:h-4" />
-                See Details
+                <FileText className="w-3 h-3 sm:w-4 sm:h-4" /> See Details
               </button>
               {work.link && (
                 <a
                   href={work.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white px-3 py-1 sm:px-4 sm:py-2 rounded-lg font-medium flex items-center gap-1 sm:gap-2 transition-all duration-300 shadow-sm cursor-pointer"
+                  className="bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white px-3 py-1 sm:px-4 sm:py-2 rounded-lg font-medium flex items-center gap-1 sm:gap-2 shadow-sm transition-all duration-300"
                 >
-                  <Globe className="w-3 h-3 sm:w-4 sm:h-4" />
-                  Visit Live
+                  <Globe className="w-3 h-3 sm:w-4 sm:h-4" /> Visit Live
                 </a>
               )}
             </div>
           </div>
 
-          {/* Image Container */}
-          <div className="flex justify-center rounded-3xl overflow-hidden mt-4 sm:mt-6 flex-grow min-h-[300px]">
+          {/* Image */}
+          <div
+            className="flex-grow w-full rounded-2xl overflow-hidden
+                h-[380px] sm:h-[400px] lg:h-[430px] mt-0 sm:mt-4"
+          >
             <img
-              loading="lazy"
               src={work.image}
               alt={work.title}
               className="w-full h-full object-contain transition-transform duration-300"
@@ -379,25 +376,30 @@ export default function WorkSection() {
   const [isPlaying, setIsPlaying] = useState(true);
   const [openModal, setOpenModal] = useState(false);
   const [selectedWork, setSelectedWork] = useState(null);
-  const [isDark, setIsDark] = useState(false);
+  const [isDark, setIsDark] = useState(
+    document.documentElement.classList.contains("dark")
+  );
   const intervalRef = useRef(null);
 
+  // Detect theme changes
   useEffect(() => {
-    const darkQuery = window.matchMedia("(prefers-color-scheme: dark)");
-    setIsDark(darkQuery.matches);
-    const listener = (e) => setIsDark(e.matches);
-    darkQuery.addEventListener("change", listener);
-    return () => darkQuery.removeEventListener("change", listener);
+    const observer = new MutationObserver(() => {
+      setIsDark(document.documentElement.classList.contains("dark"));
+    });
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+    return () => observer.disconnect();
   }, []);
 
+  // Auto carousel
   useEffect(() => {
     if (isPlaying) {
       intervalRef.current = setInterval(() => {
         setCurrentIndex((prev) => (prev + 1) % worksData.length);
       }, 4000);
-    } else {
-      clearInterval(intervalRef.current);
-    }
+    } else clearInterval(intervalRef.current);
     return () => clearInterval(intervalRef.current);
   }, [isPlaying]);
 
@@ -410,9 +412,8 @@ export default function WorkSection() {
 
   return (
     <section
-      className={`${
-        isDark ? "bg-black" : "bg-white"
-      } min-h-screen py-16 sm:py-20 transition-colors duration-500`}
+      style={{ backgroundColor: isDark ? "#000000" : "#ffffff" }}
+      className="min-h-screen py-16 sm:py-20 transition-colors duration-500"
     >
       <div className="container mx-auto px-4 sm:px-6">
         {/* Carousel */}
@@ -439,7 +440,7 @@ export default function WorkSection() {
             </AnimatePresence>
           </motion.div>
 
-          {/* Navigation buttons (hidden on mobile) */}
+          {/* Navigation */}
           <button
             onClick={prevSlide}
             className="hidden lg:flex absolute left-4 lg:left-8 top-1/2 -translate-y-1/2 bg-white dark:bg-black dark:text-white backdrop-blur-md border border-white/20 text-black hover:bg-gray-200 dark:hover:bg-white/20 transition-all duration-300 z-10 p-2 sm:p-3 rounded-full"
@@ -454,7 +455,7 @@ export default function WorkSection() {
           </button>
         </div>
 
-        {/* Controls / Dots */}
+        {/* Dots & Play/Pause */}
         <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-8">
           <div className="flex items-center gap-2 sm:gap-3 flex-wrap justify-center">
             {worksData.map((_, index) => (
@@ -487,11 +488,7 @@ export default function WorkSection() {
         </div>
 
         <div className="text-center mt-4 sm:mt-8">
-          <p
-            className={`${
-              isDark ? "text-gray-400" : "text-gray-600"
-            } text-xs sm:text-sm`}
-          >
+          <p className={`${isDark ? "text-gray-400" : "text-gray-600"} text-xs sm:text-sm`}>
             {String(currentIndex + 1).padStart(2, "0")} /{" "}
             {String(worksData.length).padStart(2, "0")}
           </p>
