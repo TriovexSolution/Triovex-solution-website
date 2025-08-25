@@ -32,48 +32,48 @@ function ScrollToTop() {
 
 function App() {
   // Your security code (commented out) remains unchanged
-  // useEffect(() => {
-  //   // 🔒 Disable right-click
-  //   const handleContextMenu = (e) => e.preventDefault();
-  //   document.addEventListener("contextmenu", handleContextMenu);
+  useEffect(() => {
+    // 🔒 Disable right-click
+    const handleContextMenu = (e) => e.preventDefault();
+    document.addEventListener("contextmenu", handleContextMenu);
 
-  //   // 🔒 Disable F12, Ctrl+Shift+I/J, Ctrl+U
-  //   const handleKeyDown = (e) => {
-  //     if (
-  //       e.key === "F12" ||
-  //       (e.ctrlKey && e.shiftKey && (e.key === "I" || e.key === "J")) ||
-  //       (e.ctrlKey && e.key === "U")
-  //     ) {
-  //       e.preventDefault();
-  //     }
-  //   };
-  //   document.addEventListener("keydown", handleKeyDown);
+    // 🔒 Disable F12, Ctrl+Shift+I/J, Ctrl+U
+    const handleKeyDown = (e) => {
+      if (
+        e.key === "F12" ||
+        (e.ctrlKey && e.shiftKey && (e.key === "I" || e.key === "J")) ||
+        (e.ctrlKey && e.key === "U")
+      ) {
+        e.preventDefault();
+      }
+    };
+    document.addEventListener("keydown", handleKeyDown);
 
-  //   // 🔒 Disable copy
-  //   const handleCopy = (e) => e.preventDefault();
-  //   document.addEventListener("copy", handleCopy);
+    // 🔒 Disable copy
+    const handleCopy = (e) => e.preventDefault();
+    document.addEventListener("copy", handleCopy);
 
-  //   // 🔒 Disable text selection
-  //   const handleSelectStart = (e) => e.preventDefault();
-  //   document.addEventListener("selectstart", handleSelectStart);
+    // 🔒 Disable text selection
+    const handleSelectStart = (e) => e.preventDefault();
+    document.addEventListener("selectstart", handleSelectStart);
 
-  //   // 🔒 Disable drag on all images
-  //   const handleDragStart = (e) => {
-  //     if (e.target.tagName === "IMG") {
-  //       e.preventDefault();
-  //     }
-  //   };
-  //   document.addEventListener("dragstart", handleDragStart);
+    // 🔒 Disable drag on all images
+    const handleDragStart = (e) => {
+      if (e.target.tagName === "IMG") {
+        e.preventDefault();
+      }
+    };
+    document.addEventListener("dragstart", handleDragStart);
 
-  //   // 🧹 Cleanup
-  //   return () => {
-  //     document.removeEventListener("contextmenu", handleContextMenu);
-  //     document.removeEventListener("keydown", handleKeyDown);
-  //     document.removeEventListener("copy", handleCopy);
-  //     document.removeEventListener("selectstart", handleSelectStart);
-  //     document.removeEventListener("dragstart", handleDragStart);
-  //   };
-  // }, []);
+    // 🧹 Cleanup
+    return () => {
+      document.removeEventListener("contextmenu", handleContextMenu);
+      document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("copy", handleCopy);
+      document.removeEventListener("selectstart", handleSelectStart);
+      document.removeEventListener("dragstart", handleDragStart);
+    };
+  }, []);
 
   return (
     <BrowserRouter>

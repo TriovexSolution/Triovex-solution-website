@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import { useRef, useEffect, useCallback, useMemo } from "react";
 import { gsap } from "gsap";
 import { InertiaPlugin } from "gsap/InertiaPlugin";
@@ -27,11 +27,11 @@ function hexToRgb(hex) {
 }
 
 const DotGrid = ({
-  dotSize = 5,
-  gap = 15,
-  baseColor = "#1a112d",
-  activeColor = "#68a483",
-  proximity = 120,
+  dotSize = 16,
+  gap = 32,
+  baseColor = "#5227FF",
+  activeColor = "#5227FF",
+  proximity = 150,
   speedTrigger = 100,
   shockRadius = 250,
   shockStrength = 5,
@@ -53,15 +53,14 @@ const DotGrid = ({
     lastTime: 0,
     lastX: 0,
     lastY: 0,
-    active: false,
   });
 
-  const lastActivityRef = useRef(performance.now());
   const baseRgb = useMemo(() => hexToRgb(baseColor), [baseColor]);
   const activeRgb = useMemo(() => hexToRgb(activeColor), [activeColor]);
 
   const circlePath = useMemo(() => {
     if (typeof window === "undefined" || !window.Path2D) return null;
+
     const p = new Path2D();
     p.arc(0, 0, dotSize / 2, 0, Math.PI * 2);
     return p;
@@ -108,6 +107,7 @@ const DotGrid = ({
 
   useEffect(() => {
     if (!circlePath) return;
+
     let rafId;
     const proxSq = proximity * proximity;
 
@@ -118,9 +118,7 @@ const DotGrid = ({
       if (!ctx) return;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      const { x: px, y: py, active } = pointerRef.current;
-      const now = performance.now();
-      const showActive = active || now - lastActivityRef.current <= 3000;
+      const { x: px, y: py } = pointerRef.current;
 
       for (const dot of dotsRef.current) {
         const ox = dot.cx + dot.xOffset;
@@ -129,28 +127,21 @@ const DotGrid = ({
         const dy = dot.cy - py;
         const dsq = dx * dx + dy * dy;
 
-        // Base dot
-        ctx.save();
-        ctx.translate(ox, oy);
-        ctx.fillStyle = baseColor;
-        ctx.fill(circlePath);
-        ctx.restore();
-
-        // Active proximity color
-        if (showActive && dsq <= proxSq) {
+        let style = baseColor;
+        if (dsq <= proxSq) {
           const dist = Math.sqrt(dsq);
           const t = 1 - dist / proximity;
           const r = Math.round(baseRgb.r + (activeRgb.r - baseRgb.r) * t);
           const g = Math.round(baseRgb.g + (activeRgb.g - baseRgb.g) * t);
           const b = Math.round(baseRgb.b + (activeRgb.b - baseRgb.b) * t);
-          const style = `rgb(${r},${g},${b})`;
-
-          ctx.save();
-          ctx.translate(ox, oy);
-          ctx.fillStyle = style;
-          ctx.fill(circlePath);
-          ctx.restore();
+          style = `rgb(${r},${g},${b})`;
         }
+
+        ctx.save();
+        ctx.translate(ox, oy);
+        ctx.fillStyle = style;
+        ctx.fill(circlePath);
+        ctx.restore();
       }
 
       rafId = requestAnimationFrame(draw);
@@ -176,13 +167,12 @@ const DotGrid = ({
   }, [buildGrid]);
 
   useEffect(() => {
-    const handleMove = (clientX, clientY) => {
-      lastActivityRef.current = performance.now();
+    const onMove = (e) => {
       const now = performance.now();
       const pr = pointerRef.current;
       const dt = pr.lastTime ? now - pr.lastTime : 16;
-      const dx = clientX - pr.lastX;
-      const dy = clientY - pr.lastY;
+      const dx = e.clientX - pr.lastX;
+      const dy = e.clientY - pr.lastY;
       let vx = (dx / dt) * 1000;
       let vy = (dy / dt) * 1000;
       let speed = Math.hypot(vx, vy);
@@ -193,14 +183,15 @@ const DotGrid = ({
         speed = maxSpeed;
       }
       pr.lastTime = now;
-      pr.lastX = clientX;
-      pr.lastY = clientY;
+      pr.lastX = e.clientX;
+      pr.lastY = e.clientY;
       pr.vx = vx;
       pr.vy = vy;
       pr.speed = speed;
-      pr.x = clientX - canvasRef.current.getBoundingClientRect().left;
-      pr.y = clientY - canvasRef.current.getBoundingClientRect().top;
-      pr.active = true;
+
+      const rect = canvasRef.current.getBoundingClientRect();
+      pr.x = e.clientX - rect.left;
+      pr.y = e.clientY - rect.top;
 
       for (const dot of dotsRef.current) {
         const dist = Math.hypot(dot.cx - pr.x, dot.cy - pr.y);
@@ -225,31 +216,55 @@ const DotGrid = ({
       }
     };
 
-    const throttledMove = throttle(handleMove, 50);
-
-    const onMouseMove = (e) => throttledMove(e.clientX, e.clientY);
-    const onTouchMove = (e) => {
-      if (e.touches.length) throttledMove(e.touches[0].clientX, e.touches[0].clientY);
+    const onClick = (e) => {
+      const rect = canvasRef.current.getBoundingClientRect();
+      const cx = e.clientX - rect.left;
+      const cy = e.clientY - rect.top;
+      for (const dot of dotsRef.current) {
+        const dist = Math.hypot(dot.cx - cx, dot.cy - cy);
+        if (dist < shockRadius && !dot._inertiaApplied) {
+          dot._inertiaApplied = true;
+          gsap.killTweensOf(dot);
+          const falloff = Math.max(0, 1 - dist / shockRadius);
+          const pushX = (dot.cx - cx) * shockStrength * falloff;
+          const pushY = (dot.cy - cy) * shockStrength * falloff;
+          gsap.to(dot, {
+            inertia: { xOffset: pushX, yOffset: pushY, resistance },
+            onComplete: () => {
+              gsap.to(dot, {
+                xOffset: 0,
+                yOffset: 0,
+                duration: returnDuration,
+                ease: "elastic.out(1,0.75)",
+              });
+              dot._inertiaApplied = false;
+            },
+          });
+        }
+      }
     };
 
-    window.addEventListener("mousemove", onMouseMove);
-    window.addEventListener("touchmove", onTouchMove, { passive: true });
-
-    const resetActive = () => (pointerRef.current.active = false);
-    const interval = setInterval(() => {
-      if (performance.now() - lastActivityRef.current > 3000) resetActive();
-    }, 500);
+    const throttledMove = throttle(onMove, 50);
+    window.addEventListener("mousemove", throttledMove, { passive: true });
+    window.addEventListener("click", onClick);
 
     return () => {
-      window.removeEventListener("mousemove", onMouseMove);
-      window.removeEventListener("touchmove", onTouchMove);
-      clearInterval(interval);
+      window.removeEventListener("mousemove", throttledMove);
+      window.removeEventListener("click", onClick);
     };
-  }, [maxSpeed, speedTrigger, proximity, resistance, returnDuration]);
+  }, [
+    maxSpeed,
+    speedTrigger,
+    proximity,
+    resistance,
+    returnDuration,
+    shockRadius,
+    shockStrength,
+  ]);
 
   return (
     <section
-      className={`flex items-center justify-center h-full w-full relative ${className}`}
+      className={`p-4 flex items-center justify-center h-full w-full relative ${className}`}
       style={style}
     >
       <div ref={wrapperRef} className="w-full h-full relative">

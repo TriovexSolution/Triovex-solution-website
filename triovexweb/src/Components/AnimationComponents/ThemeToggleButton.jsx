@@ -86,7 +86,7 @@ const ThemeToggleButton = ({
       </div>
 
       {/* Loader */}
-      {loading && (
+      {/* {loading && (
         <div className="fixed inset-0 flex items-center justify-center backdrop-blur-[2px] bg-black/30 z-50">
           <motion.svg
             className="w-14 h-14"
@@ -113,7 +113,7 @@ const ThemeToggleButton = ({
             />
           </motion.svg>
         </div>
-      )}
+      )} */}
     </>
   );
 };
